@@ -5,12 +5,8 @@
 	<meta charset="utf-8">
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<meta name="viewport" content="width=device-width, intial-scale=1">
-	
-	<!--Icon-->
-	<link rel="icon" href="public/images/Sakamoto2.jpg" type="image/png">
 
 	<!--Link-->
-	<link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
 	<link rel="stylesheet" 
 		href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 	<link rel='stylesheet' 
@@ -98,11 +94,11 @@
 	<nav class="navbar navbar-expand-sm navbar-dark" style="background-color:#33cc33">
 		<ul class="navbar-nav">
 			<li class="nav-item">
-				<a class="nav-link text-white" id="navLogo" href="#"><b>WhatToDo</b></a>
+				<a class="nav-link text-white" id="navLogo" href="{{ url('/') }}"><b>WhatToDo</b></a>
 			</li>
 		</ul>
-		<button type="button" class="btn btn-warning" id="btnloginpage" onclick="redirect_login()">Login</button>
-		<button type="button" class="btn btn-danger" id="btnlogout" onclick="kill_session()">Logout</button>
+		<button type="button" class="btn btn-warning" id="btnloginpage" onclick="location.href='{{ url('/login') }}'" style="display:none">Login</button>
+		<button type="button" class="btn btn-danger" id="btnlogout" onclick="location.href='{{ url('/logout') }}'">Logout</button>
 	</nav>
 	
 </head>
@@ -112,7 +108,7 @@
 		<div class="col-lg-12">
 			<div class="card my-3">
 				<div class="card-header">
-					<h2 class="header">Ikhmal's Tasks</h2>
+					<h2 class="header">{{Auth::user()->name}}'s Tasks</h2>
 				</div>
 				<div class="card-body" id="tasklist">
 					<table class='table-striped table-hover' id='tasktable'>
@@ -162,7 +158,7 @@
 	
 <script>
 	$(document).ready(function(){
-		
+
 		fetch();
 		
 		function fetch(){
@@ -367,7 +363,7 @@
 				headers: {
 			        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 			    },
-				url: '/createTask',
+				url: '/createtask',
 				type:"POST",
 				dataType:"json",
 				data: {
@@ -420,27 +416,6 @@
 		};
 		
 	});
-	
-	function redirect_login(){
-		location.href = "{{ URL::to('/login') }}";
-		console.log("redirect_login successfully run");
-	};
-	
-	function kill_session(){
-		$.ajax({
-			headers: {
-			        	'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-			},
-			url:"kills.php",
-			type:"POST",
-			success:function(){
-				redirect_login();
-				console.log("Successfully logged out");
-			}
-			
-		});
-	};
-	
 
 </script>
 	

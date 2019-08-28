@@ -19,18 +19,31 @@ Route::get('/about', function () {
     return view('about');
 });
 
-Route::get('/login', 'HomeController@index');
+Route::post('/checklogin', 'Auth\LoginController@checklogin')->name('checklogin');
+Route::get('/logout', 'Auth\LoginController@logout')->name('auth.logout');
 
-Route::get('/fetch', 'TaskController@fetchtasks');
-Route::post('/createTask', 'TaskController@createTask');
+Route::get('/login', function(){
+	return redirect('auth/login');
+});
+
+Route::get('/fetch', 'TaskController@fetchtasks')->name('task.fetch');
+Route::post('/createtask', 'TaskController@createTask')->name('task.create');
 Route::get('/task/create', 'TaskController@create');
 
-//Route::get('/login', 'LoginController@');
+Route::post('/deletetask', 'TaskController@deleteTask')->name('task.delete');
 
-Route::post('/deletetask', 'TaskController@deleteTask');
+Route::post('/updatetask', 'TaskController@updateTask')->name('task.update');
 
-Route::post('/updatetask', 'TaskController@updateTask');
+Route::post('/donetask', 'TaskController@doneTask')->name('task.done');
+Route::post('/undonetask', 'TaskController@undoneTask')->name('task.undone');
 
-Route::post('/donetask', 'TaskController@doneTask');
-Route::post('/undonetask', 'TaskController@undoneTask');
-Auth::routes();
+Auth::routes(['register' => false]);
+
+Route::get('/', ['middleware' =>'guest', function(){
+  return view('auth.login');
+}]);
+
+Route::get('/', function(){
+	Auth::logout();
+	return view('welcome');
+});

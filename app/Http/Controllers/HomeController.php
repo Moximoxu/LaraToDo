@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace LaraToDo\Http\Controllers;
 
 use Illuminate\Http\Request;
 
@@ -26,10 +26,4 @@ class HomeController extends Controller
         return view('login');
     }
 
-    function checklogin(Request $request){
-        $this->validate($request,[
-            'username' => 'required',
-            'password' => 'required|alphaNum|min:3'
-        ]);
-    }
 }

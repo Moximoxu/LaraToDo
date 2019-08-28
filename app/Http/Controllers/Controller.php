@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace LaraToDo\Http\Controllers;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;

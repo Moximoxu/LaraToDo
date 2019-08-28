@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace LaraToDo;
 
 use Illuminate\Database\Eloquent\Model;
 
