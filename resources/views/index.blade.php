@@ -110,6 +110,10 @@
 				<div class="card-header">
 					<h2 class="header">{{Auth::user()->name}}'s Tasks</h2>
 				</div>
+				<form class="form-action" method="post" id="add_task">
+					<input type="text" id="addtasktxt" name="name" class="form-control" autocomplete="off" placeholder="Please enter your task" required>
+					<button type="submit" class="Submit btn btn-info" id="btnAdd">Add</button>
+				</form>
 				<div class="card-body" id="tasklist">
 					<table class='table-striped table-hover' id='tasktable'>
 						<thead style='text-align:center'>
@@ -120,10 +124,6 @@
 						</tbody>
 					</table>
 				</div>
-				<form class="form-action" method="post" id="add_task">
-					<input type="text" id="addtasktxt" name="name" class="form-control" autocomplete="off" placeholder="Please enter your task" required>
-					<button type="submit" class="Submit btn btn-info" id="btnAdd">Add</button>
-				</form>
 			</div>
 		</div>
 	</div>
