@@ -163,13 +163,14 @@
 		
 		function fetch(){
 			var displaytasks = $("#tasks_name");
+			var userid = {{Auth::user()->id}}
 			
 			$.ajax({
 				headers: {
         		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         		},
 				type:"GET",
-				url:"/fetch",
+				url:"/tasks/",
 				dataType: "json",
 				success: function(result){
 					var output, count = 1;
@@ -220,7 +221,7 @@
 				headers: {
 			        	'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 			    },
-				url:"/donetask",
+				url:"/tasks/"+ dataId +"/done",
 				type:"POST",
 				data: {
 					"id": dataId,
@@ -249,7 +250,7 @@
 			headers: {
 			    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 			},
-			url:"/undonetask",
+			url:"/tasks/"+ dataId +"/undone",
 			type:"POST",
 			data: {
 				"id": dataId,
@@ -292,8 +293,8 @@
 				headers: {
 			        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 			    },
-				url:"/updatetask",
-				type:"POST",
+				url:"/tasks/",
+				type:"PUT",
 				data: {
 					"id" : dataId,
 					"name": change,
@@ -329,10 +330,7 @@
 			        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 			    },
 				url:"/tasks/" + dataId,
-				type:"POST",
-				data: {
-					"_method" : "DELETE",
-				},
+				type:"DELETE",
 				success:function(){
 					$("tr").remove("#tasktr"+dataId);
 					numarrange(0);
@@ -363,12 +361,12 @@
 				headers: {
 			        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 			    },
-				url: '/createtask',
+				url: '/tasks',
 				type:"POST",
-				dataType:"json",
 				data: {
 					"name" : name,
 				},
+				dataType:"json",
 				success:function(result){
 					var id = result.id;
 					var html = '<tr class="listoftasks" data-id="' + id + '" id="tasktr' + id + '">';

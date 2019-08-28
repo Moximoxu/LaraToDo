@@ -26,18 +26,15 @@ Route::get('/login', function(){
 	return redirect('auth/login');
 });
 
+Route::post('/tasks/{task}/done', 'TaskController@done');
+Route::post('/tasks/{task}/undone', 'TaskController@undone');
 Route::delete('/tasks/{task}', 'TaskController@destroy');
 
-Route::get('/fetch', 'TaskController@fetchtasks')->name('task.fetch');
-Route::post('/createtask', 'TaskController@createTask')->name('task.create');
-Route::get('/task/create', 'TaskController@create');
+Route::get('/tasks/', 'TaskController@show');
+Route::post('/tasks', 'TaskController@store');
 
-Route::post('/deletetask', 'TaskController@deleteTask')->name('task.delete');
+Route::put('/tasks/', 'TaskController@update');
 
-Route::post('/updatetask', 'TaskController@updateTask')->name('task.update');
-
-Route::post('/donetask', 'TaskController@doneTask')->name('task.done');
-Route::post('/undonetask', 'TaskController@undoneTask')->name('task.undone');
 
 Auth::routes(['register' => false]);
 
