@@ -4,9 +4,6 @@
     <title>WhatToDo To-Do List Web App</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, intial-scale=1">
-    
-    <!--Icon-->
-    <link rel="icon" href="Resources/Sakamoto.jpg" type="image/png">
 
     <!--Link-->
     <link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
