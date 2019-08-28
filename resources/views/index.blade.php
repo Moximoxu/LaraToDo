@@ -65,6 +65,7 @@
 		
 		.buttontd {
 			width:200px;
+			text-align: center;
 		}
 
 		.done_bttn{
@@ -97,8 +98,7 @@
 				<a class="nav-link text-white" id="navLogo" href="{{ url('/') }}"><b>WhatToDo</b></a>
 			</li>
 		</ul>
-		<button type="button" class="btn btn-warning" id="btnloginpage" onclick="location.href='{{ url('/login') }}'" style="display:none">Login</button>
-		<button type="button" class="btn btn-danger" id="btnlogout" onclick="location.href='{{ url('/logout') }}'">Logout</button>
+		<button type="button" class="btn btn-danger" id="btnlogout" onclick="location.href='{{ url('/logout') }}'"><i class="fas fa-door-open"></i></button>
 	</nav>
 	
 </head>
@@ -179,20 +179,20 @@
 							"<tr class='listoftasks' data-id='" + result[i].id + "' id='tasktr" + result[i].id + "'><td class='number' id='number'><span class='"+count+"'></span>"+
 							"</td><td id='tasktxt" + result[i].id + "'>" +
 							result[i].name + 
-							"</td><td class='buttontd'><button type='submit' class='btn btn-light done' id='btndone" + result[i].id + "' data-id='" + result[i].id + "'>Done</button>"+
-							"<button type='submit' class='btn btn-dark undone' id='btnundone" + result[i].id + "' data-id='" + result[i].id + "' style='display:none'>Undone</button>" +
-							"<button type='button' class='btn btn-success edit' data-toggle='modal' data-target='#taskModal' data-id='" + result[i].id + "'>Edit</button>" +
-							"<button type='button' class='btn btn-danger delete' id='btndelete' data-id='" + result[i].id + "' data-toggle='modal' data-target='#taskModal' >Delete</button>"+
+							"</td><td class='buttontd'><button type='submit' class='btn btn-light done' id='btndone" + result[i].id + "' data-id='" + result[i].id + "'><i class='far fa-square'></i></button>"+
+							"<button type='submit' class='btn btn-dark undone' id='btnundone" + result[i].id + "' data-id='" + result[i].id + "' style='display:none'><i class='fas fa-check-square'></i></button>" +
+							"<button type='button' class='btn btn-success edit' data-toggle='modal' data-target='#taskModal' data-id='" + result[i].id + "'><i class='far fa-edit'></i></button>" +
+							"<button type='button' class='btn btn-danger delete' id='btndelete' data-id='" + result[i].id + "' data-toggle='modal' data-target='#taskModal' ><i class='fas fa-trash-alt'></i></button>"+
 							"</td></tr>";
 						}	
 						else {output +=
 							"<tr class='listoftasks' data-id='" + result[i].id + "' id='tasktr" + result[i].id + "'><td class='number' id='number'><span class='"+count+"'></span>" +
 							"</td><td class='tdone' id='tasktxt" + result[i].id + "'>" +
 							result[i].name +
-							"</td><td class='buttontd'><button type='submit' class='btn btn-dark undone' id='btnundone" + result[i].id + "' data-id='" + result[i].id + "'>Undone</button>" +
-							"<button type='submit' class='btn btn-light done' id='btndone" + result[i].id + "' data-id='" + result[i].id + "' style='display:none'>Done</button>" +
-							"<button type='button' class='btn btn-success edit' data-toggle='modal' data-target='#taskModal' data-id='" + result[i].id + "'>Edit</button>" +
-							"<button type='button' class='btn btn-danger delete' id='btndelete' data-id='" + result[i].id + "' data-toggle='modal' data-target='#taskModal' >Delete</button>"+
+							"</td><td class='buttontd'><button type='submit' class='btn btn-dark undone' id='btnundone" + result[i].id + "' data-id='" + result[i].id + "'><i class='fas fa-check-square'></i></button>" +
+							"<button type='submit' class='btn btn-light done' id='btndone" + result[i].id + "' data-id='" + result[i].id + "' style='display:none'><i class='far fa-square'></i></button>" +
+							"<button type='button' class='btn btn-success edit' data-toggle='modal' data-target='#taskModal' data-id='" + result[i].id + "'><i class='far fa-edit'></i></button>" +
+							"<button type='button' class='btn btn-danger delete' id='btndelete' data-id='" + result[i].id + "' data-toggle='modal' data-target='#taskModal' ><i class='fas fa-trash-alt'></i></button>"+
 							"</td></tr>";
 						}
 						count++;
