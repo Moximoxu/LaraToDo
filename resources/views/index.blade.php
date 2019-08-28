@@ -37,7 +37,7 @@
 			background-color:#d6f5d6;
 			margin:30px auto;
 			width:100%;
-			max-width:500px;
+			max-width:700px;
 			padding:20px;
 			border-radius:5px;
 			box-shadow:20px 20px 0 rgba(0, 0, 0, .1);
@@ -372,10 +372,10 @@
 					var html = '<tr class="listoftasks" data-id="' + id + '" id="tasktr' + id + '">';
 					html += '<td class="number" id="number"><span class="'+count+'"><p id="frstnum">1</p></span></td>';
 					html += '<td class="tundone" id="tasktxt' + id + '">' + name;
-					html += '<td class="buttontd"><button type="submit" class="btn btn-light done" id="btndone'+id+'" data-id="'+id+'">Done</button>';
-					html += '<button type="submit" class="btn btn-dark undone" id="btnundone' + id + '" data-id="' + id + '" style="display:none">Undone</button>';
-					html += '<button type="button" class="btn btn-success edit" data-toggle="modal" data-target="#taskModal" data-id="' + id + '">Edit</button>';
-					html += '<button type="button" class="btn btn-danger delete" id="btndelete" data-id="' + id + '" data-toggle="modal" data-target="#taskModal">Delete</button>';
+					html += '<td class="buttontd"><button type="submit" class="btn btn-light done" id="btndone'+id+'" data-id="'+id+'"><i class="far fa-square"></i></button>';
+					html += '<button type="submit" class="btn btn-dark undone" id="btnundone' + id + '" data-id="' + id + '" style="display:none"><i class="fas fa-check-square"></i></button>';
+					html += '<button type="button" class="btn btn-success edit" data-toggle="modal" data-target="#taskModal" data-id="' + id + '"><i class="far fa-edit"></i></button>';
+					html += '<button type="button" class="btn btn-danger delete" id="btndelete" data-id="' + id + '" data-toggle="modal" data-target="#taskModal"><i class="fas fa-trash-alt"></i></button>';
 					html += '</td></tr>';
 					console.log(id);
 					$('#tasks_name').prepend(html);
