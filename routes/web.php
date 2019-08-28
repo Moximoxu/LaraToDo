@@ -26,6 +26,8 @@ Route::get('/login', function(){
 	return redirect('auth/login');
 });
 
+Route::delete('/tasks/{task}', 'TaskController@destroy');
+
 Route::get('/fetch', 'TaskController@fetchtasks')->name('task.fetch');
 Route::post('/createtask', 'TaskController@createTask')->name('task.create');
 Route::get('/task/create', 'TaskController@create');

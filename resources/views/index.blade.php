@@ -328,10 +328,10 @@
 				headers: {
 			        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 			    },
-				url:"/deletetask",
+				url:"/tasks/" + dataId,
 				type:"POST",
 				data: {
-					"id" : dataId,
+					"_method" : "DELETE",
 				},
 				success:function(){
 					$("tr").remove("#tasktr"+dataId);

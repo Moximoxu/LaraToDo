@@ -52,4 +52,8 @@ class TaskController extends Controller
         $undonetask = Task::where('id',$taskid);
         $undonetask->update(['done' => 0]);
     }
+
+    public function destroy(Task $task){
+        $task->delete();
+    }
 }
