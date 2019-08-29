@@ -25,10 +25,6 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::post('/tasks', 'TaskController@store');
 
 	Route::put('/tasks/', 'TaskController@update');
-
-
-	Auth::routes(['register' => false]);
-
 });
 
 	Route::get('/about', function () {
@@ -46,3 +42,9 @@ Route::group(['middleware' => 'auth'], function(){
 		Auth::logout();
 		return view('welcome');
 	});
+
+	Route::get('register', function(){
+		return view('auth/register');
+	});
+	Route::post('/register/create', 'Auth\RegisterController@create');
+	Route::post('/register/', 'Auth\RegisterController@validator');
