@@ -35,9 +35,11 @@
 	
 		.card{
 			background-color:#d6f5d6;
-			margin:30px auto;
+			margin: 0 auto;
+        	float: none;
+        	margin-bottom: 30px;
 			width:100%;
-			max-width:700px;
+			max-width:600px;
 			padding:20px;
 			border-radius:5px;
 			box-shadow:20px 20px 0 rgba(0, 0, 0, .1);
@@ -186,7 +188,7 @@
 							"</td></tr>";
 						}	
 						else {output +=
-							"<tr class='listoftasks' data-id='" + result[i].id + "' id='tasktr" + result[i].id + "'><td class='number' id='number'><span class='"+count+"'></span>" +
+							"<tr class='listoftasks' data-id='" + result[i].id + "' id='tasktr" + result[i].id + "'><td class='number tdone' id='number'><span class='"+count+"'></span>" +
 							"</td><td class='tdone' id='tasktxt" + result[i].id + "'>" +
 							result[i].name +
 							"</td><td class='buttontd'><button type='submit' class='btn btn-dark undone' id='btnundone" + result[i].id + "' data-id='" + result[i].id + "'><i class='fas fa-check-square'></i></button>" +
@@ -370,7 +372,7 @@
 				success:function(result){
 					var id = result.id;
 					var html = '<tr class="listoftasks" data-id="' + id + '" id="tasktr' + id + '">';
-					html += '<td class="number" id="number"><span class="'+count+'"><p id="frstnum">1</p></span></td>';
+					html += '<td class="number tundone" id="number"><span class="'+count+'"><p id="frstnum">1</p></span></td>';
 					html += '<td class="tundone" id="tasktxt' + id + '">' + name;
 					html += '<td class="buttontd"><button type="submit" class="btn btn-light done" id="btndone'+id+'" data-id="'+id+'"><i class="far fa-square"></i></button>';
 					html += '<button type="submit" class="btn btn-dark undone" id="btnundone' + id + '" data-id="' + id + '" style="display:none"><i class="fas fa-check-square"></i></button>';
