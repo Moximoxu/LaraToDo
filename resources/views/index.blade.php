@@ -85,7 +85,7 @@
 			margin-top; 10px;
 			box-shadow: 3px 3px 0 #ddd;
 		}
-		.tdone{
+		.tdone, number.tdone{
 			text-decoration:line-through;
 			color: rgba(0, 0, 0, 0.25);
 		}
@@ -180,8 +180,8 @@
 					var output, count = 1;
 					for (var i in result) {
 						if (result[i].done == 0){output +=
-							"<tr class='listoftasks' data-id='" + result[i].id + "' id='tasktr" + result[i].id + "'><td class='number tundone' id='number'><span class='"+count+"'></span>"+
-							"</td><td class='tundone' id='tasktxt" + result[i].id + "'>" +
+							"<tr class='listoftasks' data-id='" + result[i].id + "' id='tasktr" + result[i].id + "'><td class='number' id='number" + result[i].id + "'><span class='"+count+"'></span>"+
+							"</td><td id='tasktxt" + result[i].id + "'>" +
 							result[i].name + 
 							"</td><td class='buttontd'><button type='submit' class='btn btn-light done' id='btndone" + result[i].id + "' data-id='" + result[i].id + "'><i class='far fa-square'></i></button>"+
 							"<button type='submit' class='btn btn-dark undone' id='btnundone" + result[i].id + "' data-id='" + result[i].id + "' style='display:none'><i class='fas fa-check-square'></i></button>" +
@@ -190,7 +190,7 @@
 							"</td></tr>";
 						}	
 						else {output +=
-							"<tr class='listoftasks' data-id='" + result[i].id + "' id='tasktr" + result[i].id + "'><td class='number tdone' id='number'><span class='"+count+"'></span>" +
+							"<tr class='listoftasks' data-id='" + result[i].id + "' id='tasktr" + result[i].id + "'><td class='number tdone' id='number" + result[i].id + "'><span class='"+count+"'></span>" +
 							"</td><td class='tdone' id='tasktxt" + result[i].id + "'>" +
 							result[i].name +
 							"</td><td class='buttontd'><button type='submit' class='btn btn-dark undone' id='btnundone" + result[i].id + "' data-id='" + result[i].id + "'><i class='fas fa-check-square'></i></button>" +
@@ -214,8 +214,9 @@
 			
 			var dataId = $(this).data("id");
 			console.log(dataId);
-			var taskname = $("#tasktr" +dataId);
+			var taskname = $("#tasktr" + dataId);
 			console.log(taskname);
+			var tasknum = $("#number" + dataId);
 			var task = $("#tasktxt" + dataId);
 			console.log(task);
 			var bttnundone = $("#btnundone" + dataId);
@@ -231,6 +232,7 @@
 					"id": dataId,
 				},
 				success:function(){
+					$(tasknum).toggleClass("tdone", true);
 					$(taskname).toggleClass( "tdone", true);
 					$(task).toggleClass("tdone", true);
 					$(bttnundone).show("400");
@@ -243,6 +245,7 @@
 		$(document).on("click", "button.undone", function(){
 			
 			var dataId = $(this).data("id");
+			var tasknum = $("#number" + dataId);
 			var taskname = $("#tasktr" +dataId);
 			var task = $("#tasktxt" + dataId);
 			console.log(taskname);
@@ -260,6 +263,7 @@
 				"id": dataId,
 			},
 			success:function(){
+				$(tasknum).toggleClass("tdone", false);
 				$(taskname).toggleClass("tdone", false);
 				$(task).toggleClass("tdone", false);
 				$(bttndone).show("400");
@@ -374,8 +378,8 @@
 				success:function(result){
 					var id = result.id;
 					var html = '<tr class="listoftasks" data-id="' + id + '" id="tasktr' + id + '">';
-					html += '<td class="number tundone" id="number"><span class="'+count+'"><p id="frstnum">1</p></span></td>';
-					html += '<td class="tundone" id="tasktxt' + id + '">' + name;
+					html += '<td class="number" id="number' + result[i].id + '"><span class="'+count+'"><p id="frstnum">1</p></span></td>';
+					html += '<td id="tasktxt' + id + '">' + name;
 					html += '<td class="buttontd"><button type="submit" class="btn btn-light done" id="btndone'+id+'" data-id="'+id+'"><i class="far fa-square"></i></button>';
 					html += '<button type="submit" class="btn btn-dark undone" id="btnundone' + id + '" data-id="' + id + '" style="display:none"><i class="fas fa-check-square"></i></button>';
 					html += '<button type="button" class="btn btn-success edit" data-toggle="modal" data-target="#taskModal" data-id="' + id + '"><i class="far fa-edit"></i></button>';

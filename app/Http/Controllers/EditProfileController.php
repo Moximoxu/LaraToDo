@@ -17,7 +17,6 @@ class EditProfileController extends Controller
                 'email' => 'required|email',
                 'gender' => 'required',
                 'birthdate' => 'required',
-                'password' => 'required|min:5',
         ]);
         $user = Auth::user();
 
@@ -26,7 +25,6 @@ class EditProfileController extends Controller
             'email' => $request->get('email'),
             'gender' => $request->get('gender'),
             'birthdate' => $request->get('birthdate'),
-            'password' => Hash::make($request->get('password')),
             'updated_at' => Carbon::now(),
         );
 
