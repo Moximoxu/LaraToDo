@@ -25,6 +25,12 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::post('/tasks', 'TaskController@store');
 
 	Route::put('/tasks/', 'TaskController@update');
+
+	Route::post('/user/edit', 'EditProfileController@edituser');
+
+	Route::get('/edit', function(){
+		return view('edituser');
+	});
 });
 
 	Route::get('/about', function () {

@@ -87,6 +87,7 @@
 		}
 		.tdone{
 			text-decoration:line-through;
+			color: rgba(0, 0, 0, 0.25);
 		}
 		.tundone{
 			text-decoration:none;
@@ -101,6 +102,7 @@
 			</li>
 		</ul>
 		<button type="button" class="btn btn-danger" id="btnlogout" onclick="location.href='{{ url('/logout') }}'"><i class="fas fa-door-open"></i></button>
+		<button type="button" class="btn btn-secondary" id="btnedit" onclick="location.href='{{ url('/edit') }}'"><i class="fas fa-user-edit"></i></button>
 	</nav>
 	
 </head>

@@ -10,7 +10,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
-class RegisterController extends Controller
+class EditUserController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
@@ -23,7 +23,6 @@ class RegisterController extends Controller
     |
     */
 
-    use RegistersUsers;
 
     /**
      * Where to redirect users after registration.
@@ -48,7 +47,7 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \LaraToDo\User
      */
-    function create(Request $request){
+    function edituser(Request $request){
         $this->validate($request, [
                 'name' => 'required',
                 'email' => 'required|email',
@@ -63,12 +62,11 @@ class RegisterController extends Controller
             'gender' => $request->get('gender'),
             'birthdate' => $request->get('birthdate'),
             'password' => Hash::make($request->get('password')),
-            'remember_token' => str_random(10),
-            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
         );
 
         User::insert($user_data);
 
-        return redirect('login');
+        return redirect('/index');
     }
 }
