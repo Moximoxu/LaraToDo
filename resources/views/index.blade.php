@@ -45,6 +45,12 @@
 			box-shadow:20px 20px 0 rgba(0, 0, 0, .1);
 			box-sizing:border-box;
 		}
+
+		.topbtns{
+			position: absolute;
+            right: 10px;
+            top: 18px;
+		}
 		
 		.tasks{
 			margin:0;
@@ -101,8 +107,10 @@
 				<a class="nav-link text-white" id="navLogo" href="{{ url('/') }}"><b>WhatToDo</b></a>
 			</li>
 		</ul>
-		<button type="button" class="btn btn-danger" id="btnlogout" onclick="location.href='{{ url('/logout') }}'"><i class="fas fa-door-open"></i></button>
-		<button type="button" class="btn btn-secondary" id="btnedit" onclick="location.href='{{ url('/edit') }}'"><i class="fas fa-user-edit"></i></button>
+		<div class="topbtns">
+			<button type="button" class="btn btn-secondary" id="btnedit" onclick="location.href='{{ url('/edit') }}'"><i class="fas fa-user-edit"></i></button>
+			<button type="button" class="btn btn-danger" id="btnlogout" onclick="location.href='{{ url('/logout') }}'"><i class="fas fa-door-open"></i></button>
+		</div>
 	</nav>
 	
 </head>
@@ -378,7 +386,7 @@
 				success:function(result){
 					var id = result.id;
 					var html = '<tr class="listoftasks" data-id="' + id + '" id="tasktr' + id + '">';
-					html += '<td class="number" id="number' + result[i].id + '"><span class="'+count+'"><p id="frstnum">1</p></span></td>';
+					html += '<td class="number" id="number' + id + '"><span class="'+count+'"><p id="frstnum">1</p></span></td>';
 					html += '<td id="tasktxt' + id + '">' + name;
 					html += '<td class="buttontd"><button type="submit" class="btn btn-light done" id="btndone'+id+'" data-id="'+id+'"><i class="far fa-square"></i></button>';
 					html += '<button type="submit" class="btn btn-dark undone" id="btnundone' + id + '" data-id="' + id + '" style="display:none"><i class="fas fa-check-square"></i></button>';
