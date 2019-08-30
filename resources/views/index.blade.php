@@ -108,7 +108,7 @@
 			</li>
 		</ul>
 		<div class="topbtns">
-			<button type="button" class="btn btn-secondary" id="btnedit" onclick="location.href='{{ url('/edit') }}'"><i class="fas fa-user-edit"></i></button>
+			<button type="button" class="btn btn-warning" id="btnedit" onclick="location.href='{{ url('/edit') }}'"><i class="fas fa-user-edit"></i></button>
 			<button type="button" class="btn btn-danger" id="btnlogout" onclick="location.href='{{ url('/logout') }}'"><i class="fas fa-door-open"></i></button>
 		</div>
 	</nav>

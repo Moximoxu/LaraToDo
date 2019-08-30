@@ -84,7 +84,7 @@
         <div class="flex-center position-ref full-height">
             <div class="top-right links">
                 <button type="button" class="btn btn-info" onclick="location.href='{{ url('login') }}'">Login</button>&nbsp;
-                <button type="button" class="btn btn-warning" onclick="location.href='{{ url('register') }}'">Register</button>
+                <button type="button" class="btn btn-success" onclick="location.href='{{ url('register') }}'">Register</button>
             </div>
 
             <div class="content">
