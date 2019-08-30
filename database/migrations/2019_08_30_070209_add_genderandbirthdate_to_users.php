@@ -14,7 +14,7 @@ class AddGenderandbirthdateToUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->tinytext('gender');
+            $table->string('gender', 6);
             $table->date('birthdate');
         });
     }
