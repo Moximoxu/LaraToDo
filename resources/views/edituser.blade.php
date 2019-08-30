@@ -184,9 +184,13 @@
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     Update
+                                </button>&nbsp;
+                                <button type="button" class="btn btn-danger" onclick="location.href='{{ url('/index') }}'">
+                                    Cancel
                                 </button>
                             </div>
                         </div>
+                        
                     </form>
                 </div>
             </div>
