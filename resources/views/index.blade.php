@@ -180,8 +180,8 @@
 					var output, count = 1;
 					for (var i in result) {
 						if (result[i].done == 0){output +=
-							"<tr class='listoftasks' data-id='" + result[i].id + "' id='tasktr" + result[i].id + "'><td class='number' id='number'><span class='"+count+"'></span>"+
-							"</td><td id='tasktxt" + result[i].id + "'>" +
+							"<tr class='listoftasks' data-id='" + result[i].id + "' id='tasktr" + result[i].id + "'><td class='number tundone' id='number'><span class='"+count+"'></span>"+
+							"</td><td class='tundone' id='tasktxt" + result[i].id + "'>" +
 							result[i].name + 
 							"</td><td class='buttontd'><button type='submit' class='btn btn-light done' id='btndone" + result[i].id + "' data-id='" + result[i].id + "'><i class='far fa-square'></i></button>"+
 							"<button type='submit' class='btn btn-dark undone' id='btnundone" + result[i].id + "' data-id='" + result[i].id + "' style='display:none'><i class='fas fa-check-square'></i></button>" +
