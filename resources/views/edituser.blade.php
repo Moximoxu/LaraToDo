@@ -134,14 +134,8 @@
 
                             <div class="col-md-6">
                                 <select class="form-control" id="gender" name="gender" required>
-                                    if({{Auth::user()->gender}} == "Male"){
-                                        <option selected="selected">Male</option>
-                                        <option>Female</option>
-                                    }
-                                    else{
-                                        <option>Male</option>
-                                        <option>Female</option>
-                                    }
+                                    <option>Male</option>
+                                    <option>Female</option>
                                 </select>
 
                                 @error('gender')
