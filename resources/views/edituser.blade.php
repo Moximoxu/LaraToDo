@@ -171,6 +171,14 @@
                             </div>
                         </div>
 
+                        <div class="form-group row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <br><button type="button" class="btn btn-warning" onclick="location.href='{{ url('resetpassword') }}'">
+                                    Reset password
+                                </button>
+                            </div>
+                        </div>
+
                     </form>
                 </div>
             </div>

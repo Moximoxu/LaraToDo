@@ -110,7 +110,7 @@
                             </tr>
                             @endif
                             <tr><th>Email</th><td><span class="input_wrapper"><input type="email" id="emailtxt" name="email" class="form-control" onfocus="this.value=''" autocomplete="off" placeholder="Enter your email" required></span><span id="cleartbtnid1" class="clearbtn" name="clearbtn" title="Clear" style="display:none;cursor:pointer;color:red;right:0px;">&times;</span></td></tr>
-                            <tr><th>Password</th><td><span class="input_wrapper"><input type="password" id="passtxt" name="password" class="form-control" onfocus="this.value=''" autocomplete="off" placeholder="Enter your password" required></span><span id="clearbtnid2" class="clearbtn2" name="clearbtn2" title="Clear" style="display:none;cursor:pointer;color:red;right:0px;">&times;</span></td>
+                            <tr><th>Password</th><td><span class="input_wrapper"><input type="password" id="passtxt" name="password" class="form-control" onfocus="this.value=''" autocomplete="off" placeholder="Enter your password" required></span></td><td><span><a onmouseover="showpsswrd()" onmouseout="hidepsswrd()"><i class="fas fa-eye"></i></a></span><span id="clearbtnid2" class="clearbtn2" name="clearbtn2" title="Clear" style="display:none;cursor:pointer;color:red;right:0px;">&times;</span></td>
                                     @if ($message = Session::get('error'))
                                     <td>
                                        <div class="alert alert-danger alert-block">
@@ -176,6 +176,20 @@
             $("#clearbtnid2").hide("400");
             $("#passtxt")[0].reset();
         });
+    };
+
+    function showpsswrd() {
+        var x = document.getElementById("passtxt");
+        if (x.type === "password") {
+            x.type = "text";
+        }
+    };
+
+    function hidepsswrd(){
+        var x= document.getElementById("passtxt");
+        if (x.type === "text"){
+            x.type = "password";
+        }
     };
         
         //Must have a token after login is successful in order to access the database while in the index page.

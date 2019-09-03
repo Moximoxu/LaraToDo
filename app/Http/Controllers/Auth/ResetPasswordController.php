@@ -2,7 +2,11 @@
 
 namespace LaraToDo\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
+use LaraToDo\User;
 use LaraToDo\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 
 class ResetPasswordController extends Controller
@@ -32,8 +36,21 @@ class ResetPasswordController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('guest');
+
+    function reset(Request $request){
+        $this->validate($request, [
+            'password' => 'required|min:5',
+        ]);
+
+        $user = Auth::user();
+
+        $user_data = array(
+            'password' => Hash::make($request->get('password')),
+        );
+
+        $user->fill($user_data);
+        $user->save();
+
+        return redirect('login');
     }
 }

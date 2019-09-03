@@ -159,7 +159,7 @@
 				<!-- Modal footer -->
 				<div class="modal-footer">
 					<button type="button" class="btn btn-info" id="btnok" style="display:none" data-dismiss="modal">Okay</button>
-					<button type="button" class="btn btn-primary save" id="btnsavechanges">Save</button>
+					<button type="button" class="btn btn-primary save" id="btnsavechanges"><i class="fas fa-save"></i></button>
 					<button type="button" class="btn btn-danger confirm" id="btnconfirm" style="display:none">Yes</button>
 					<button type="button" class="btn btn-info cancel" id="btncancel" style="display:none" data-dismiss="modal">Cancel</button>
 				</div>

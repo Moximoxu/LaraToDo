@@ -31,6 +31,10 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::get('/edit', function(){
 		return view('edituser');
 	});
+
+	Route::get('resetpassword', function(){
+		return view('auth/passwords/reset');
+	});
 });
 
 	Route::get('/about', function () {
@@ -54,3 +58,5 @@ Route::group(['middleware' => 'auth'], function(){
 	});
 	Route::post('/register/create', 'Auth\RegisterController@create');
 	Route::post('/register/', 'Auth\RegisterController@validator');
+
+	Route::post('/resetpass', 'Auth\ResetPasswordController@reset');
