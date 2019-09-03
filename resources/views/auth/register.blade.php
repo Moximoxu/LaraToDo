@@ -164,7 +164,7 @@
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password"><a onmouseover="showpsswrd()" onmouseout="hidepsswrd()"><i class="fas fa-eye"></i></a>
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -178,7 +178,7 @@
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password"><a onmouseover="showcpsswrd()" onmouseout="hidecpsswrd()"><i class="fas fa-eye"></i></a>
                             </div>
                         </div>
 
@@ -195,6 +195,36 @@
         </div>
     </div>
 </div>
+
+<script>
+    function showpsswrd() {
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+            x.type = "text";
+        }
+    };
+
+    function hidepsswrd(){
+        var x = document.getElementById("password");
+        if (x.type === "text"){
+            x.type = "password";
+        }
+    };
+
+    function showcpsswrd() {
+        var x = document.getElementById("password-confirm");
+        if (x.type === "password") {
+            x.type = "text";
+        }
+    };
+
+    function hidecpsswrd(){
+        var x = document.getElementById("password-confirm");
+        if (x.type === "text"){
+            x.type = "password";
+        }
+    };
+</script>
 
 </body>
 

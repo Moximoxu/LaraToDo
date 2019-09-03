@@ -102,10 +102,38 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Email') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password"><a onmouseover="showpsswrd()" onmouseout="hidepsswrd()"><i class="fas fa-eye"></i></a>
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" required placeholder="Your email">
+
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="oldpassword" class="col-md-4 col-form-label text-md-right">{{ __('Old Password') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="oldpassword" type="password" class="form-control @error('oldpassword') is-invalid @enderror" name="oldpassword" required placeholder="Current password"><a onmouseover="showoldpsswrd()" onmouseout="hideoldpsswrd()"><i class="fas fa-eye"></i></a>
+
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('New Password') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="New password"><a onmouseover="showpsswrd()" onmouseout="hidepsswrd()"><i class="fas fa-eye"></i></a>
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -119,7 +147,7 @@
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Enter your new password again">
                             </div>
                         </div>
 
@@ -141,6 +169,20 @@
 </div>
 
 <script>
+    function showoldpsswrd() {
+        var x = document.getElementById("oldpassword");
+        if (x.type === "password") {
+            x.type = "text";
+        }
+    };
+
+    function hideoldpsswrd(){
+        var x = document.getElementById("oldpassword");
+        if (x.type === "text"){
+            x.type = "password";
+        }
+    };
+
     function showpsswrd() {
         var x = document.getElementById("password");
         if (x.type === "password") {

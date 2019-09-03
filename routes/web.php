@@ -35,6 +35,8 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::get('resetpassword', function(){
 		return view('auth/passwords/reset');
 	});
+
+	Route::post('/resetpass', 'Auth\ResetPasswordController@reset');
 });
 
 	Route::get('/about', function () {

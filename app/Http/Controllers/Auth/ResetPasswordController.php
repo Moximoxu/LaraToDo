@@ -3,11 +3,11 @@
 namespace LaraToDo\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
-use LaraToDo\User;
 use LaraToDo\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Foundation\Auth\ResetsPasswords;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Validator;
 
 class ResetPasswordController extends Controller
 {
@@ -22,14 +22,13 @@ class ResetPasswordController extends Controller
     |
     */
 
-    use ResetsPasswords;
+    use AuthenticatesUsers;
 
     /**
      * Where to redirect users after resetting their password.
      *
      * @var string
      */
-    protected $redirectTo = '/index';
 
     /**
      * Create a new controller instance.
@@ -39,18 +38,29 @@ class ResetPasswordController extends Controller
 
     function reset(Request $request){
         $this->validate($request, [
+            'email' => 'required|email',
             'password' => 'required|min:5',
         ]);
 
         $user = Auth::user();
 
-        $user_data = array(
+        $checkoldpsswrd = array(
+            'email' => $request->get('email'),
+            'password' => $request->get('oldpassword'),
+        );
+
+        $newpass = array(
             'password' => Hash::make($request->get('password')),
         );
 
-        $user->fill($user_data);
-        $user->save();
+        if(Auth::attempt($checkoldpsswrd)){
+            $user->fill($newpass);
+            $user->save();
 
-        return redirect('login');
+            return redirect('login');
+        }
+        else{
+            return  back()->with('error', 'Wrong old password');
+        }
     }
 }
