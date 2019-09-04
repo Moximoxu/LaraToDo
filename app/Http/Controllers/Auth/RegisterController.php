@@ -63,7 +63,6 @@ class RegisterController extends Controller
             'gender' => $request->get('gender'),
             'birthdate' => $request->get('birthdate'),
             'password' => Hash::make($request->get('password')),
-            'remember_token' => str_random(10),
             'created_at' => Carbon::now(),
         );
 
