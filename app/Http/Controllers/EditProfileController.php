@@ -11,6 +11,11 @@ use Carbon\Carbon;
 
 class EditProfileController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth', 'verified']);
+    }
+
     function edituser(Request $request){
         $this->validate($request, [
                 'name' => 'required',

@@ -8,6 +8,10 @@ use LaraToDo\Task;
 
 class TaskController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth', 'verified']);
+    }
 
     public function show(){
         $userid = Auth::id();

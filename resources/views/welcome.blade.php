@@ -13,6 +13,7 @@
         <link rel='stylesheet' 
             href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
         <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        
         <!--Script sources-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -91,6 +92,9 @@
                 <div class="title m-b-md">
                     LaraToDo
                 </div>
+                <div class="body">
+                    <p>Laravel-Based To-Do Web Application</p>
+                </div>
 
                 <div class="links">
                     <a href="https://laravel.com/docs">Docs</a>
@@ -99,7 +103,7 @@
                     <a href="https://blog.laravel.com">Blog</a>
                     <a href="https://nova.laravel.com">Nova</a>
                     <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <a href="https://github.com/Moximoxu/LaraToDo">GitHub</a>
                 </div>
             </div>
         </div>

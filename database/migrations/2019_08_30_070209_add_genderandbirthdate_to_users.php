@@ -13,10 +13,17 @@ class AddGenderandbirthdateToUsers extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
+        if ( !Schema::hasColumn('users', 'gender')){
+            Schema::table('users', function (Blueprint $table) {
             $table->string('gender', 6);
+            });
+        }
+        
+        if ( !Schema::hasColumn('users', 'birthdate')){
+            Schema::table('users', function (Blueprint $table) {
             $table->date('birthdate');
         });
+        }
     }
 
     /**
@@ -26,9 +33,16 @@ class AddGenderandbirthdateToUsers extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
+        if ( !Schema::hasColumn('users', 'gender')){
+            Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('gender');
+            });
+        }
+        
+        if ( !Schema::hasColumn('users', 'birthdate')){
+            Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('birthdate');
-        });
+            });
+        }
     }
 }

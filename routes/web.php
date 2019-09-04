@@ -62,3 +62,9 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::post('/register/', 'Auth\RegisterController@validator');
 
 	Route::post('/resetpass', 'Auth\ResetPasswordController@reset');
+
+	Auth::routes(['verify' => true]);
+
+	Route::get('verify', function(){
+		return view('auth/verify');
+	});
