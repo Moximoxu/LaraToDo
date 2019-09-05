@@ -57,17 +57,25 @@ class RegisterController extends Controller
                 'password' => 'required|min:5',
         ]);
 
+        $email_u = $request->get('email');
+
         $user_data = array(
             'name' => $request->get('name'),
-            'email' => $request->get('email'),
+            'email' => $email_u,
             'gender' => $request->get('gender'),
             'birthdate' => $request->get('birthdate'),
             'password' => Hash::make($request->get('password')),
+            'remember_token' => random_bytes(10),
             'created_at' => Carbon::now(),
         );
 
         User::insert($user_data);
 
-        return redirect('login');
+        $user = User::where('email', $email_u)->first();
+
+        $user->sendEmailVerificationNotification();
+        $user->markEmailAsVerified();
+
+        return redirect('verify');
     }
 }
