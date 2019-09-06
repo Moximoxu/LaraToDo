@@ -2,24 +2,22 @@
 
 namespace LaraToDo\Notifications;
 
-use Illuminate\Bus\Queueable;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
 class VerifyEmail extends Notification
 {
-    use Queueable;
-
+    
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
-    {
-        //
-    }
+    public static $toMailCallback;
 
     /**
      * Get the notification's delivery channels.
