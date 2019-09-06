@@ -33,13 +33,13 @@ class AddGenderandbirthdateToUsers extends Migration
      */
     public function down()
     {
-        if ( !Schema::hasColumn('users', 'gender')){
+        if ( Schema::hasColumn('users', 'gender')){
             Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('gender');
             });
         }
         
-        if ( !Schema::hasColumn('users', 'birthdate')){
+        if ( Schema::hasColumn('users', 'birthdate')){
             Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('birthdate');
             });

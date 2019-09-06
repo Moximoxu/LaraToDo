@@ -7,7 +7,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use LaraToDo\User;
-use Validator;
+use Validator; 
 
 class LoginController extends Controller
 {
@@ -49,7 +49,12 @@ class LoginController extends Controller
         );
 
         if(Auth::attempt($user_data)){
-            return redirect('/index');
+            if (Auth::user() == User::where('roles', 'admin')){
+                return redirect('/admin');
+            }
+            elseif(Auth::user() == User::where('roles', 'user')){
+                return redirect('/index');
+            }
         }
         else{
             return  back()->with('error', 'Wrong login details');

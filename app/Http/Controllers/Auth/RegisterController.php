@@ -74,7 +74,6 @@ class RegisterController extends Controller
         $user = User::where('email', $email_u)->first();
 
         $user->sendEmailVerificationNotification();
-        $user->markEmailAsVerified();
 
         return redirect('verify');
     }
