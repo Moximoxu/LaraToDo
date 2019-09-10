@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-	<title>WhatToDo To-Do List Web App</title>
+	<title>LaraToDo To-Do List Web App</title>
 	<meta charset="utf-8">
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<meta name="viewport" content="width=device-width, intial-scale=1">
@@ -105,7 +105,7 @@
 	<nav class="navbar navbar-expand-sm navbar-dark" style="background-color:#33cc33">
 		<ul class="navbar-nav">
 			<li class="nav-item">
-				<a class="nav-link text-white" id="navLogo" href="{{ url('/') }}"><b>WhatToDo</b></a>
+				<a class="nav-link text-white" id="navLogo" href="{{ url('/') }}"><b>LaraToDo</b></a>
 			</li>
 		</ul>
 		<div class="topbtns">

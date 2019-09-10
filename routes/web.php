@@ -12,64 +12,56 @@ use Illuminate\Support\Facades\Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::group(['middleware' => 'LaraToDo\Http\Middleware\AdminMiddleware'], function(){
+	Route::match(['get', 'post'], '/admin', function(){
+		return view('admin');
+	});
 
-Route::group(['middleware' => 'auth'], function(){
-	if(Auth::user() == User::where('roles', 'admin')){
-		Route::get('/admin/', 'AdminController@show');
-		Route::post('/admin/edit', 'EditProfileController@edituser');
-		Route::get('/admin', function(){
-			return view('admin');
-		});
-		Route::post('/checklogin', 'Auth\LoginController@checklogin')->name('checklogin');
-		Route::get('/logout', 'Auth\LoginController@logout')->name('auth.logout');
+	Route::match(['get', 'post'], '/', function(){
+		Auth::logout();
+		return view('welcome');
+	});
 
-		Route::get('login', function(){
-			return view('auth/login');
-		});
+	Route::match(['get', 'post'], '/admin/', 'AdminController@show');
+	Route::match(['get', 'post'], '/admin/edit', 'EditProfileController@edituser');
 
-		Route::get('/', function(){
-			Auth::logout();
-			return view('welcome');
-		});
-	}
-	elseif(Auth::user() == User::where('roles', 'user')){
-		Route::post('/checklogin', 'Auth\LoginController@checklogin')->name('checklogin');
-		Route::get('/logout', 'Auth\LoginController@logout')->name('auth.logout');
+	Route::match(['get', 'delete'], '/admin/{user}', 'AdminController@destroy');
 
-		Route::get('login', function(){
-			return view('auth/login');
-		});
+	Route::match(['get', 'post'], '/logout', 'Auth\LoginController@logout')->name('auth.logout');
+});
 
-		Route::get('/', function(){
-			Auth::logout();
-			return view('welcome');
-		});
+Route::group(['middleware' => 'LaraToDo\Http\Middleware\MemberMiddleware'], function(){
+	Route::match(['get', 'post'], '/index', 'Auth\LoginController@index');
 
-		Route::get('/index', 'Auth\LoginController@index');
-		Route::post('/tasks/{task}/done', 'TaskController@done');
-		Route::post('/tasks/{task}/undone', 'TaskController@undone');
-		Route::delete('/tasks/{task}', 'TaskController@destroy');
+	Route::match(['get', 'post'], '/tasks/{task}/done', 'TaskController@done');
+	Route::match(['get', 'post'], '/tasks/{task}/undone', 'TaskController@undone');
 
-		Route::get('/tasks/', 'TaskController@show');
-		Route::post('/tasks', 'TaskController@store');
+	Route::match(['get', 'delete'], '/tasks/{task}', 'TaskController@destroy');
 
-		Route::put('/tasks/', 'TaskController@update');
+	Route::match(['get', 'post'], '/tasks/', 'TaskController@show');
+	Route::match(['get', 'post'], '/tasks', 'TaskController@store');
 
-		Route::post('/user/edit', 'EditProfileController@edituser');
+	Route::match(['get', 'put'], '/tasks', 'TaskController@store');
 
-		Route::get('/edit', function(){
+	Route::match(['get', 'post'], '/user/edit', 'EditProfileController@edituser');
+
+	Route::match(['get', 'post'], '/edit', function(){
 			return view('edituser');
-		});
+	});
 
-		Route::get('resetpassword', function(){
+	Route::match(['get', 'post'], 'resetpassword', function(){
 			return view('auth/passwords/reset');
-		});
+	});
 
-		Route::post('/resetpass', 'Auth\ResetPasswordController@reset');
-	}
+	Route::match(['get', 'post'], '/resetpass', 'Auth\ResetPasswordController@reset');
 
 });
-	
+
+	Route::get('/', function(){
+		Auth::logout();
+		return view('welcome');
+	});
+
 	Route::post('/checklogin', 'Auth\LoginController@checklogin')->name('checklogin');
 	
 	Route::get('/about', function () {

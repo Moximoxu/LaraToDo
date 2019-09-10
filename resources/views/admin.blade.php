@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-	<title>WhatToDo To-Do List Web App</title>
+	<title>LaraToDo To-Do List Web App</title>
 	<meta charset="utf-8">
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<meta name="viewport" content="width=device-width, intial-scale=1">
@@ -105,7 +105,7 @@
 	<nav class="navbar navbar-expand-sm navbar-dark" style="background-color:#33cc33">
 		<ul class="navbar-nav">
 			<li class="nav-item">
-				<a class="nav-link text-white" id="navLogo" href="{{ url('/') }}"><b>WhatToDo</b></a>
+				<a class="nav-link text-white" id="navLogo" href="{{ url('/') }}"><b>LaraToDo</b></a>
 			</li>
 		</ul>
 		<div class="topbtns">
@@ -126,7 +126,7 @@
 				<div class="card-body" id="tasklist">
 					<table class='table-striped table-hover' id='tasktable'>
 						<thead style='text-align:center'>
-							<tr><th>No.</th><th>Task</th><th>Actions</th>
+							<tr><th>Name</th><th>Email</th><th>Gender</th><th>Birthdate</th><th>Created At</th><th>Updated At</th><th>Email Verified At</th><th>Role</th><th>Actions</th>
 						</thead>
 						<tbody id='tasks_name'>
 							
@@ -168,7 +168,7 @@
 <script>
 	$(document).ready(function(){
 
-		fetch();
+		//fetch();
 		
 		function fetch(){
 			var displaytasks = $("#tasks_name");
@@ -181,10 +181,10 @@
 				url:"/admin/",
 				dataType: "json",
 				success: function(result){
-					var output, count = 1;
+					var output;
 					for (var i in result) {
 						output +=
-							"<tr class='listoftasks' data-id='" + result[i].id + "' id='tasktr" + result[i].id + "'><td class='number' id='number" + result[i].id + "'><span class='"+count+"'></span>"+
+							"<tr class='listoftasks' data-id='" + result[i].id + "' id='tasktr" + result[i].id + "'><td class='number' id='number" + result[i].id + "'><span class='"+result[i].id+"'></span>"+
 							"</td><td id='tasktxt" + result[i].id + "'>" +
 							result[i].name + 
 							"</td></td><td id='tasktxt" + result[i].id + "'>" +
@@ -202,15 +202,13 @@
 							"</td></td><td id='tasktxt" + result[i].id + "'>" +
 							result[i].roles + 
 							"</td><td class='buttontd'><button type='submit' class='btn btn-light done' id='btndone" + result[i].id + "' data-id='" + result[i].id + "'><i class='far fa-square'></i></button>"+
-							"<button type='submit' class='btn btn-dark undone' id='btnundone" + result[i].id + "' data-id='" + result[i].id + "' style='display:none'><i class='fas fa-check-square'></i></button>" +
+							"' style='display:none'><i class='fas fa-check-square'></i></button>" +
 							"<button type='button' class='btn btn-warning edituser' id='btnedit'><i class='fas fa-user-edit'></i></button>" +
 							"<button type='button' class='btn btn-danger delete' id='btndelete' data-id='" + result[i].id + "' data-toggle='modal' data-target='#taskModal' ><i class='fas fa-trash-alt'></i></button>"+
 							"</td></tr>";
-						count++;
 					}
 					console.log(result);
 					displaytasks.html(output);
-					numarrange(0);
 					$("table").addClass("table");
 					console.log("Tasks fetched");
 				}
@@ -231,93 +229,20 @@
 			
 			$.ajax({
 				headers: {
-			        	'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 			    },
 				url:"/edit",
 				type:"POST",
-				data: {
-					"id": dataId,
-				},
-				success:function(){
-					$(tasknum).toggleClass("tdone", true);
-					$(taskname).toggleClass( "tdone", true);
-					$(task).toggleClass("tdone", true);
-					$(bttnundone).show("400");
-					$(bttndone).hide("400");
-				}
 			});
 			console.log("Ajax 'edit' successful");
-		});
-		
-		$(document).on("click", "button.done", function(){
-			
-			var dataId = $(this).data("id");
-			console.log(dataId);
-			var taskname = $("#tasktr" + dataId);
-			console.log(taskname);
-			var tasknum = $("#number" + dataId);
-			var task = $("#tasktxt" + dataId);
-			console.log(task);
-			var bttnundone = $("#btnundone" + dataId);
-			var bttndone = $("#btndone" + dataId);
-			
-			$.ajax({
-				headers: {
-			        	'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-			    },
-				url:"/tasks/"+ dataId +"/done",
-				type:"POST",
-				data: {
-					"id": dataId,
-				},
-				success:function(){
-					$(tasknum).toggleClass("tdone", true);
-					$(taskname).toggleClass( "tdone", true);
-					$(task).toggleClass("tdone", true);
-					$(bttnundone).show("400");
-					$(bttndone).hide("400");
-				}
-			});
-			console.log("Ajax 'done' successful");
-		});
-		
-		$(document).on("click", "button.undone", function(){
-			
-			var dataId = $(this).data("id");
-			var tasknum = $("#number" + dataId);
-			var taskname = $("#tasktr" +dataId);
-			var task = $("#tasktxt" + dataId);
-			console.log(taskname);
-			console.log(dataId);
-			var bttnundone = $("#btnundone" + dataId);
-			var bttndone = $("#btndone" + dataId);
-			
-			$.ajax({
-			headers: {
-			    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-			},
-			url:"/tasks/"+ dataId +"/undone",
-			type:"POST",
-			data: {
-				"id": dataId,
-			},
-			success:function(){
-				$(tasknum).toggleClass("tdone", false);
-				$(taskname).toggleClass("tdone", false);
-				$(task).toggleClass("tdone", false);
-				$(bttndone).show("400");
-				$(bttnundone).hide("400");
-			}
-			});
-			console.log("Ajax 'undone' successful");
 		});
 		
 		$(document).on("click", "button.delete", function(){
 			var dataId = $(this).data("id");
 			console.log("Current data-id is "+dataId);
-			$("#modaltitle").text("Deleting task");
+			$("#modaltitle").text("Deleting user");
 			$("#modalmessage").show("400");
-			$("#modalmessage").text("Are you sure you want to delete this task?");
+			$("#modalmessage").text("Are you sure you want to delete this user?");
 			$("#editTasktxt").hide("400");
 			$("#btnok").hide("400");
 			$("#btnconfirm").show("400");
@@ -332,7 +257,7 @@
 				headers: {
 			        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 			    },
-				url:"/tasks/" + dataId,
+				url:"/admin/" + dataId,
 				type:"DELETE",
 				success:function(){
 					$("tr").remove("#tasktr"+dataId);
@@ -341,7 +266,7 @@
 				});
 				$("#btnconfirm").hide("400");
 				$("#btncancel").hide("400");
-				getalertmodal("Task deleted", "Task successfully deleted");
+				getalertmodal("User deleted", "User successfully deleted");
 				console.log("Ajax 'delete' successful");
 			});
 			

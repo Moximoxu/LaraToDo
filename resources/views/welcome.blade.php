@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>LaraToDo</title>
+        <title>LaraToDo To-Do List Web App</title>
 
         <!--Link-->
         <link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">

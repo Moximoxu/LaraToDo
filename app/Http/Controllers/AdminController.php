@@ -14,7 +14,7 @@ class AdminController extends Controller
     }
 
     public function show(){
-        $result = User::where('roles', 'user')->orderBy('created_at', 'desc')->get();
+        $result = User::where('roles', 'member')->orderBy('created_at', 'desc')->get();
         return $result;
     }
 
@@ -41,15 +41,7 @@ class AdminController extends Controller
         return redirect('/admin/');
     }
 
-    public function done(Task $task){
-        $task->update(['done' => 1]);
-    }
-
-    public function undone(Task $task){
-        $task->update(['done' => 0]);
-    }
-
-    public function destroy(Task $task){
-        $task->delete();
+    public function destroy(User $user){
+        $user->delete();
     }
 }
