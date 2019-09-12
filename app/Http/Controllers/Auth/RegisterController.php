@@ -3,6 +3,7 @@
 namespace LaraToDo\Http\Controllers\Auth;
 
 use LaraToDo\User;
+use LaraToDo\Role;
 use LaraToDo\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -67,6 +68,7 @@ class RegisterController extends Controller
             'password' => Hash::make($request->get('password')),
             'remember_token' => random_bytes(10),
             'created_at' => Carbon::now(),
+            'roles' => 'member',
         );
 
         User::insert($user_data);
@@ -74,6 +76,7 @@ class RegisterController extends Controller
         $user = User::where('email', $email_u)->first();
 
         $user->sendEmailVerificationNotification();
+        $user->markEmailAsVerified();
 
         return redirect('verify');
     }

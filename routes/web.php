@@ -22,38 +22,52 @@ Route::group(['middleware' => 'LaraToDo\Http\Middleware\AdminMiddleware'], funct
 		return view('welcome');
 	});
 
-	Route::match(['get', 'post'], '/admin/', 'AdminController@show');
-	Route::match(['get', 'post'], '/admin/edit', 'EditProfileController@edituser');
+	Route::match(['get', 'post'], '/admin/fetch', 'AdminController@show');
+	Route::match(['get', 'post'], '/admin/{user}/edituser', 'AdminController@edituserdetails');
+	Route::match(['get', 'post'], '/admin/edit', 'AdminController@edituser');
+
+	//Route::match(['get', 'post'], 'adminedituser', function(){
+	//	return view('adminedituser');
+	//});
+
+	Route::get('adminedituser', function () {
+    	return view('/adminedituser');
+	});
 
 	Route::match(['get', 'delete'], '/admin/{user}', 'AdminController@destroy');
 
-	Route::match(['get', 'post'], '/logout', 'Auth\LoginController@logout')->name('auth.logout');
+	Route::match(['get', 'post'], '/logout', function(){
+		Auth::logout();
+		return view('/login');
+	});
 });
 
 Route::group(['middleware' => 'LaraToDo\Http\Middleware\MemberMiddleware'], function(){
 	Route::match(['get', 'post'], '/index', 'Auth\LoginController@index');
 
-	Route::match(['get', 'post'], '/tasks/{task}/done', 'TaskController@done');
-	Route::match(['get', 'post'], '/tasks/{task}/undone', 'TaskController@undone');
+	Route::post('/tasks/{task}/done', 'TaskController@done');
+	Route::post('/tasks/{task}/undone', 'TaskController@undone');
 
-	Route::match(['get', 'delete'], '/tasks/{task}', 'TaskController@destroy');
+	Route::delete('/tasks/{task}', 'TaskController@destroy');
 
-	Route::match(['get', 'post'], '/tasks/', 'TaskController@show');
-	Route::match(['get', 'post'], '/tasks', 'TaskController@store');
+	Route::get('/tasks/', 'TaskController@show');
+	Route::post('/tasks', 'TaskController@store');
 
-	Route::match(['get', 'put'], '/tasks', 'TaskController@store');
+	Route::put('/tasks/', 'TaskController@update');
 
 	Route::match(['get', 'post'], '/user/edit', 'EditProfileController@edituser');
 
 	Route::match(['get', 'post'], '/edit', function(){
-			return view('edituser');
+		return view('edituser');
 	});
 
 	Route::match(['get', 'post'], 'resetpassword', function(){
-			return view('auth/passwords/reset');
+		return view('auth/passwords/reset');
 	});
 
 	Route::match(['get', 'post'], '/resetpass', 'Auth\ResetPasswordController@reset');
+
+	Route::match(['get', 'post'], '/logout', 'Auth\LoginController@logout')->name('auth.logout');
 
 });
 
@@ -63,6 +77,8 @@ Route::group(['middleware' => 'LaraToDo\Http\Middleware\MemberMiddleware'], func
 	});
 
 	Route::post('/checklogin', 'Auth\LoginController@checklogin')->name('checklogin');
+
+	Route::match(['get', 'post'], '/logout', 'Auth\LoginController@logout')->name('auth.logout');
 	
 	Route::get('/about', function () {
 	    return view('about');

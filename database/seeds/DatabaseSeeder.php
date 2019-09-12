@@ -14,5 +14,8 @@ class DatabaseSeeder extends Seeder
     {
         Eloquent::unguard();
         $this->call('UsersTableSeeder');
+        // Role comes before User seeder here.
+        $this->call('RoleTableSeeder');
+        $this->call('TaskTableSeeder');
     }
 }

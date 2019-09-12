@@ -124,6 +124,7 @@
 					<h2 class="header">{{Auth::user()->name}}'s Tasks</h2>
 				</div>
 				<form class="form-action" method="post" id="add_task">
+					{{ csrf_field() }}
 					<input type="text" id="addtasktxt" name="name" class="form-control" autocomplete="off" placeholder="Please enter your task" required>
 					<button type="submit" class="Submit btn btn-info" id="btnAdd">Add</button>
 				</form>
@@ -429,8 +430,7 @@
 				});	
 			}
 		};
-		
-	});
+	)};
 
 </script>
 	

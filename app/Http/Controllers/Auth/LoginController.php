@@ -27,7 +27,9 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/index';
+    protected function redirectTo() {
+        return '/index';
+    } 
     /**
      * Create a new controller instance.
      *
@@ -43,20 +45,14 @@ class LoginController extends Controller
             'password' => 'required|min:5'
         ]);
 
-        $user_data = array(
-            'email' => $request->get('email'),
-            'password' => $request->get('password')
-        );
+        $useremail = $request->get('email');
+        $userpassword = $request->get('password');
 
-        if(Auth::attempt($user_data)){
+        if(Auth::attempt(['email' => $useremail, 'password' => $userpassword, 'roles' => 'admin'])){
             return redirect('/admin');
-
-            //if (Auth::user() == User::where('roles', 'admin')){
-                //return redirect('/admin');
-            //}
-            //elseif(Auth::user() == User::where('roles', 'user')){
-                //return redirect('/index');
-            //}
+        }
+        elseif(Auth::attempt(['email' => $useremail, 'password' => $userpassword, 'roles' => 'member'])){
+            return redirect('/index');
         }
         else{
             return  back()->with('error', 'Wrong login details');

@@ -39,8 +39,6 @@
 			margin: 0 auto;
         	float: none;
         	margin-bottom: 30px;
-			width:100%;
-			max-width:600px;
 			padding:20px;
 			border-radius:5px;
 			box-shadow:20px 20px 0 rgba(0, 0, 0, .1);
@@ -126,7 +124,7 @@
 				<div class="card-body" id="tasklist">
 					<table class='table-striped table-hover' id='tasktable'>
 						<thead style='text-align:center'>
-							<tr><th>Name</th><th>Email</th><th>Gender</th><th>Birthdate</th><th>Created At</th><th>Updated At</th><th>Email Verified At</th><th>Role</th><th>Actions</th>
+							<tr><th>ID</th><th>Name</th><th>Email</th><th>Gender</th><th>Birthdate</th><th>Created At</th><th>Updated At</th><th>Email Verified At</th><th>Role</th><th>Actions</th></tr>
 						</thead>
 						<tbody id='tasks_name'>
 							
@@ -168,23 +166,23 @@
 <script>
 	$(document).ready(function(){
 
-		//fetch();
+		fetch();
 		
 		function fetch(){
 			var displaytasks = $("#tasks_name");
 			
 			$.ajax({
 				headers: {
-        		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         		},
 				type:"GET",
-				url:"/admin/",
+				url:"/admin/fetch",
 				dataType: "json",
 				success: function(result){
 					var output;
 					for (var i in result) {
 						output +=
-							"<tr class='listoftasks' data-id='" + result[i].id + "' id='tasktr" + result[i].id + "'><td class='number' id='number" + result[i].id + "'><span class='"+result[i].id+"'></span>"+
+							"<tr class='listoftasks' data-id='" + result[i].id + "' id='tasktr" + result[i].id + "'><td class='number' id='number" + result[i].id + "'><span class='"+result[i].id+"'>"+result[i].id+"</span>"+
 							"</td><td id='tasktxt" + result[i].id + "'>" +
 							result[i].name + 
 							"</td></td><td id='tasktxt" + result[i].id + "'>" +
@@ -201,16 +199,15 @@
 							result[i].email_verified_at + 
 							"</td></td><td id='tasktxt" + result[i].id + "'>" +
 							result[i].roles + 
-							"</td><td class='buttontd'><button type='submit' class='btn btn-light done' id='btndone" + result[i].id + "' data-id='" + result[i].id + "'><i class='far fa-square'></i></button>"+
-							"' style='display:none'><i class='fas fa-check-square'></i></button>" +
-							"<button type='button' class='btn btn-warning edituser' id='btnedit'><i class='fas fa-user-edit'></i></button>" +
+							"</td><td class='buttontd'>" +
+							"<button type='button' class='btn btn-warning edituser' id='btnedit' data-id='" + result[i].id + "'><i class='fas fa-user-edit'></i></button>" +
 							"<button type='button' class='btn btn-danger delete' id='btndelete' data-id='" + result[i].id + "' data-toggle='modal' data-target='#taskModal' ><i class='fas fa-trash-alt'></i></button>"+
 							"</td></tr>";
 					}
 					console.log(result);
 					displaytasks.html(output);
 					$("table").addClass("table");
-					console.log("Tasks fetched");
+					console.log("Users fetched");
 				}
 			});
 		};
@@ -219,20 +216,16 @@
 			
 			var dataId = $(this).data("id");
 			console.log(dataId);
-			var taskname = $("#tasktr" + dataId);
-			console.log(taskname);
-			var tasknum = $("#number" + dataId);
-			var task = $("#tasktxt" + dataId);
-			console.log(task);
-			var bttnundone = $("#btnundone" + dataId);
-			var bttndone = $("#btndone" + dataId);
 			
 			$.ajax({
 				headers: {
 			        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 			    },
-				url:"/edit",
-				type:"POST",
+				url:"/admin/"+ dataId + "/edituser",
+				type:"GET",
+				data:{
+					"id" : dataId,
+				},
 			});
 			console.log("Ajax 'edit' successful");
 		});
@@ -261,7 +254,6 @@
 				type:"DELETE",
 				success:function(){
 					$("tr").remove("#tasktr"+dataId);
-					numarrange(0);
 				}
 				});
 				$("#btnconfirm").hide("400");
@@ -284,21 +276,6 @@
 			$("#btnok").show("400");
 			$("#btnsavechanges").hide("400");
 		};
-		
-		function numarrange(start){
-			if(start > 0 ){
-				$("#frstnum").hide();
-				$(".number").each(function(index){
-					$(this).html(index+2);
-				});	
-			}
-			else if(start < 1 ){
-				$(".number").each(function(index){
-					$(this).html(index+1);
-				});	
-			}
-		};
-		
 	});
 
 </script>

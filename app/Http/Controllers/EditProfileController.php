@@ -18,10 +18,10 @@ class EditProfileController extends Controller
 
     function edituser(Request $request){
         $this->validate($request, [
-                'name' => 'required',
-                'email' => 'required|email',
-                'gender' => 'required',
-                'birthdate' => 'required',
+            'name' => 'required',
+            'email' => 'required|email',
+            'gender' => 'required',
+            'birthdate' => 'required',
         ]);
         $user = Auth::user();
 

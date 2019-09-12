@@ -99,14 +99,16 @@
                 <div class="card-header">Edit Information</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ url('/user/edit') }}">
-                        @csrf
+                    <form method="POST" action="{{ url('/admin/edit') }}">
+                        {{ csrf_field() }}
+
+                        @if (session('name'))
 
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{Auth::user()->name}}" required autocomplete="name" autofocus>
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{session('name')}}" required autocomplete="name" autofocus>
 
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -115,12 +117,14 @@
                                 @enderror
                             </div>
                         </div>
+                        @endif
 
+                        @if (session('email'))
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{Auth::user()->email}}" required>
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{session('email')}}" required>
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -147,11 +151,12 @@
                             </div>
                         </div>
 
+                        @if (session('birthdate'))
                         <div class="form-group row">
                             <label for="birthdate" class="col-md-4 col-form-label text-md-right">{{ __('Birthdate') }}</label>
 
                             <div class="col-md-6">
-                                <input id="birthdate" type="date" class="form-control @error('birthdate') is-invalid @enderror" name="birthdate" value="{{Auth::user()->birthdate}}" required autofocus>
+                                <input id="birthdate" type="date" class="form-control @error('birthdate') is-invalid @enderror" name="birthdate" value="{{session('birthdate')}}" required autofocus>
 
                                 @error('birthdate')
                                     <span class="invalid-feedback" role="alert">
@@ -160,30 +165,33 @@
                                 @enderror
                             </div>
                         </div>
+                        @endif
 
                         <div class="form-group row">
                             <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
 
                             <div class="col-md-6">
-                                <p id="role" type="text" name="role">{{Auth::user()->roles}}</p>
+                                <select class="form-control" id="roles" name="roles" required>
+                                    <option>Member</option>
+                                    <option>Admin</option>
+                                </select>
+
+                                @error('role')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
+                        @endif
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     Update
                                 </button>&nbsp;
-                                <button type="button" class="btn btn-danger" onclick="location.href='{{ url('/index') }}'">
+                                <button type="button" class="btn btn-danger" onclick="location.href='{{ url('/admin') }}'">
                                     Cancel
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <br><button type="button" class="btn btn-warning" onclick="location.href='{{ url('resetpassword') }}'">
-                                    Reset password
                                 </button>
                             </div>
                         </div>
