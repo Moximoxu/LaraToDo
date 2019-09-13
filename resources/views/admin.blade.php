@@ -37,7 +37,7 @@
 		.card{
 			background-color:#d6f5d6;
 			margin: 0 auto;
-			max-width: 1100px;
+			max-width: 1150px;
         	float: none;
         	margin-bottom: 30px;
 			padding:20px;

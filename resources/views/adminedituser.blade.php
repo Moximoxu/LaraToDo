@@ -173,8 +173,8 @@
 
                             <div class="col-md-6">
                                 <select class="form-control" id="roles" name="roles" required>
-                                    <option>Member</option>
-                                    <option>Admin</option>
+                                    <option value="member">Member</option>
+                                    <option value="admin">Admin</option>
                                 </select>
 
                                 @error('role')

@@ -22,20 +22,28 @@ Route::group(['middleware' => 'LaraToDo\Http\Middleware\AdminMiddleware'], funct
 		return view('welcome');
 	});
 
+	//Routes for managing users
 	Route::match(['get', 'post'], '/admin/fetch', 'AdminController@show');
 	Route::match(['get', 'post'], '/admin/{user}/edituser', 'AdminController@edituserdetails');
 	Route::match(['get', 'post'], '/admin/edit', 'AdminController@edituser');
-
-	//Route::match(['get', 'post'], 'adminedituser', function(){
-	//	return view('adminedituser');
-	//});
-
+	Route::match(['get', 'delete'], '/admin/{user}', 'AdminController@destroy');
 	Route::get('adminedituser', function () {
     	return view('/adminedituser');
 	});
 
-	Route::match(['get', 'delete'], '/admin/{user}', 'AdminController@destroy');
+	//Routes for editing current user profile
+	Route::match(['get', 'post'], '/user/edit', 'EditProfileController@edituser');
+	Route::match(['get', 'post'], '/edit', function(){
+		return view('edituser');
+	});
+	
+	//Routes for resetting password
+	Route::match(['get', 'post'], '/resetpass', 'Auth\ResetPasswordController@reset');
+	Route::match(['get', 'post'], 'resetpassword', function(){
+		return view('auth/passwords/reset');
+	});
 
+	//Route for logging out
 	Route::match(['get', 'post'], '/logout', function(){
 		Auth::logout();
 		return view('/login');
@@ -45,28 +53,27 @@ Route::group(['middleware' => 'LaraToDo\Http\Middleware\AdminMiddleware'], funct
 Route::group(['middleware' => 'LaraToDo\Http\Middleware\MemberMiddleware'], function(){
 	Route::match(['get', 'post'], '/index', 'Auth\LoginController@index');
 
+	//Routes for managing tasks
 	Route::post('/tasks/{task}/done', 'TaskController@done');
 	Route::post('/tasks/{task}/undone', 'TaskController@undone');
-
 	Route::delete('/tasks/{task}', 'TaskController@destroy');
-
 	Route::get('/tasks/', 'TaskController@show');
 	Route::post('/tasks', 'TaskController@store');
-
 	Route::put('/tasks/', 'TaskController@update');
 
+	//Routes for editing current user profile
 	Route::match(['get', 'post'], '/user/edit', 'EditProfileController@edituser');
-
 	Route::match(['get', 'post'], '/edit', function(){
 		return view('edituser');
 	});
 
+	//Routes for resetting password
+	Route::match(['get', 'post'], '/resetpass', 'Auth\ResetPasswordController@reset');
 	Route::match(['get', 'post'], 'resetpassword', function(){
 		return view('auth/passwords/reset');
 	});
 
-	Route::match(['get', 'post'], '/resetpass', 'Auth\ResetPasswordController@reset');
-
+	//Route for logging out
 	Route::match(['get', 'post'], '/logout', 'Auth\LoginController@logout')->name('auth.logout');
 
 });
@@ -84,16 +91,17 @@ Route::group(['middleware' => 'LaraToDo\Http\Middleware\MemberMiddleware'], func
 	    return view('about');
 	});
 
+	//Routes for registering
+	Route::post('/register/create', 'Auth\RegisterController@create');
+	Route::post('/register/', 'Auth\RegisterController@validator');
 	Route::get('register', function(){
 		return view('auth/register');
 	});
-	Route::post('/register/create', 'Auth\RegisterController@create');
-	Route::post('/register/', 'Auth\RegisterController@validator');
 
-	Route::post('/resetpass', 'Auth\ResetPasswordController@reset');
-
+	//Routes for verifying registration
 	Auth::routes(['verify' => true]);
-
 	Route::get('verify', function(){
 		return view('auth/verify');
 	});
+
+	Route::post('/resetpass', 'Auth\ResetPasswordController@reset');
