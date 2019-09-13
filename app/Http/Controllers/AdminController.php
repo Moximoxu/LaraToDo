@@ -4,13 +4,13 @@ namespace LaraToDo\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use LaraToDo\Http\Controllers\Controller;
 use LaraToDo\User;
+use Carbon\Carbon;
 
 class AdminController extends Controller
 {
-    protected function redirectTo() {
-        return '/index';
-    } 
 
     public function __construct(){
         $this->middleware(['auth', 'verified']);
@@ -22,11 +22,12 @@ class AdminController extends Controller
     }
 
     public function edituserdetails(User $user){ 
+    	$userid = $user->id;
     	$name = $user->name;
     	$email = $user->email;
     	$birthdate = $user->birthdate;
     	$roles = $user->roles;
-    	return redirect('adminedituser')->with('name' , $name)->with('email' , $email)->with('birthdate' , $birthdate);
+    	return redirect('adminedituser')->with('name' , $name)->with('email' , $email)->with('birthdate' , $birthdate)->with('roles' , $roles);
     }
 
     public function edituser(Request $request){
@@ -37,21 +38,15 @@ class AdminController extends Controller
             'birthdate' => 'required',
             'roles' => 'required',
         ]);
-        $useremail = $request->get('email');
 
-        $user = User::where('email', $useremail);
-
-        $user_data = array(
-            'name' => $request->get('name'),
-            'email' => $useremail,
+        DB::table('users')->updateOrInsert(
+        	['email' => $request->get('email')],
+            ['name' => $request->get('name'),
             'gender' => $request->get('gender'),
             'birthdate' => $request->get('birthdate'),
             'updated_at' => Carbon::now(),
-            'roles' => $request->get('roles'),
+            'roles' => $request->get('roles')]
         );
-
-        $user->fill($user_data);
-        $user->save();
 
         return redirect('/admin');
     }

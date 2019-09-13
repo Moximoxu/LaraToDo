@@ -134,7 +134,7 @@
 							<tr><th>No.</th><th>Task</th><th>Actions</th>
 						</thead>
 						<tbody id='tasks_name'>
-							
+
 						</tbody>
 					</table>
 				</div>
@@ -172,9 +172,8 @@
 	
 <script>
 	$(document).ready(function(){
-
 		fetch();
-		
+
 		function fetch(){
 			var displaytasks = $("#tasks_name");
 			var userid = {{Auth::user()->id}}
@@ -219,7 +218,7 @@
 				}
 			});
 		};
-		
+
 		$(document).on("click", "button.done", function(){
 			
 			var dataId = $(this).data("id");
@@ -251,37 +250,40 @@
 			});
 			console.log("Ajax 'done' successful");
 		});
-		
+
 		$(document).on("click", "button.undone", function(){
 			
 			var dataId = $(this).data("id");
-			var tasknum = $("#number" + dataId);
-			var taskname = $("#tasktr" +dataId);
-			var task = $("#tasktxt" + dataId);
-			console.log(taskname);
 			console.log(dataId);
+			var taskname = $("#tasktr" + dataId);
+			console.log(taskname);
+			var tasknum = $("#number" + dataId);
+			var task = $("#tasktxt" + dataId);
+			console.log(task);
 			var bttnundone = $("#btnundone" + dataId);
 			var bttndone = $("#btndone" + dataId);
 			
 			$.ajax({
-			headers: {
-			    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-			},
-			url:"/tasks/"+ dataId +"/undone",
-			type:"POST",
-			data: {
-				"id": dataId,
-			},
-			success:function(){
-				$(tasknum).toggleClass("tdone", false);
-				$(taskname).toggleClass("tdone", false);
-				$(task).toggleClass("tdone", false);
-				$(bttndone).show("400");
-				$(bttnundone).hide("400");
-			}
+				headers: {
+			        	'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			    },
+				url:"/tasks/"+ dataId +"/undone",
+				type:"POST",
+				data: {
+					"id": dataId,
+				},
+				success:function(){
+					$(tasknum).toggleClass("tdone", false);
+					$(taskname).toggleClass( "tdone", false);
+					$(task).toggleClass("tdone", false);
+					$(bttnundone).hide("400");
+					$(bttndone).show("400");
+				}
 			});
 			console.log("Ajax 'undone' successful");
 		});
+	});
+		
 		
 		$(document).on("click", "button.edit", function(){
 			
@@ -430,7 +432,6 @@
 				});	
 			}
 		};
-	)};
 
 </script>
 	
