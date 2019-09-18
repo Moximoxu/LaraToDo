@@ -201,7 +201,7 @@
 							"</td></td><td id='tasktxt" + result[i].id + "'>" +
 							result[i].roles + 
 							"</td><td class='buttontd'>" +
-							"<button type='button' class='btn btn-warning edituser' id='btnedit' data-id='" + result[i].id + "'><i class='fas fa-user-edit'></i></button>" +
+							"<a href='/admin/"+ result[i].id + "/edituser'><i class='fas fa-user-edit'></i>" +
 							"<button type='button' class='btn btn-danger delete' id='btndelete' data-id='" + result[i].id + "' data-toggle='modal' data-target='#taskModal' ><i class='fas fa-trash-alt'></i></button>"+
 							"</td></tr>";
 					}
@@ -212,24 +212,6 @@
 				}
 			});
 		};
-
-		$(document).on("click", "button.edituser", function(){
-			
-			var dataId = $(this).data("id");
-			console.log(dataId);
-			
-			$.ajax({
-				headers: {
-			        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-			    },
-				url:"/admin/"+ dataId + "/edituser",
-				type:"GET",
-				data:{
-					"id" : dataId,
-				},
-			});
-			console.log("Ajax 'edit' successful");
-		});
 		
 		$(document).on("click", "button.delete", function(){
 			var dataId = $(this).data("id");
