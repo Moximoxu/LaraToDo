@@ -17,8 +17,8 @@ class AdminController extends Controller
     }
 
     public function show(){
-        $result = User::orderBy('created_at', 'desc')->get();
-        return $result;
+        $users = DB::table('users')->simplePaginate(10);
+        return view('admin', ['users' => $users]);
     }
 
     public function edituserdetails(User $user){ 

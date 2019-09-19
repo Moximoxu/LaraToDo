@@ -98,6 +98,10 @@
 		.tundone{
 			text-decoration:none;
 		}
+
+		.number{
+			padding:4px;
+		}
 		
 	</style>
 	
@@ -128,9 +132,52 @@
 							<tr><th>ID</th><th>Name</th><th>Email</th><th>Gender</th><th>Birthdate</th><th>Created At</th><th>Updated At</th><th>Email Verified At</th><th>Role</th><th>Actions</th></tr>
 						</thead>
 						<tbody id='tasks_name'>
-							
+							@foreach ($users as $user)
+							<tr class='listoftasks' data-id='{{$user->id}}' id='tasktr{{$user->id}}'>
+								<td class='number' id='number{{$user->id}}'><span class='{{$user->id}}'>{{$user->id}}</span>
+								</td>
+
+								<td id='tasktxt{{$user->id}}'>
+								{{$user->name}}
+								</td>
+
+								<td id='tasktxt{{$user->id}}'>
+								{{$user->email}}
+								</td>
+
+								<td id='tasktxt{{$user->id}}'>
+								{{$user->gender}}
+								</td>
+
+								<td id='tasktxt{{$user->id}}'>
+								{{$user->birthdate}}
+								</td>
+
+								<td id='tasktxt{{$user->id}}'>
+								{{$user->created_at}}
+								</td>
+
+								<td id='tasktxt{{$user->id}}'>
+								{{$user->updated_at}}
+								</td>
+
+								<td id='tasktxt{{$user->id}}'>
+								{{$user->email_verified_at}}
+								</td>
+
+								<td id='tasktxt{{$user->id}}'>
+								{{$user->roles}}
+								</td>
+
+								<td class='buttontd'>
+								<a href='/admin/{{$user->id}}/edituser'><i class='fas fa-user-edit'></i></a>
+								<button type='button' class='btn btn-danger delete' id='btndelete' data-id='{{$user->id}}' data-toggle='modal' data-target='#taskModal' ><i class='fas fa-trash-alt'></i></button>
+								</td>
+							</tr>
+							@endforeach
 						</tbody>
 					</table>
+					{{ $users->links() }}
 				</div>
 			</div>
 		</div>
@@ -166,52 +213,6 @@
 	
 <script>
 	$(document).ready(function(){
-
-		fetch();
-		
-		function fetch(){
-			var displaytasks = $("#tasks_name");
-			
-			$.ajax({
-				headers: {
-        			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        		},
-				type:"GET",
-				url:"/admin/fetch",
-				dataType: "json",
-				success: function(result){
-					var output;
-					for (var i in result) {
-						output +=
-							"<tr class='listoftasks' data-id='" + result[i].id + "' id='tasktr" + result[i].id + "'><td class='number' id='number" + result[i].id + "'><span class='"+result[i].id+"'>"+result[i].id+"</span>"+
-							"</td><td id='tasktxt" + result[i].id + "'>" +
-							result[i].name + 
-							"</td></td><td id='tasktxt" + result[i].id + "'>" +
-							result[i].email + 
-							"</td></td><td id='tasktxt" + result[i].id + "'>" +
-							result[i].gender + 
-							"</td></td><td id='tasktxt" + result[i].id + "'>" +
-							result[i].birthdate + 
-							"</td></td><td id='tasktxt" + result[i].id + "'>" +
-							result[i].created_at + 
-							"</td></td><td id='tasktxt" + result[i].id + "'>" +
-							result[i].updated_at + 
-							"</td></td><td id='tasktxt" + result[i].id + "'>" +
-							result[i].email_verified_at + 
-							"</td></td><td id='tasktxt" + result[i].id + "'>" +
-							result[i].roles + 
-							"</td><td class='buttontd'>" +
-							"<a href='/admin/"+ result[i].id + "/edituser'><i class='fas fa-user-edit'></i>" +
-							"<button type='button' class='btn btn-danger delete' id='btndelete' data-id='" + result[i].id + "' data-toggle='modal' data-target='#taskModal' ><i class='fas fa-trash-alt'></i></button>"+
-							"</td></tr>";
-					}
-					console.log(result);
-					displaytasks.html(output);
-					$("table").addClass("table");
-					console.log("Users fetched");
-				}
-			});
-		};
 		
 		$(document).on("click", "button.delete", function(){
 			var dataId = $(this).data("id");

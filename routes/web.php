@@ -13,9 +13,8 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 Route::group(['middleware' => 'LaraToDo\Http\Middleware\AdminMiddleware'], function(){
-	Route::match(['get', 'post'], '/admin', function(){
-		return view('admin');
-	});
+
+	Route::match(['get', 'post'], '/admin', 'AdminController@show');
 
 	Route::match(['get', 'post'], '/', function(){
 		Auth::logout();
@@ -23,7 +22,6 @@ Route::group(['middleware' => 'LaraToDo\Http\Middleware\AdminMiddleware'], funct
 	});
 
 	//Routes for managing users
-	Route::match(['get', 'post'], '/admin/fetch', 'AdminController@show');
 	Route::match(['get', 'post'], '/admin/{user}/edituser', 'AdminController@edituserdetails');
 	Route::match(['get', 'post'], '/admin/edit', 'AdminController@edituser');
 	Route::match(['get', 'delete'], '/admin/{user}', 'AdminController@destroy');

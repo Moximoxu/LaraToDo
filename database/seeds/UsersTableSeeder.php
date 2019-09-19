@@ -14,21 +14,14 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         
-        $role_member = Role::where('name', 'member')->first();
-        $role_admin  = Role::where('name', 'admin')->first();
+        for($i=0; $i < 30; $i++){
+           $member = new User();
+            $member->name = "Member Name$i";
+            $member->email = "employee$i@example.com";
+            $member->password = Hash::make('password');
+            $member->roles = 'member';
+            $member->save(); 
+        }
         
-        $member = new User();
-        $member->name = 'Member Name';
-        $member->email = 'employee@example.com';
-        $member->password = Hash::make('secret');
-        $member->roles()->attach($role_member);
-        $member->save();
-        
-        $admin = new User();
-        $admin->name = 'Admin Name';
-        $admin->email = 'admin@example.com';
-        $admin->password = Hash::make('secret');
-        $admin->roles()->attach($role_admin);
-        $admin->save();
     }
 }
