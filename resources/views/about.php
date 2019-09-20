@@ -6,6 +6,8 @@
 		
 		<link rel="stylesheet" 
 		href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+		<link rel='stylesheet' 
+		href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
 		
 		<!--Sources-->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -17,13 +19,13 @@
 
         <!-- Styles -->
         <style>
-            html, body {
-                background-color:#aeeaae;
-                color: #000000;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
+            #navLogo {
+				font-family:Georgia;
+				font-size:40px;
+			}
+
+            body {
+            	background-color:#aeeaae;
             }
 
             .full-height {
@@ -35,13 +37,13 @@
 			}
 			
 			.card{
-				color: #000000;
-				background-color: #66ff66;
-				font-family: 'Helvetica';
-				width:100%;
-				max-width:500px;
+				background-color:#d6f5d6;
+				margin: 0 auto;
+				max-width: 1150px;
+	        	float: none;
+	        	margin-bottom: 30px;
 				padding:20px;
-				border-radius:7px;
+				border-radius:5px;
 				box-shadow:20px 20px 0 rgba(0, 0, 0, .1);
 				box-sizing:border-box;
 			}
@@ -82,14 +84,24 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+
         </style>
+
+        <nav class="navbar navbar-expand-sm navbar-dark" style="background-color:#33cc33">
+			<ul class="navbar-nav">
+				<li class="nav-item">
+					<a class="nav-link text-white" id="navLogo"><b>LaraToDo</b></a>
+				</li>
+			</ul>
+		</nav>
+
     </head>
     <body>
         <div class="flex-center position-ref full-height">
             <div class="content">
 				<div class="card mx-auto">
-					<div class="card-header">
-						<h2 class="header">About LaraToDo</h2>
+					<div class="card-header" style="background-color:#33cc33">
+						<h2 class="header" style="color:#ffffff">About LaraToDo</h2>
 					</div>
 					<div class="card-body my-3" id="aboutcontent">
 						<div class="row">
@@ -104,6 +116,9 @@
 									<li>Edit tasks</li>
 									<li>View tasks based on the user that is logged in</li>
 								</ul>
+							</div>
+							<div class="col-sm-12 mx-auto">
+								<a href='/'><i class="far fa-hand-point-left"></i></a>
 							</div>
 						</div>
 					</div>

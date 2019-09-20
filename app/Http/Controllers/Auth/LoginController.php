@@ -28,7 +28,7 @@ class LoginController extends Controller
      * @var string
      */
     protected function redirectTo() {
-        return '/index';
+        return '/welcome';
     } 
     /**
      * Create a new controller instance.

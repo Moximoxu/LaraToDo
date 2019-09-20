@@ -104,6 +104,7 @@
                     <a href="https://nova.laravel.com">Nova</a>
                     <a href="https://forge.laravel.com">Forge</a>
                     <a href="https://github.com/Moximoxu/LaraToDo">GitHub</a>
+                    <a href='/about'>About Us</a>
                 </div>
             </div>
         </div>

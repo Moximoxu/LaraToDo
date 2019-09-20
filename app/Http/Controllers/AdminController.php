@@ -16,9 +16,52 @@ class AdminController extends Controller
         $this->middleware(['auth', 'verified']);
     }
 
+    protected function redirectTo() {
+        return '/login';
+    } 
+
     public function show(){
         $users = DB::table('users')->simplePaginate(10);
         return view('admin', ['users' => $users]);
+    }
+
+    public function showSearch(Request $request){
+        $q = $request->get ( 'q' );
+        $users = DB::table('users')->where('name','LIKE','%'.$q.'%')->orWhere('email','LIKE','%'.$q.'%')->simplePaginate(10);
+        if($q == 'members' OR $q == 'member'){
+            $users = DB::table('users')->where('roles','LIKE','%'.$q.'%')->simplePaginate(10);
+            if(count($users) > 0)
+                return view('admin', ['users' => $users]);
+            else 
+                return view ('admin', ['message' => "No $q users found."]);
+        }
+        elseif($q == 'admin' OR $q == 'admins'){
+            $users = DB::table('users')->where('roles','LIKE','%'.$q.'%')->simplePaginate(10);
+            if(count($users) > 0)
+                return view('admin', ['users' => $users]);
+            else 
+                return view ('admin', ['message' => "No $q users found."]);
+        }
+        elseif($q == 'male'){
+            $users = DB::table('users')->where('gender','LIKE','%'.$q.'%')->simplePaginate(10);
+            if(count($users) > 0)
+                return view('admin', ['users' => $users]);
+            else 
+                return view ('admin', ['message' => "No $q users found."]);
+        }
+        elseif($q == 'female'){
+            $users = DB::table('users')->where('gender','LIKE','%'.$q.'%')->simplePaginate(10);
+            if(count($users) > 0)
+                return view('admin', ['users' => $users]);
+            else 
+                return view ('admin', ['message' => "No $q users found."]);
+        }
+        else{
+            if(count($users) > 0)
+                return view('admin', ['users' => $users]);
+            else 
+                return view ('admin');
+        }
     }
 
     public function edituserdetails(User $user){ 

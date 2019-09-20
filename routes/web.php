@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+//
+//Routes for admin users
+//
 Route::group(['middleware' => 'LaraToDo\Http\Middleware\AdminMiddleware'], function(){
 
 	Route::match(['get', 'post'], '/admin', 'AdminController@show');
@@ -20,6 +24,9 @@ Route::group(['middleware' => 'LaraToDo\Http\Middleware\AdminMiddleware'], funct
 		Auth::logout();
 		return view('welcome');
 	});
+
+	//Route for searching users
+	Route::any('/search', 'AdminController@showSearch');
 
 	//Routes for managing users
 	Route::match(['get', 'post'], '/admin/{user}/edituser', 'AdminController@edituserdetails');
@@ -48,6 +55,9 @@ Route::group(['middleware' => 'LaraToDo\Http\Middleware\AdminMiddleware'], funct
 	});
 });
 
+//
+//Routes for member users
+//
 Route::group(['middleware' => 'LaraToDo\Http\Middleware\MemberMiddleware'], function(){
 	Route::match(['get', 'post'], '/index', 'Auth\LoginController@index');
 
@@ -76,6 +86,9 @@ Route::group(['middleware' => 'LaraToDo\Http\Middleware\MemberMiddleware'], func
 
 });
 
+//
+//Routes for guests
+//
 	Route::get('/', function(){
 		Auth::logout();
 		return view('welcome');
@@ -87,6 +100,13 @@ Route::group(['middleware' => 'LaraToDo\Http\Middleware\MemberMiddleware'], func
 	
 	Route::get('/about', function () {
 	    return view('about');
+	});
+
+	//Routes for editing current user profile
+	Route::match(['get', 'post'], '/user/edit', 'EditProfileController@edituser');
+	Route::match(['get', 'post'], '/{user}/edit', 'EditProfileController@checkRole');
+	Route::match(['get', 'post'], '/edit', function(){
+		return view('edituser');
 	});
 
 	//Routes for registering

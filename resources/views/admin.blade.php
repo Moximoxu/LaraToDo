@@ -52,37 +52,13 @@
             top: 18px;
 		}
 		
-		.tasks{
-			margin:0;
-			padding:0;
-		}
-		
-		.tasks li:hover .done_bttn{
-			opacity:1;
-		}
-		
-		.tasks li, task-add input{
-			border:0;
-			border-bottom:1px dashed #ccc;
-			padding:15px 0;
-		}
-		
-		.input{
-			width:100%;
+		.form-control{
+			width:70%;
 		}
 		
 		.buttontd {
 			width:200px;
 			text-align: center;
-		}
-
-		.done_bttn{
-			display:inline-block;
-			background-color:#85e085;
-			color:#e67300;
-			padding:3px 6px;
-			border:0;
-			opacity:0.5;
 		}
 		
 		.Submit{
@@ -90,13 +66,6 @@
 			width:100%;
 			margin-top; 10px;
 			box-shadow: 3px 3px 0 #ddd;
-		}
-		.tdone, number.tdone{
-			text-decoration:line-through;
-			color: rgba(0, 0, 0, 0.25);
-		}
-		.tundone{
-			text-decoration:none;
 		}
 
 		.number{
@@ -127,6 +96,25 @@
 					<h2 class="header">Admin {{Auth::user()->name}}'s View</h2>
 				</div>
 				<div class="card-body" id="tasklist">
+					<form action="/search" method="POST" role="search">
+				    {{ csrf_field() }}
+				    <div class="input-group">
+				        <input type="text" class="form-control" name="q"
+				            placeholder="Search users"> <span class="input-group-btn">
+				            <button type="submit" class="btn btn-default">
+				                <i class="fas fa-search"></i>
+				            </button>
+					        </span>
+					    </div>
+					</form>
+					@if(isset($message))
+                            <h3>
+                                <div class="alert alert-danger success-block"><strong>{{ $message }}</strong>
+                                </div>
+                            </h3>
+                    @endif
+
+                    @if(isset($users))
 					<table class='table-striped table-hover' id='tasktable'>
 						<thead style='text-align:center'>
 							<tr><th>ID</th><th>Name</th><th>Email</th><th>Gender</th><th>Birthdate</th><th>Created At</th><th>Updated At</th><th>Email Verified At</th><th>Role</th><th>Actions</th></tr>
@@ -178,6 +166,7 @@
 						</tbody>
 					</table>
 					{{ $users->links() }}
+					@endif
 				</div>
 			</div>
 		</div>

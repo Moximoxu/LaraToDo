@@ -25,9 +25,11 @@ class EditProfileController extends Controller
         ]);
         $user = Auth::user();
 
+        $useremail = $request->get('email');
+
         $user_data = array(
             'name' => $request->get('name'),
-            'email' => $request->get('email'),
+            'email' => $useremail,
             'gender' => $request->get('gender'),
             'birthdate' => $request->get('birthdate'),
             'updated_at' => Carbon::now(),
@@ -36,6 +38,20 @@ class EditProfileController extends Controller
         $user->fill($user_data);
         $user->save();
 
-        return redirect('/index');
+        if(User::Where(['email' => $useremail, 'roles' => 'admin'])){
+            return redirect('/admin');
+        }
+        elseif(User::Where(['email' => $useremail, 'roles' => 'member'])){
+            return redirect('/index');
+        }
+    }
+
+    function checkRole(User $user){
+        if(User::Where(['email' => $user->email, 'roles' => 'admin'])){
+            return redirect('/admin');
+        }
+        elseif(User::Where(['email' => $user->email, 'roles' => 'member'])){
+            return redirect('/index');
+        }
     }
 }

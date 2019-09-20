@@ -174,7 +174,7 @@
                                 <button type="submit" class="btn btn-primary">
                                     Update
                                 </button>&nbsp;
-                                <button type="button" class="btn btn-danger" onclick="location.href='{{ url('/index') }}'">
+                                <button type="button" class="btn btn-danger" onclick="location.href='{{ url()->previous() }}'">
                                     Cancel
                                 </button>
                             </div>

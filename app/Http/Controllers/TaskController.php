@@ -8,10 +8,13 @@ use LaraToDo\Task;
 
 class TaskController extends Controller
 {
-    public function __construct() 
-    {
+    public function __construct(){
         $this->middleware(['auth', 'verified']);
     }
+
+    protected function redirectTo() {
+        return '/login';
+    } 
 
     public function show(){
         $userid = Auth::id();
