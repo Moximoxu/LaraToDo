@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-	<title>LaraToDo To-Do List Web App</title>
+	<title>LaraToDo</title>
 	<meta charset="utf-8">
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<meta name="viewport" content="width=device-width, intial-scale=1">
@@ -71,6 +71,10 @@
 		.number{
 			padding:4px;
 		}
+
+		.fa-user-edit{
+			color: #ffffff;
+		}
 		
 	</style>
 	
@@ -79,9 +83,12 @@
 			<li class="nav-item">
 				<a class="nav-link text-white" id="navLogo" href="{{ url('/') }}"><b>LaraToDo</b></a>
 			</li>
+			<li class="nav-item" style="margin-top:30px">
+				<a class="nav-link" style="font-family:Georgia;font-size:14px;">To-Do Web Application</a>
+			</li>
 		</ul>
 		<div class="topbtns">
-			<button type="button" class="btn btn-warning" id="btnedit" onclick="location.href='{{ url('/edit') }}'"><i class="fas fa-user-edit"></i></button>
+			<button type="button" class="btn btn-warning" id="btnedit" onclick="location.href='{{ url('/edit') }}'"><i class="fas fa-user-edit" style="color:#000000"></i></button>
 			<button type="button" class="btn btn-danger" id="btnlogout" onclick="location.href='{{ url('/logout') }}'"><i class="fas fa-door-open"></i></button>
 		</div>
 	</nav>
@@ -101,7 +108,7 @@
 				    <div class="input-group">
 				        <input type="text" class="form-control" name="q"
 				            placeholder="Search users"> <span class="input-group-btn">
-				            <button type="submit" class="btn btn-default">
+				            <button type="submit" class="btn btn-primary">
 				                <i class="fas fa-search"></i>
 				            </button>
 					        </span>
@@ -158,7 +165,7 @@
 								</td>
 
 								<td class='buttontd'>
-								<a href='/admin/{{$user->id}}/edituser'><i class='fas fa-user-edit'></i></a>
+								<button class='btn btn-success'><a href='/admin/{{$user->id}}/edituser'><i class='fas fa-user-edit user'></i></a></button>
 								<button type='button' class='btn btn-danger delete' id='btndelete' data-id='{{$user->id}}' data-toggle='modal' data-target='#taskModal' ><i class='fas fa-trash-alt'></i></button>
 								</td>
 							</tr>

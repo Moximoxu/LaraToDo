@@ -92,6 +92,9 @@
 				<li class="nav-item">
 					<a class="nav-link text-white" id="navLogo"><b>LaraToDo</b></a>
 				</li>
+				<li class="nav-item" style="margin-top:30px">
+					<a class="nav-link" style="font-family:Georgia;font-size:14px;">To-Do Web Application</a>
+				</li>
 			</ul>
 		</nav>
 

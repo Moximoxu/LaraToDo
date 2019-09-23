@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    <title>LaraToDo To-Do List Web App</title>
+    <title>LaraToDo</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, intial-scale=1">
 
@@ -86,6 +86,9 @@
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link text-white" id="navLogo" href="{{ url('/') }}"><b>LaraToDo</b></a>
+            </li>
+            <li class="nav-item" style="margin-top:30px">
+                <a class="nav-link" style="font-family:Georgia;font-size:14px;">To-Do Web Application</a>
             </li>
         </ul>
     </nav>
