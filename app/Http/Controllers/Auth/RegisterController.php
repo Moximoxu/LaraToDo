@@ -68,7 +68,7 @@ class RegisterController extends Controller
             'password' => Hash::make($request->get('password')),
             'remember_token' => random_bytes(10),
             'created_at' => Carbon::now(),
-            'roles' => 'admin',
+            'roles' => 'member',
         );
 
         User::insert($user_data);

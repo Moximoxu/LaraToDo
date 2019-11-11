@@ -123,3 +123,13 @@ Route::group(['middleware' => 'LaraToDo\Http\Middleware\MemberMiddleware'], func
 	});
 
 	Route::post('/resetpass', 'Auth\ResetPasswordController@reset');
+
+	//				 //
+   //	SUMMERNOTE  //
+  //			   //
+
+	Route::get('summernote',  'SummernoteController@show');
+	Route::get('get/{content}/summernote', 'SummernoteController@get');
+	Route::post('store/summernote', 'SummernoteController@store')->name('summernotePersist');
+
+	Route::get('editor', 'SummernoteController@index');
