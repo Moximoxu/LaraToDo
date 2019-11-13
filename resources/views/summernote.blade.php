@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-	<title>Countimer</title>
+	<title>Countimer Content</title>
 	<meta charset="utf-8">
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<meta name="viewport" content="width=device-width, intial-scale=1">
@@ -25,10 +25,12 @@
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	
 	<!--Summernote sources-->
-	<!-- include libraries(jQuery, bootstrap) -->
+	<!-- include libraries(jQuery, bootstrap, fontawesome) -->
 	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
-	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
+	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+	<link rel='stylesheet' 
+		href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'> 
 
 	<!-- include summernote css/js -->
 	<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
@@ -52,7 +54,8 @@
 					<div>
 						@if(isset($summernote))
 							{!!html_entity_decode($summernote->content)!!}
-							<button class="btn btn-danger delete" data-id="{{$summernote->id}}">Delete</button>
+							<button class="btn btn-danger delete" data-id="{{$summernote->id}}"><i class='fas fa-trash-alt'></i></button>
+							<a class="btn btn-warning" href="editor">Back To Editor</a>
 						@endif
 					</div>
 						

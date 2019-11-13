@@ -211,12 +211,4 @@
 		  
 		console.log("Counting down time");
 		}, 1000);
-		
-		//Store the content in the editor
-		$("#store_Content").click(function(){
-			var textareaValue = $('#summernote').summernote('code');
-			localStorage.setItem("content", textareaValue);
-			$("#timer_div").remove();
-			$('#summernote').summernote("code", "");
-		});
 	};

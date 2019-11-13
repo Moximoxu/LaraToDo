@@ -25,10 +25,12 @@
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	
 	<!--Summernote sources-->
-	<!-- include libraries(jQuery, bootstrap) -->
+	<!-- include libraries(jQuery, bootstrap, fontawesome) -->
 	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
-	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
+	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+	<link rel='stylesheet' 
+		href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'> 
 
 	<!-- include summernote css/js -->
 	<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
@@ -54,12 +56,12 @@
 					        {{ csrf_field() }}
 					        <textarea name="summernoteInput" class="summernote" id="summernote"></textarea>
 					        <br>
-					        <button class="btn btn-warning" type="submit">Store Content</button>
+					        <button class="btn btn-success" type="submit">Save <i class="fas fa-save"></i></button>
 					        @foreach ($summernotes as $summernote)
 								<a class="btn btn-info my-3" href="/get/{{$summernote->id}}/summernote" id="get_Content">Content #{{$summernote->id}}</a>
 							@endforeach
 					    </form>
-						<a class="btn btn-danger" href="/">Back</a>
+						<a class="btn btn-danger" href="/">Back To Menu</a>
 					</div>
 						
 					</div>
