@@ -72,6 +72,7 @@
 					click: function () {
 						$counter = '<div class="col" id="timer_div">'+
 						'<h2 class="header" style="text-align:center;font-size:40px" id="c_title">Title</h2>'+
+						'<h2 id="title_show" style="display:none"></h2>'+
 						'<table style="text-align:center" class="table table-hover my-3 mx-3">'+
 						'	<thead>'+
 						'		<tr>'+
@@ -83,6 +84,7 @@
 						'	</thead>'+
 						'	<tbody>'+
 						'		<tr>'+
+						'			<h3 id="c_countDown" style="display:none"></h3>'+
 						'			<td><h3 id="c_days" style="font-size:40px"></h3></td>'+
 						'			<td><h3 id="c_hours" style="font-size:40px"></h3></td>'+
 						'			<td><h3 id="c_minutes" style="font-size:40px"></h3></td>'+
@@ -169,6 +171,7 @@
 		//Insert into variable for calculation
 		var countDown = countDownDate.getTime();
 		console.log("Successfully fetched set time");
+		document.getElementById("c_countDown").innerHTML = countDown;
 		
 		//Update the count down every 1 second
 		var x = setInterval(function() {
@@ -186,8 +189,11 @@
 		  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 			
 		  //Output the result in an element with id="timer"
-		  var countimer = document.getElementById("timer");
 		  document.getElementById("c_title").innerHTML = title;
+		  document.getElementById("c_title").value = title;
+		  document.getElementById("title_show").innerHTML = title;
+		  console.log(document.getElementById("title_show").innerHTML);
+
 		  document.getElementById("c_days").innerHTML = days;
 		  document.getElementById("c_hours").innerHTML = hours;
 		  document.getElementById("c_minutes").innerHTML = minutes;
@@ -202,7 +208,7 @@
 			document.getElementById("c_seconds").innerHTML = "0";
 		  }
 		  
-		  console.log("Counting down time");
+		console.log("Counting down time");
 		}, 1000);
 		
 		//Store the content in the editor
@@ -211,13 +217,5 @@
 			localStorage.setItem("content", textareaValue);
 			$("#timer_div").remove();
 			$('#summernote').summernote("code", "");
-			//clearInterval(x);
 		});
 	};
-
-// Paste the content that have written inside the editor 
-function getContent(){
-	//Retrieve
-	var textareaValue = localStorage.getItem("content");
-	$('#summernote').summernote('editor.pasteHTML', textareaValue);
-};

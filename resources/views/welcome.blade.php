@@ -86,8 +86,7 @@
             <div class="top-right links">
                 <button type="button" class="btn btn-info" onclick="location.href='{{ url('login') }}'">Login</button>&nbsp;
                 <button type="button" class="btn btn-success" onclick="location.href='{{ url('register') }}'">Register</button>
-                <button type="button" class="btn btn-dark" onclick="location.href='{{ url('editor') }}'">Editor</button>
-                <button type="button" class="btn btn-warning" onclick="location.href='{{ url('summernote') }}'">Summernote</button>
+                <button type="button" class="btn btn-warning" onclick="location.href='{{ url('editor') }}'">Summernote Editor</button>
             </div>
 
             <div class="content">

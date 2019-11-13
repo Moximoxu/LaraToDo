@@ -39,7 +39,7 @@
 	
 	<style>
 		body{
-			width:800px;
+			width:80%;
 			margin: 20px auto 0;
 		}
 	</style>
@@ -55,8 +55,8 @@
 					        <textarea name="summernoteInput" class="summernote" id="summernote"></textarea>
 					        <br>
 					        <button class="btn btn-warning" type="submit">Store Content</button>
-					        @foreach ($contents as $content)
-								<a class="btn btn-info" href="/get/{{$content->id}}/summernote" id="get_Content">Show Content #{{$content->id}}</a>
+					        @foreach ($summernotes as $summernote)
+								<a class="btn btn-info" href="/get/{{$summernote->id}}/summernote" id="get_Content">Content #{{$summernote->id}}</a>
 							@endforeach
 					    </form>
 						<a class="btn btn-danger" href="/">Back</a>

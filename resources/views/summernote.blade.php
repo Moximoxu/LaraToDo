@@ -35,11 +35,11 @@
 	<script type="text/javascript" src="{{URL::asset('js/summernote.min.js')}}"></script> 
 	
 	<!--Countimer plugin-->
-	<script type="text/javascript" src="{{URL::asset('js/countimer_script.js')}}"></script>
+	<script type="text/javascript" src="{{URL::asset('js/countimer_show_script.js')}}"></script>
 	
 	<style>
 		body{
-			width:800px;
+			width:80%;
 			margin: 20px auto 0;
 		}
 	</style>
@@ -50,10 +50,10 @@
 		<div class="col-lg-12">
 					<div class="row">
 					<div>
-						@if(isset($summernote_content))
-							{{!!$summernote_content!!}}
+						@if(isset($summernote))
+							{!!html_entity_decode($summernote->content)!!}
+							<button class="btn btn-danger delete" data-id="{{$summernote->id}}">Delete</button>
 						@endif
-						<a class="btn btn-danger" href="/">Back</a>
 					</div>
 						
 					</div>
@@ -61,21 +61,5 @@
 		</div>
 	</div>
 </body>
-
-<script type="text/javascript">
-	$(document).ready(function() {
-		$('#summernote').summernote({
-			width: 600,
-			height: 400,
-			focus: true,
-			toolbar:[
-				['insert', ['countimer']],
-				['font', ['fontname', 'fontsize']],
-				['tool', ['undo', 'redo', 'codeview']],
-				['style',['style']],
-			],
-		});
-	});
-</script>
 
 </html>

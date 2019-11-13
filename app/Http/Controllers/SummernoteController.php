@@ -5,6 +5,7 @@ namespace LaraToDo\Http\Controllers;
 use LaraToDo\Summernote;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
+use DOMDocument;
 
 class SummernoteController extends Controller
 {
@@ -15,8 +16,8 @@ class SummernoteController extends Controller
      */
     public function index()
     {
-        $contents = Summernote::get();
-        return View::make('editor', ['contents' => $contents]);
+        $summernotes = Summernote::get();
+        return View::make('editor', ['summernotes' => $summernotes]);
     }
 
     /**
@@ -39,7 +40,7 @@ class SummernoteController extends Controller
     {
         $detail=$request->summernoteInput;
  
-        $dom = new \domdocument();
+        $dom = new \DOMDocument();
         $dom->loadHtml($detail, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
         $images = $dom->getelementsbytagname('img');
  
@@ -66,7 +67,8 @@ class SummernoteController extends Controller
         $summernote->content = $detail;
         $summernote->save();
 
-        return View::make('/');
+        $summernotes = Summernote::get();
+        return View::make('editor', ['summernotes' => $summernotes]);
     }
 
     /**
@@ -77,8 +79,7 @@ class SummernoteController extends Controller
      */
     public function show()
     {
-        $contents = Summernote::get();
-        return View::make('summernote', ['contents' => $contents]);
+        //
     }
 
     /**
@@ -89,8 +90,7 @@ class SummernoteController extends Controller
      */
     public function get(Summernote $summernote)
     {
-        $summernote_content = $summernote->content;
-        return View::make('summernote', ['summernote_content' => $summernote_content]);
+        return View::make('summernote', ['summernote' => $summernote]);
     }
 
     /**
@@ -124,6 +124,6 @@ class SummernoteController extends Controller
      */
     public function destroy(Summernote $summernote)
     {
-        //
+        $summernote->delete();
     }
 }

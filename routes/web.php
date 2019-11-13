@@ -129,7 +129,8 @@ Route::group(['middleware' => 'LaraToDo\Http\Middleware\MemberMiddleware'], func
   //			   //
 
 	Route::get('summernote',  'SummernoteController@show');
-	Route::get('get/{content}/summernote', 'SummernoteController@get');
+	Route::get('/get/{summernote}/summernote', 'SummernoteController@get');
 	Route::post('store/summernote', 'SummernoteController@store')->name('summernotePersist');
+	Route::delete('/summernote/{summernote}', 'SummernoteController@destroy');
 
 	Route::get('editor', 'SummernoteController@index');
