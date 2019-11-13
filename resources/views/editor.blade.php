@@ -56,7 +56,7 @@
 					        <br>
 					        <button class="btn btn-warning" type="submit">Store Content</button>
 					        @foreach ($summernotes as $summernote)
-								<a class="btn btn-info" href="/get/{{$summernote->id}}/summernote" id="get_Content">Content #{{$summernote->id}}</a>
+								<a class="btn btn-info my-3" href="/get/{{$summernote->id}}/summernote" id="get_Content">Content #{{$summernote->id}}</a>
 							@endforeach
 					    </form>
 						<a class="btn btn-danger" href="/">Back</a>

@@ -73,6 +73,7 @@
 						$counter = '<div class="col" id="timer_div">'+
 						'<h2 class="header" style="text-align:center;font-size:40px" id="c_title">Title</h2>'+
 						'<h2 id="title_show" style="display:none"></h2>'+
+						'<h3 id="c_countDown" style="display:none"></h3>'+
 						'<table style="text-align:center" class="table table-hover my-3 mx-3">'+
 						'	<thead>'+
 						'		<tr>'+
@@ -84,7 +85,6 @@
 						'	</thead>'+
 						'	<tbody>'+
 						'		<tr>'+
-						'			<h3 id="c_countDown" style="display:none"></h3>'+
 						'			<td><h3 id="c_days" style="font-size:40px"></h3></td>'+
 						'			<td><h3 id="c_hours" style="font-size:40px"></h3></td>'+
 						'			<td><h3 id="c_minutes" style="font-size:40px"></h3></td>'+
@@ -94,7 +94,7 @@
 						'</table>'+
 					'</div>'+
 					
-					'<div id="setModal" class="modal fade" role="dialog">'+
+					'<div id="setModal" class="modal fade" role="dialog" style="display: none;">'+
 					'  <div class="modal-dialog">'+ 
 					'	<div class="modal-content">'+
 					'	  <div class="modal-header">'+
@@ -172,6 +172,7 @@
 		var countDown = countDownDate.getTime();
 		console.log("Successfully fetched set time");
 		document.getElementById("c_countDown").innerHTML = countDown;
+		console.log(document.getElementById("c_countDown").innerHTML);
 		
 		//Update the count down every 1 second
 		var x = setInterval(function() {

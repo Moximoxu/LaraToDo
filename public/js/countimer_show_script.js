@@ -63,7 +63,7 @@ $(document).ready(function() {
 		url: "/summernote/" + dataId,
 		type:"DELETE",
 		success:function(){
-	          window.location.href='editor';
+	        window.location.href="editor";
 		}
 		});
 		console.log("Ajax 'delete' successful");
