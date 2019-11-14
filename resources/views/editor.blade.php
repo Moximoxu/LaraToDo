@@ -52,15 +52,30 @@
 		<div class="col-lg-12">
 					<div class="row">
 					<div>
-						<form action="{{route('summernotePersist')}}" method="POST">
-					        {{ csrf_field() }}
+
+						@if(isset($summernote_content))
+						<form method="POST">
+					    	@csrf
+						    <textarea name="summernoteInput" class="summernote" id="summernote">
+					        	{{$summernote_content}}
+					        </textarea>
+					        <br>
+				        	<submit class="btn btn-success" type="submit">Save Changes <i class="fas fa-save"></i></button>
+				        </form>
+			        	@endif
+
+					    @if(!isset($summernote_content))
+					    <form action="{{route('summernotePersist')}}" method="POST">
+					        @csrf
 					        <textarea name="summernoteInput" class="summernote" id="summernote"></textarea>
 					        <br>
-					        <button class="btn btn-success" type="submit">Save <i class="fas fa-save"></i></button>
+					        <button class="btn btn-success" type="submit">Store <i class="fas fa-save"></i></button>
 					        @foreach ($summernotes as $summernote)
-								<a class="btn btn-info my-3" href="/get/{{$summernote->id}}/summernote" id="get_Content">Content #{{$summernote->id}}</a>
+								<a class="btn btn-info my-3" href="/get/{{$summernote->id}}/summernote" id="get_Content" target="_blank">Content #{{$summernote->id}}</a>
 							@endforeach
 					    </form>
+				        @endif
+
 						<a class="btn btn-danger" href="/">Back To Menu</a>
 					</div>
 						

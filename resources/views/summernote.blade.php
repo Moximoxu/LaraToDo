@@ -54,8 +54,9 @@
 					<div>
 						@if(isset($summernote))
 							{!!html_entity_decode($summernote->content)!!}
-							<button class="btn btn-danger delete" data-id="{{$summernote->id}}"><i class='fas fa-trash-alt'></i></button>
-							<a class="btn btn-warning" href="editor">Back To Editor</a>
+							<a class="btn btn-danger delete" target="_blank" data-id="{{$summernote->id}}" style="color:#ffffff"><i class='fas fa-trash-alt'></i></a>
+							<a class="btn btn-warning" href="{{ url('editor') }}">Back To Editor</a>
+							<a class="btn btn-dark" href="/edit/{{$summernote->id}}/summernote"><i class='far fa-edit'></i></a>
 						@endif
 					</div>
 						

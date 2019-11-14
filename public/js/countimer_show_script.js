@@ -16,6 +16,7 @@ $(document).ready(function() {
 	//Insert into variable for calculation
 	var countDown = document.getElementById("c_countDown").innerHTML;
 	console.log("Successfully fetched set time");
+	console.log(countDown);
 	
 	//Update the count down every 1 second
 	var x = setInterval(function() {
@@ -53,7 +54,7 @@ $(document).ready(function() {
 	}, 1000);
 
 
-	$(document).on("click", "button.delete", function(){
+	$(document).on("click", "a.delete", function(){
 		var dataId = $(this).data("id");
 
 		$.ajax({
@@ -63,7 +64,7 @@ $(document).ready(function() {
 		url: "/summernote/" + dataId,
 		type:"DELETE",
 		success:function(){
-	        window.location.href="editor";
+	        window.close();
 		}
 		});
 		console.log("Ajax 'delete' successful");

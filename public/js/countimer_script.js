@@ -92,9 +92,10 @@
 						'		</tr>'+
 						'	</tbody>'+
 						'</table>'+
+					'<p>You can place any input here</p>'+
 					'</div>'+
 					
-					'<div id="setModal" class="modal fade" role="dialog" style="display: none;">'+
+					'<div id="setModal" class="modal fade" role="dialog" style="display:none;">'+
 					'  <div class="modal-dialog">'+ 
 					'	<div class="modal-content">'+
 					'	  <div class="modal-header">'+
