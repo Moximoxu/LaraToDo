@@ -71,27 +71,25 @@
 					//HTML that will be inserted into editor
 					click: function () {
 						$counter = '<div class="col" id="timer_div">'+
-						'<h2 class="header" style="text-align:center;font-size:40px" id="c_title">Title</h2>'+
-						'<h2 id="title_show" style="display:none"></h2>'+
-						'<h3 id="c_countDown" style="display:none"></h3>'+
-						'<table style="text-align:center" class="table table-hover my-3 mx-3">'+
-						'	<thead>'+
-						'		<tr>'+
-						'			<td><h3 style="font-size:20px">Days</h3></td>'+
-						'			<td><h3 style="font-size:20px">Hours</h3></td>'+
-						'			<td><h3 style="font-size:20px">Minutes</h3></td>'+
-						'			<td><h3 style="font-size:20px">Seconds</h3></td>'+
-						'		</tr>'+
-						'	</thead>'+
-						'	<tbody>'+
-						'		<tr>'+
-						'			<td><h3 id="c_days" style="font-size:40px"></h3></td>'+
-						'			<td><h3 id="c_hours" style="font-size:40px"></h3></td>'+
-						'			<td><h3 id="c_minutes" style="font-size:40px"></h3></td>'+
-						'			<td><h3 id="c_seconds" style="color:red;font-size:40px"></h3></td>'+
-						'		</tr>'+
-						'	</tbody>'+
-						'</table>'+
+						'<div class="container my-3 mx-3">'+
+						'		<div class="row">'+
+						'			<div class="col-sm-4 mx-2"><h2 class="text-center" id="c_title">Title</h2></div>'+
+						'			<h2 id="title_show" style="display:none"></h2>'+
+						'			<h3 id="c_countDown" style="display:none"></h3>'+
+						'		</div>'+
+						'		<div class="row">'+
+						'			<div class="col-sm-1"><h3 class="text-center" id="c_days_label">Days</h3></div>'+
+						'			<div class="col-sm-1"><h3 class="text-center" id="c_hours_label">Hours</h3></div>'+
+						'			<div class="col-sm-1"><h3 class="text-center" id="c_minutes_label">Minutes</h3></div>'+
+						'			<div class="col-sm-1"><h3 class="text-center" id="c_seconds_label">Seconds</h3></div>'+
+						'		</div>'+
+						'		<div class="row">'+
+						'			<div class="col-sm-1"><h3 class="text-center" id="c_days"></h3></div>'+
+						'			<div class="col-sm-1"><h3 class="text-center" id="c_hours"></h3></div>'+
+						'			<div class="col-sm-1"><h3 class="text-center" id="c_minutes"></h3></div>'+
+						'			<div class="col-sm-1"><h3 class="text-center" id="c_seconds" style="color:red;"></h3></div>'+
+						'		</div>'+
+						'</div>'+
 					'<p>You can place any input here</p>'+
 					'</div>'+
 					

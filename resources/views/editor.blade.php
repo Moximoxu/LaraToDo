@@ -38,6 +38,7 @@
 	
 	<!--Countimer plugin-->
 	<script type="text/javascript" src="{{URL::asset('js/countimer_script.js')}}"></script>
+	<link rel="stylesheet" type="text/css" href="{{ url('/css/countimer.css') }}" />
 	
 	<style>
 		body{
@@ -54,13 +55,14 @@
 					<div>
 
 						@if(isset($summernote_content))
-						<form method="POST">
+						<form method="POST" action="{{ url('save/summernote') }}">
 					    	@csrf
-						    <textarea name="summernoteInput" class="summernote" id="summernote">
+						    <textarea name="summernoteUpdate" class="summernote" id="summernote">
 					        	{{$summernote_content}}
 					        </textarea>
+					        <input id="content_id" value="{{$summernote_id}}" style="display:none" readonly>
 					        <br>
-				        	<submit class="btn btn-success" type="submit">Save Changes <i class="fas fa-save"></i></button>
+				        	<button class="btn btn-success" type="submit">Save Changes <i class="fas fa-save"></i></button>
 				        </form>
 			        	@endif
 

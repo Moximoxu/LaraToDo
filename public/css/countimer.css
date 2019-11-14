@@ -1,0 +1,23 @@
+#c_title{
+	font-size:40px;
+}
+
+#c_days_label{
+	font-size:20px;
+}
+
+#c_hours_label{
+	font-size:20px;
+}
+
+#c_minutes_label{
+	font-size:18px;
+}
+
+#c_seconds_label{
+	font-size:16px;
+}
+
+#c_days, #c_hours, #c_minutes, #c_seconds{
+	font-size:40px;
+}

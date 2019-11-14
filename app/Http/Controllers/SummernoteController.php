@@ -5,6 +5,7 @@ namespace LaraToDo\Http\Controllers;
 use LaraToDo\Summernote;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
+use Carbon\Carbon;
 use DOMDocument;
 
 class SummernoteController extends Controller
@@ -114,7 +115,7 @@ class SummernoteController extends Controller
      */
     public function update(Request $request, Summernote $summernote)
     {
-        $detail=$request->summernoteInput;
+        $detail=$request->summernoteUpdate;
  
         $dom = new \DOMDocument();
         $dom->loadHtml($detail, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
@@ -137,10 +138,18 @@ class SummernoteController extends Controller
             $img->removeattribute('src');
             $img->setattribute('src', $image_name);
         }
- 
+
+        $content_id = $request->get('content_id');
         $detail = $dom->savehtml();
-        $summernote->content = $detail;
-        $summernote->save();
+
+        Summernote::updateOrInsert(
+            ['id' => $content_id],
+            ['content' => $detail,
+            'updated_at' => Carbon::now()]
+        );
+
+        $summernotes = Summernote::get();
+        return View::make('editor', ['summernotes' => $summernotes]);
     }
 
     /**

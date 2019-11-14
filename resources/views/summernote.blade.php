@@ -38,6 +38,7 @@
 	
 	<!--Countimer plugin-->
 	<script type="text/javascript" src="{{URL::asset('js/countimer_show_script.js')}}"></script>
+	<link rel="stylesheet" type="text/css" href="{{ url('/css/countimer.css') }}" />
 	
 	<style>
 		body{
