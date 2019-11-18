@@ -13,9 +13,10 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-//
-//Routes for admin users
-//
+	  //			//
+	 //   ADMINS   //
+	//			  //
+
 Route::group(['middleware' => 'LaraToDo\Http\Middleware\AdminMiddleware'], function(){
 
 	Route::match(['get', 'post'], '/admin', 'AdminController@show');
@@ -55,9 +56,10 @@ Route::group(['middleware' => 'LaraToDo\Http\Middleware\AdminMiddleware'], funct
 	});
 });
 
-//
-//Routes for member users
-//
+	  //			 //
+	 //   MEMBERS   //
+	//			   //
+
 Route::group(['middleware' => 'LaraToDo\Http\Middleware\MemberMiddleware'], function(){
 	Route::match(['get', 'post'], '/index', 'Auth\LoginController@index');
 
@@ -86,9 +88,10 @@ Route::group(['middleware' => 'LaraToDo\Http\Middleware\MemberMiddleware'], func
 
 });
 
-//
-//Routes for guests
-//
+	  //			//
+	 //   GUESTS   //
+	//			  //
+
 	Route::get('/', function(){
 		Auth::logout();
 		return view('welcome');

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-	<title>Countimer Content</title>
+	<title>Countimer</title>
 	<meta charset="utf-8">
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<meta name="viewport" content="width=device-width, intial-scale=1">
@@ -37,7 +37,7 @@
 	<script type="text/javascript" src="{{URL::asset('js/summernote.min.js')}}"></script> 
 	
 	<!--Countimer plugin-->
-	<script type="text/javascript" src="{{URL::asset('js/countimer_show_script.js')}}"></script>
+	<script type="text/javascript" src="{{URL::asset('js/countimer_script.js')}}"></script>
 	<link rel="stylesheet" type="text/css" href="{{ url('/css/countimer.css') }}" />
 	
 	<style>
@@ -51,20 +51,56 @@
 <body>
 	<div class="row">
 		<div class="col-lg-12">
-					<div class="row">
-					<div>
-						@if(isset($summernote))
-							{!!html_entity_decode($summernote->content)!!}
-							<a class="btn btn-danger delete" target="_blank" data-id="{{$summernote->id}}" style="color:#ffffff"><i class='fas fa-trash-alt'></i></a>
-							<a class="btn btn-warning" href="{{ url('editor') }}">Back To Editor</a>
-							<a class="btn btn-dark" href="/edit/{{$summernote->id}}/summernote"><i class='far fa-edit'></i></a>
-						@endif
-					</div>
-						
-					</div>
+			<div class="row">
+				<div class="col">
+
+					@if(isset($summernote_content))
+					<form method="POST" action="{{ url('save/summernote') }}">
+				    	@csrf
+					    <textarea name="summernoteUpdate" class="summernote" id="summernote">
+				        	{{$summernote_content}}
+				        </textarea>
+				        <input id="content_id" name="content_id" value="{{$summernote_id}}" style="display:none" readonly>
+				        <br>
+			        	<button class="btn btn-success my-3" type="submit">Save Changes <i class="fas fa-save"></i></button>
+			        	<a class="btn btn-danger my-3" href="/get/{{$summernote_id}}/summernote" id="get_Content">Cancel</a>
+			        </form>
+		        	@endif
+
+				    @if(!isset($summernote_content))
+				    <form action="{{route('summernotePersist')}}" method="POST">
+				        @csrf
+				        <textarea name="summernoteInput" class="summernote" id="summernote"></textarea>
+				        <br>
+				        <button class="btn btn-success" type="submit">Store <i class="fas fa-save"></i></button>
+				        @foreach ($summernotes as $summernote)
+							<a class="btn btn-info my-3" href="/get/{{$summernote->id}}/summernote" id="get_Content" target="_blank">Content #{{$summernote->id}}</a>
+						@endforeach
+				    </form>
+			        @endif
+
+					<a class="btn btn-dark" href="/"><i class="fas fa-chevron-circle-left"></i> Menu</a>
+				</div>	
 			</div>
 		</div>
 	</div>
 </body>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#summernote').summernote({
+			width: 600,
+			height: 400,
+			focus: true,
+			toolbar:[
+				['insert', ['countimer']],
+				['font', ['fontname', 'fontsize']],
+				['tool', ['undo', 'redo', 'codeview']],
+				['style',['style']],
+			],
+		});
+		console.log("The summernote ID is "+document.getElementById("content_id").value);
+	});
+</script>
 
 </html>

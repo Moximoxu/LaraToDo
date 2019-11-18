@@ -21,3 +21,8 @@
 #c_days, #c_hours, #c_minutes, #c_seconds{
 	font-size:40px;
 }
+
+#summernote_div{
+	margin:auto;
+	width:70%;  
+}

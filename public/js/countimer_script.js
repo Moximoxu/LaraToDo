@@ -142,6 +142,7 @@
 		}
 	});
 }));
+
 	// Set the date we're counting down to 
 	function setDate(){
 		//Close the modal

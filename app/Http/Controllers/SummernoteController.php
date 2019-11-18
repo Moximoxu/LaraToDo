@@ -18,7 +18,7 @@ class SummernoteController extends Controller
     public function index()
     {
         $summernotes = Summernote::get();
-        return View::make('editor', ['summernotes' => $summernotes]);
+        return View::make('countimer/editor', ['summernotes' => $summernotes]);
     }
 
     /**
@@ -69,7 +69,7 @@ class SummernoteController extends Controller
         $summernote->save();
 
         $summernotes = Summernote::get();
-        return View::make('editor', ['summernotes' => $summernotes]);
+        return View::make('countimer/editor', ['summernotes' => $summernotes]);
     }
 
     /**
@@ -91,7 +91,7 @@ class SummernoteController extends Controller
      */
     public function get(Summernote $summernote)
     {
-        return View::make('summernote', ['summernote' => $summernote]);
+        return View::make('countimer/summernote', ['summernote' => $summernote]);
     }
 
     /**
@@ -103,7 +103,7 @@ class SummernoteController extends Controller
     public function edit(Summernote $summernote)
     {
         $summernote_id = $summernote->id;
-        return View::make('editor', ['summernote_content' => $summernote->content, 'summernote_id' => $summernote_id]);
+        return View::make('countimer/editor', ['summernote_content' => $summernote->content, 'summernote_id' => $summernote_id]);
     }
 
     /**
@@ -149,7 +149,7 @@ class SummernoteController extends Controller
         );
 
         $summernotes = Summernote::get();
-        return View::make('editor', ['summernotes' => $summernotes]);
+        return View::make('countimer/editor', ['summernotes' => $summernotes]);
     }
 
     /**
