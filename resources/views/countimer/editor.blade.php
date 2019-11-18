@@ -99,7 +99,6 @@
 				['style',['style']],
 			],
 		});
-		console.log("The summernote ID is "+document.getElementById("content_id").value);
 	});
 </script>
 

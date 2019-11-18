@@ -90,7 +90,7 @@
 						'			<div class="col-sm-1"><h3 class="text-center" id="c_seconds" style="color:red;"></h3></div>'+
 						'		</div>'+
 						'</div>'+
-					'<p>You can place any input here</p>'+
+					'<p>You need to place an input here</p>'+
 					'</div>'+
 					
 					'<div id="setModal" class="modal fade" role="dialog" style="display:none;">'+
