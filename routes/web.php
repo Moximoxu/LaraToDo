@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-	  //			//
+	  //						//
 	 //   ADMINS   //
-	//			  //
+	//			      //
 
 Route::group(['middleware' => 'LaraToDo\Http\Middleware\AdminMiddleware'], function(){
 
@@ -42,7 +42,7 @@ Route::group(['middleware' => 'LaraToDo\Http\Middleware\AdminMiddleware'], funct
 	Route::match(['get', 'post'], '/edit', function(){
 		return view('edituser');
 	});
-	
+
 	//Routes for resetting password
 	Route::match(['get', 'post'], '/resetpass', 'Auth\ResetPasswordController@reset');
 	Route::match(['get', 'post'], 'resetpassword', function(){
@@ -56,9 +56,9 @@ Route::group(['middleware' => 'LaraToDo\Http\Middleware\AdminMiddleware'], funct
 	});
 });
 
-	  //			 //
+	  //			 			 //
 	 //   MEMBERS   //
-	//			   //
+	//			   		 //
 
 Route::group(['middleware' => 'LaraToDo\Http\Middleware\MemberMiddleware'], function(){
 	Route::match(['get', 'post'], '/index', 'Auth\LoginController@index');
@@ -88,9 +88,9 @@ Route::group(['middleware' => 'LaraToDo\Http\Middleware\MemberMiddleware'], func
 
 });
 
-	  //			//
+	  //			      //
 	 //   GUESTS   //
-	//			  //
+	//			      //
 
 	Route::get('/', function(){
 		Auth::logout();
@@ -100,7 +100,7 @@ Route::group(['middleware' => 'LaraToDo\Http\Middleware\MemberMiddleware'], func
 	Route::post('/checklogin', 'Auth\LoginController@checklogin')->name('checklogin');
 
 	Route::match(['get', 'post'], '/logout', 'Auth\LoginController@logout')->name('auth.logout');
-	
+
 	Route::get('/about', function () {
 	    return view('about');
 	});
@@ -127,9 +127,9 @@ Route::group(['middleware' => 'LaraToDo\Http\Middleware\MemberMiddleware'], func
 
 	Route::post('/resetpass', 'Auth\ResetPasswordController@reset');
 
-	//				 //
-   //	SUMMERNOTE  //
-  //			   //
+	  //				       //
+   //		SUMMERNOTE  //
+  //			         //
 
 	Route::get('summernote',  'SummernoteController@show');
 	Route::get('/get/{summernote}/summernote', 'SummernoteController@get');

@@ -1,9 +1,9 @@
 /**
- * 
+ *
  * copyright 2019, Mohd Ikhmal Hafiq Zubir.
  * email: ikhmal.zubir@gmail.com
  * license: Your chosen license, or link to a license file.
- * 
+ *
  */
 (function (factory) {
   /* Global define */
@@ -41,7 +41,7 @@
 					R.push(val.slice(i, i + chunkSize));
 				return R;
 			};
-			
+
 		/*IE polyfill*/
 		if (!Array.prototype.filter) {
 			Array.prototype.filter = function (fun /*, thisp*/) {
@@ -61,7 +61,7 @@
 				return res;
 			};
 		}
-			
+
 			//Context for button in plugin toolbar
 			context.memo('button.countimer', function () {
 				var button = ui.button({
@@ -74,7 +74,7 @@
 						'<div class="container my-3 mx-3">'+
 						'		<div class="row">'+
 						'			<div class="col-sm-4 mx-2"><h2 class="text-center" id="c_title">Title</h2></div>'+
-						'			<h2 id="title_show" style="display:none"></h2>'+
+						'			<p id="title_show" name="title_show" style="display:none"></p>'+
 						'			<h3 id="c_countDown" style="display:none"></h3>'+
 						'		</div>'+
 						'		<div class="row">'+
@@ -89,50 +89,17 @@
 						'			<div class="col-sm-1"><h3 class="text-center" id="c_minutes"></h3></div>'+
 						'			<div class="col-sm-1"><h3 class="text-center" id="c_seconds" style="color:red;"></h3></div>'+
 						'		</div>'+
-						'</div>'+
-					'<p>You need to place an input here</p>'+
-					'</div>'+
-					
-					'<div id="setModal" class="modal fade" role="dialog" style="display:none;">'+
-					'  <div class="modal-dialog">'+ 
-					'	<div class="modal-content">'+
-					'	  <div class="modal-header">'+
-					'		<button type="button" class="close" data-dismiss="modal">&times;</button>'+
-					'		<h4 class="modal-title">Set Countimer</h4>'+
-					'	  </div>'+
-					'	  <div class="modal-body" id="timer">'+
-					'			<label for="c_title_in">Title of Countdown</label>'+
-					'			<input type="text" id="c_title_in"><br>'+
+						'</div'+
+					'</div'+
 
-					'			<label for="c_date">Countdown Date</label>'+
-					'			<input type="date" id="c_date" placeholder="Countdown date"><br>'+
-
-					'			<label for="c_hour">Hour</label>'+
-					'			<input type="number" id="c_hour" required value="00" min="0" step="1" max="23">:'+
-
-					'			<label for="c_minute">Minute</label>'+
-					'			<input type="number" id="c_minute" required value="00" min="0" step="1" max="59">:'+
-
-					'			<label for="c_second">Second</label>'+
-					'			<input type="number" id="c_second" required value="00" min="0" step="1" max="59"><br>'+
-
-					'			<button type="button" onclick="setDate()" class="btn btn-info my-3" data-dismiss="modal">Set</button>'+
-					'	  </div>'+
-					'	  <div class="modal-footer">'+
-					'		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>'+
-					'	  </div>'+
-					'	</div>'+
-
-					'  </div>'+
-					'</div>'+
-					
 					'</div>';
-						
+
 						//Paste countimer into editor
 						context.invoke('editor.pasteHTML', $counter);
-						
+
 						//Automatically opens the modal once the button is pressed
 						$('#setModal').modal('show');
+
 					}
 				});
 				//Render button
@@ -143,64 +110,64 @@
 	});
 }));
 
-	// Set the date we're counting down to 
+	// Set the date we're counting down to
 	function setDate(){
 		//Close the modal
 		$("#setModal.close").click();
-		
+
 		//Set the title
 		var title = document.getElementById("c_title_in").value;
 		console.log("Successfully set title");
-		
+    document.getElementById("title_show").innerHTML = title;
+    console.log(document.getElementById("title_show").innerHTML);
+
 		//Set date of the endpoint
 		var date =  document.getElementById("c_date").value;
 		var countDownDate = new Date(date);
-		
+
 		//Set hour of the endpoint
 		var hour =  document.getElementById("c_hour").value;
 		countDownDate.setHours(hour);
-		
+
 		//Set minute of the endpoint
 		var minute =  document.getElementById("c_minute").value;
 		countDownDate.setMinutes(minute);
-		
+
 		//Set second of the endpoint
 		var second = document.getElementById("c_second").value;
 		countDownDate.setSeconds(second);
-		
+
 		//Insert into variable for calculation
 		var countDown = countDownDate.getTime();
 		console.log("Successfully fetched set time");
 		document.getElementById("c_countDown").innerHTML = countDown;
 		console.log(document.getElementById("c_countDown").innerHTML);
-		
+
 		//Update the count down every 1 second
 		var x = setInterval(function() {
 
 		  //Get today's date and time
 		  var now = new Date().getTime();
-			
+
 		  //Find the distance between now and the count down date
 		  var distance = countDown - now;
-			
+
 		  //Time calculations for days, hours, minutes and seconds
 		  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
 		  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 		  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
 		  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-			
+
 		  //Output the result in an element with id="timer"
 		  document.getElementById("c_title").innerHTML = title;
-		  document.getElementById("c_title").value = title;
-		  document.getElementById("title_show").innerHTML = title;
-		  console.log(document.getElementById("title_show").innerHTML);
+		  document.getElementById("c_title").value = title
 
 		  document.getElementById("c_days").innerHTML = days;
 		  document.getElementById("c_hours").innerHTML = hours;
 		  document.getElementById("c_minutes").innerHTML = minutes;
 		  document.getElementById("c_seconds").innerHTML = seconds;
-			
-		  //If the count down is over, write some text 
+
+		  //If the count down is over, write some text
 		  if (distance < 0) {
 			document.getElementById("c_title").innerHTML = "EXPIRED";
 			document.getElementById("c_days").innerHTML = "0";
@@ -208,7 +175,10 @@
 			document.getElementById("c_minutes").innerHTML = "0";
 			document.getElementById("c_seconds").innerHTML = "0";
 		  }
-		  
+
 		console.log("Counting down time");
 		}, 1000);
+
+    //Enters a whitespace into summernote editor
+    $('#summernote').summernote('insertText', '');
 	};

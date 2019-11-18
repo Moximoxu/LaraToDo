@@ -24,5 +24,9 @@
 
 #summernote_div{
 	margin:auto;
-	width:70%;  
+	width:70%;
+}
+
+#setModal{
+	display:none;
 }
