@@ -18,23 +18,43 @@ $(document).ready(function() {
 	console.log("Successfully fetched set time");
 	console.log(countDown);
 
+  //Get today's date and time
+  var now = new Date().getTime();
+
+  //Find the distance between now and the count down date
+  var distance = countDown - now;
+
+  //Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  //Output the result in an element with id="timer"
+  var countimer = document.getElementById("timer");
+  document.getElementById("c_title").innerHTML = title;
+  document.getElementById("c_days").innerHTML = days;
+  document.getElementById("c_hours").innerHTML = hours;
+  document.getElementById("c_minutes").innerHTML = minutes;
+  document.getElementById("c_seconds").innerHTML = seconds;
+
 	//Update the count down every 1 second
 	var x = setInterval(function() {
 
 	  //Get today's date and time
-	  var now = new Date().getTime();
+	  now = new Date().getTime();
 
 	  //Find the distance between now and the count down date
-	  var distance = countDown - now;
+	  distance = countDown - now;
 
 	  //Time calculations for days, hours, minutes and seconds
-	  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-	  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-	  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-	  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+	  days = Math.floor(distance / (1000 * 60 * 60 * 24));
+	  hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+	  minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+	  seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
 	  //Output the result in an element with id="timer"
-	  var countimer = document.getElementById("timer");
+	  countimer = document.getElementById("timer");
 	  document.getElementById("c_title").innerHTML = title;
 	  document.getElementById("c_days").innerHTML = days;
 	  document.getElementById("c_hours").innerHTML = hours;
