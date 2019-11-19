@@ -51,8 +51,8 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
+				<h4 class="modal-title" id="c_modal_title">Set Countimer</h4>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Set Countimer</h4>
 			</div>
 			<div class="modal-body" id="timer">
 				<label for="c_title_in">Title of Countdown</label>
