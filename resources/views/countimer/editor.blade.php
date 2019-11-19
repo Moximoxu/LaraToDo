@@ -59,7 +59,7 @@
 				<input type="text" id="c_title_in"><br>
 
 					<label for="c_date">Countdown Date</label>
-					<input type="date" id="c_date" placeholder="Countdown date"><br>
+					<input type="date" id="c_date"><br>
 
 				<label for="c_hour">Hour</label>
 					<input type="number" id="c_hour" required value="00" min="0" step="1" max="23">:
@@ -78,6 +78,7 @@
 		</div>
 	</div>
 </div>
+
 </head>
 
 <body>
@@ -90,8 +91,8 @@
 					<form method="POST" action="{{ url('save/summernote') }}">
 				    	@csrf
 					    <textarea name="summernoteUpdate" class="summernote" id="summernote">
-				        	{{$summernote_content}}
-				        </textarea>
+				       {{$summernote_content}}
+				      </textarea>
 				        <input id="content_id" name="content_id" value="{{$summernote_id}}" style="display:none" readonly>
 				        <br>
 			        	<button class="btn btn-success my-3" type="submit">Save Changes <i class="fas fa-save"></i></button>

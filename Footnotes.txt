@@ -1,0 +1,20 @@
+LARATODO:
+
+i) Main functions of this system is to allow users to list down tasks that they needed done.
+ii) Helps track tasks that are done and those that are pending.
+iii) Lists down the tasks that the users want to be reminded of.
+
+NOTE: Included alongside LaraToDo is the plugin project "Countimer"
+
+COUNTIMER:
+i) Originally made with the purpose to be implemented into Summernote WYSIWYG editor.
+ii) Main purpose of this plugin is to allow users to implement a timer in their text file such as a form or blog.
+iii) Developed using JavaScript, HTML, BootStrap, PHP and CSS which is then implemented into a Laravel framework.
+iv) Have the capabilities to be stored into a database and fetched through a controller.
+v) The content saved alongside the timer is any text or elements that are added into the Summernote editor.
+vi) Implemented as a plugin for Summernote where a button will insert the timer into the editor and be set to any date and time.
+vii) Needed to be compact in order to be a plugin which requires the JavaScript file to be able to function almost independently without any additional files besides CSS file.
+viii) Any and all methods and variables are subject to change which will be updated progressively.
+
+By: Mohd Ikhmal Hafiq Zubir
+GitHub Username: Moximoxu
