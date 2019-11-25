@@ -8,6 +8,7 @@
  * Countimer Plugin
 */
 $(document).ready(function() {
+	if(document.getElementById("title_show").innerHTML){
 	//Set the title
 	var title = document.getElementById("title_show").innerHTML;
 	console.log("Successfully set title");
@@ -89,4 +90,5 @@ $(document).ready(function() {
 		});
 		console.log("Ajax 'delete' successful");
 	});
+	};
 });

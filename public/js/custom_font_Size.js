@@ -65,25 +65,39 @@
 			//Context for button in plugin toolbar
 			context.memo('button.customFontSize', function () {
 				var button = ui.button({
-					contents: '<i class="fas fa-font"></i> <input id="fontSize" name="fontSize" type="number" max="80" min="8" step="0.1">',
+					contents: '<i class="fas fa-font"></i> <input id="fontSize" name="fontSize" type="number" max="80" min="8" step="0.1"> px',
 					tooltip: 'Change font size',
 
 					//HTML that will be inserted into editor
 					click: function () {
             var in_font_size = document.getElementById("fontSize").value;
+            console.log("Current font size is " + in_font_size);
 
-            var selectedText = "";
-            if(window.getSelection()){
-              selectedText = window.getSelection();
-            }
-            else if(document.getSelection()){
-              selectedText = document.getSelection();
-            }
-            else if(document.selection()){
-              selectedText = document.selection.createRange().text;
+            var span = document.createElement("span");
+            span.style.fontSize = in_font_size + "px";
+
+            if (document.getSelection) {
+                var sel = document.getSelection();
+                if (sel.rangeCount) {
+                    var range = sel.getRangeAt(0).cloneRange();
+                    range.surroundContents(span);
+                    sel.removeAllRanges();
+                    sel.addRange(range);
+                }
             }
 
-            selectedText.style.fontSize = in_font_size;
+            // var selectedText = "";
+            // if(window.getSelection()){
+            //   selectedText = window.getSelection();
+            // }
+            // else if(document.getSelection()){
+            //   selectedText = document.getSelection();
+            // }
+            // else if(document.selection()){
+            //   selectedText = document.selection.createRange().text;
+            // }
+
+            console.log("Current selectedText is " + sel);
 					}
 				});
 				//Render button
