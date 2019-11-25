@@ -40,6 +40,12 @@
 	<script type="text/javascript" src="{{URL::asset('js/countimer_script.js')}}"></script>
 	<link rel="stylesheet" type="text/css" href="{{ url('/css/countimer.css') }}" />
 
+	<!--Image attributes plugin-->
+	<script type="text/javascript" src="{{URL::asset('js/summernote-image-attributes.js')}}"></script>
+
+	<!--Custom Font Size plugin-->
+	<script type="text/javascript" src="{{URL::asset('js/custom_font_Size.js')}}"></script>
+
 	<style>
 		body{
 			width:80%;
@@ -89,16 +95,16 @@
 
 					@if(isset($summernote_content))
 					<form method="POST" action="{{ url('save/summernote') }}">
-				    	@csrf
-					    <textarea name="summernoteUpdate" class="summernote" id="summernote">
-				       {{$summernote_content}}
-				      </textarea>
-				        <input id="content_id" name="content_id" value="{{$summernote_id}}" style="display:none" readonly>
-				        <br>
-			        	<button class="btn btn-success my-3" type="submit">Save Changes <i class="fas fa-save"></i></button>
-			        	<a class="btn btn-danger my-3" href="/get/{{$summernote_id}}/summernote" id="get_Content">Cancel</a>
-			        </form>
-		        	@endif
+			    	@csrf
+				    <textarea name="summernoteUpdate" class="summernote" id="summernote">
+			       {{$summernote_content}}
+			      </textarea>
+			        <input id="content_id" name="content_id" value="{{$summernote_id}}" style="display:none" readonly>
+			        <br>
+		        	<button class="btn btn-success my-3" type="submit">Save Changes <i class="fas fa-save"></i></button>
+		        	<a class="btn btn-danger my-3" href="/get/{{$summernote_id}}/summernote" id="get_Content">Cancel</a>
+	        </form>
+        	@endif
 
 				    @if(!isset($summernote_content))
 				    <form action="{{route('summernotePersist')}}" method="POST">
@@ -107,10 +113,10 @@
 				        <br>
 				        <button class="btn btn-success" type="submit">Store <i class="fas fa-save"></i></button>
 				        @foreach ($summernotes as $summernote)
-							<a class="btn btn-info my-3" href="/get/{{$summernote->id}}/summernote" id="get_Content" target="_blank">Content #{{$summernote->id}}</a>
-						@endforeach
+									<a class="btn btn-info my-3" href="/get/{{$summernote->id}}/summernote" id="get_Content" target="_blank">Content #{{$summernote->id}}</a>
+								@endforeach
 				    </form>
-			        @endif
+			      @endif
 
 					<a class="btn btn-dark" href="/"><i class="fas fa-chevron-circle-left"></i> Menu</a>
 				</div>
@@ -126,11 +132,19 @@
 			height: 400,
 			focus: true,
 			toolbar:[
-				['insert', ['countimer']],
-				['font', ['fontname', 'fontsize']],
+				['insert', ['countimer', 'picture']],
+				['font', ['fontname', 'fontsize', 'customFontSize']],
 				['tool', ['undo', 'redo', 'codeview']],
 				['style',['style']],
 			],
+			popover:{
+				image:[
+					['custom', ['imageAttributes']],
+					['imagesize', ['imageSize100', 'imageSize50', 'imageSize25']],
+	        ['float', ['floatLeft', 'floatRight', 'floatNone']],
+	        ['remove', ['removeMedia']]
+				],
+			}
 		});
 	});
 </script>
