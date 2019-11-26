@@ -8,87 +8,92 @@
  * Countimer Plugin
 */
 $(document).ready(function() {
-	if(document.getElementById("title_show").innerHTML){
-	//Set the title
-	var title = document.getElementById("title_show").innerHTML;
-	console.log("Successfully set title");
-	console.log("Current title is " + title);
 
-	//Insert into variable for calculation
-	var countDown = document.getElementById("c_countDown").innerHTML;
-	console.log("Successfully fetched set time");
-	console.log(countDown);
+		var num_of_timers = document.getElementsByClassName("timer").length;
+		console.log("Number of timers present in this file is " + num_of_timers);
 
-  //Get today's date and time
-  var now = new Date().getTime();
+		for(var i = 1; i <= num_of_timers; i++){
+			//Set the title
+			var title = document.getElementById("title_show" + i).innerHTML;
+			console.log("Successfully set title");
 
-  //Find the distance between now and the count down date
-  var distance = countDown - now;
+			//Insert into variable for calculation
+			var countDown = document.getElementById("c_countDown" + i).innerHTML;
+			console.log("Successfully fetched set time");
+			console.log(countDown);
 
-  //Time calculations for days, hours, minutes and seconds
-  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+		  //Get today's date and time
+		  var now = new Date().getTime();
 
-  //Output the result in an element with id="timer"
-  var countimer = document.getElementById("timer");
-  document.getElementById("c_title").innerHTML = title;
-  document.getElementById("c_days").innerHTML = days;
-  document.getElementById("c_hours").innerHTML = hours;
-  document.getElementById("c_minutes").innerHTML = minutes;
-  document.getElementById("c_seconds").innerHTML = seconds;
+		  //Find the distance between now and the count down date
+		  var distance = countDown - now;
 
-	//Update the count down every 1 second
-	var x = setInterval(function() {
+		  //Time calculations for days, hours, minutes and seconds
+		  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+		  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+		  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+		  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-	  //Get today's date and time
-	  now = new Date().getTime();
+		  //Output the result into each element
+			console.log("Current title is " + title);
+		  document.getElementById("c_title" + i).innerHTML = title;
+		  document.getElementById("c_days" + i).innerHTML = days;
+		  document.getElementById("c_hours" + i).innerHTML = hours;
+		  document.getElementById("c_minutes" + i).innerHTML = minutes;
+		  document.getElementById("c_seconds" + i).innerHTML = seconds;
 
-	  //Find the distance between now and the count down date
-	  distance = countDown - now;
+			//Update the count down every 1 second
+			var x = setInterval(function() {
 
-	  //Time calculations for days, hours, minutes and seconds
-	  days = Math.floor(distance / (1000 * 60 * 60 * 24));
-	  hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-	  minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-	  seconds = Math.floor((distance % (1000 * 60)) / 1000);
+			  //Get today's date and time
+			  now = new Date().getTime();
 
-	  //Output the result in an element with id="timer"
-	  countimer = document.getElementById("timer");
-	  document.getElementById("c_title").innerHTML = title;
-	  document.getElementById("c_days").innerHTML = days;
-	  document.getElementById("c_hours").innerHTML = hours;
-	  document.getElementById("c_minutes").innerHTML = minutes;
-	  document.getElementById("c_seconds").innerHTML = seconds;
+			  //Find the distance between now and the count down date
+			  distance = countDown - now;
 
-	  //If the count down is over, write some text
-	  if (distance < 0) {
-		document.getElementById("c_title").innerHTML = "EXPIRED";
-		document.getElementById("c_days").innerHTML = "0";
-		document.getElementById("c_hours").innerHTML = "0";
-		document.getElementById("c_minutes").innerHTML = "0";
-		document.getElementById("c_seconds").innerHTML = "0";
-	  }
+			  //Time calculations for days, hours, minutes and seconds
+			  days = Math.floor(distance / (1000 * 60 * 60 * 24));
+			  hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+			  minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+			  seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-	  console.log("Counting down time");
-	}, 1000);
+			  //Output the result into each element
+				var new_i = i - 1;
+			  document.getElementById("c_title" + new_i).innerHTML = title;
+			  document.getElementById("c_days" + new_i).innerHTML = days;
+			  document.getElementById("c_hours" + new_i).innerHTML = hours;
+			  document.getElementById("c_minutes" + new_i).innerHTML = minutes;
+			  document.getElementById("c_seconds" + new_i).innerHTML = seconds;
 
+			  //If the count down is over, write some text
+			  if (distance < 0) {
+					document.getElementById("c_title" + new_i).innerHTML = "EXPIRED";
+					document.getElementById("c_days" + new_i).innerHTML = "0";
+					document.getElementById("c_hours" + new_i).innerHTML = "0";
+					document.getElementById("c_minutes" + new_i).innerHTML = "0";
+					document.getElementById("c_seconds" + new_i).innerHTML = "0";
+			  }
 
-	$(document).on("click", "a.delete", function(){
-		var dataId = $(this).data("id");
+			  console.log("Counting down time");
+			}, 1000);
 
-		$.ajax({
-		headers: {
-	        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-	    },
-		url: "/summernote/" + dataId,
-		type:"DELETE",
-		success:function(){
-	        window.close();
+			console.log("Current value of i = " + i);
 		}
+
+		$(document).on("click", "a.delete", function(){
+			var dataId = $(this).data("id");
+
+			$.ajax({
+			headers: {
+		        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		    },
+			url: "/summernote/" + dataId,
+			type:"DELETE",
+			success:function(){
+		        window.close();
+			}
+			});
+			console.log("Ajax 'delete' successful");
 		});
-		console.log("Ajax 'delete' successful");
-	});
-	};
+
 });

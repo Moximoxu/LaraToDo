@@ -71,7 +71,7 @@
 
    					//HTML that will be inserted into editor
    					click: function () {
-   						$counter = '<div class="col" id="timer_div">'+
+   						$counter = '<div class="col timer" id="timer_div">'+
    						'<div class="container my-3 mx-3">'+
    						'		<div class="row">'+
    						'			<div class="col-sm-4 mx-2"><h2 class="text-center" id="c_title">Title</h2></div>'+
@@ -180,6 +180,9 @@
          $('#c_title' + i-1).attr('id', 'c_title' + i);
          var c_title = document.getElementById('c_title' + i);
 
+         $('#title_show' + i-1).attr('id', 'title_show' + i);
+         var title_show = document.getElementById('title_show' + i);
+
          $('#c_days' + i-1).attr('id', 'c_days' + i);
          var c_days = document.getElementById('c_days' + i);
 
@@ -196,6 +199,8 @@
          var title = c_title_in.value;
          console.log("Successfully set title");
          console.log(title);
+         title_show.value = title;
+         title_show.innerHTML = title;
 
          //Set date of the endpoint
          var countDownDate = new Date(c_date.value);
@@ -232,7 +237,7 @@
 
            //Output the result in an element with id="timer"
            c_title.innerHTML = title;
-           c_title.value = title
+           c_title.value = title;
 
            c_days.innerHTML = days;
            c_hours.innerHTML = hours;
@@ -275,6 +280,9 @@
          $('#c_title').attr('id', 'c_title' + i);
          var c_title = document.getElementById('c_title' + i);
 
+         $('#title_show').attr('id', 'title_show' + i);
+         var title_show = document.getElementById('title_show' + i);
+
          $('#c_days').attr('id', 'c_days' + i);
          var c_days = document.getElementById('c_days' + i);
 
@@ -291,6 +299,8 @@
          var title = c_title_in.value;
          console.log("Successfully set title");
          console.log(title);
+         title_show.value = title;
+         title_show.innerHTML = title;
 
          //Set date of the endpoint
          var countDownDate = new Date(c_date.value);
