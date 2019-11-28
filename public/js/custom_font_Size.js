@@ -68,19 +68,18 @@
 					contents: '<i class="fas fa-font"></i> <input id="fontSize" name="fontSize" type="number" max="80" min="8" step="0.1"> px',
 					tooltip: 'Change font size',
 
-					//HTML that will be inserted into editor
+					//Changes the font size according to the input in #fontSize
 					click: function () {
             var in_font_size = document.getElementById("fontSize").value;
             console.log("Current font size is " + in_font_size);
 
-            var span = document.createElement("span");
-            span.style.fontSize = in_font_size + "px";
-
             if (document.getSelection) {
                 var sel = document.getSelection();
+                var text = sel.anchorNode.parentNode;
+                console.log("sel.anchorNode.parentNode = " + sel.anchorNode.parentNode);
                 if (sel.rangeCount) {
                     var range = sel.getRangeAt(0).cloneRange();
-                    range.surroundContents(span);
+                    text.style.fontSize = in_font_size + "px";
                     sel.removeAllRanges();
                     sel.addRange(range);
                 }
