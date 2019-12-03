@@ -10,17 +10,17 @@
 $(document).ready(function() {
 
 		var num_of_timers = document.getElementsByClassName("timer").length;
-		console.log("Number of timers present in this file is " + num_of_timers);
+		// console.log("Number of timers present in this file is " + num_of_timers);
 
 		for(var i = 1; i <= num_of_timers; i++){
 			//Set the title
 			var title = document.getElementById("title_show" + i).innerHTML;
-			console.log("Successfully set title");
+			// console.log("Successfully set title");
 
 			//Insert into variable for calculation
 			var countDown = document.getElementById("c_countDown" + i).innerHTML;
-			console.log("Successfully fetched set time");
-			console.log(countDown);
+			// console.log("Successfully fetched set time");
+			// console.log(countDown);
 
 		  //Get today's date and time
 		  var now = new Date().getTime();
@@ -35,7 +35,7 @@ $(document).ready(function() {
 		  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
 		  //Output the result into each element
-			console.log("Current title is " + title);
+			// console.log("Current title is " + title);
 		  document.getElementById("c_title" + i).innerHTML = title;
 		  document.getElementById("c_days" + i).innerHTML = days;
 		  document.getElementById("c_hours" + i).innerHTML = hours;
@@ -74,10 +74,10 @@ $(document).ready(function() {
 					document.getElementById("c_seconds" + new_i).innerHTML = "0";
 			  }
 
-			  console.log("Counting down time");
+			  // console.log("Counting down time");
 			}, 1000);
 
-			console.log("Current value of i = " + i);
+			// console.log("Current value of i = " + i);
 		}
 
 		$(document).on("click", "a.delete", function(){
@@ -93,7 +93,7 @@ $(document).ready(function() {
 		        window.close();
 			}
 			});
-			console.log("Ajax 'delete' successful");
+			// console.log("Ajax 'delete' successful");
 		});
 
 });

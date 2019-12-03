@@ -62,21 +62,26 @@
 			};
 		}
 
-			//Context for button in plugin toolbar
+			// Context for button in plugin toolbar
 			context.memo('button.customFontSize', function () {
 				var button = ui.button({
-					contents: '<i class="fas fa-font"></i> <input id="fontSize" name="fontSize" type="number" max="80" min="8" step="0.1"> px',
+					contents: '<i class="fas fa-font"></i> <input id="fontSize" name="fontSize" type="number" max="80" min="8" step="0.1" value="14"> px',
 					tooltip: 'Change font size',
 
-					//Changes the font size according to the input in #fontSize
+					// Changes the font size according to the input in #fontSize
 					click: function () {
             var in_font_size = document.getElementById("fontSize").value;
-            console.log("Current font size is " + in_font_size);
+            // console.log("Current font size is " + in_font_size);
 
+            // Acquiring the selected text that is needed to have different font size
             if (document.getSelection) {
-                var sel = document.getSelection();
+                var sel = document.getSelection(); //Contains the raw text of the selected text
+
+                // Variable for acquiring the selected text, specifically the p element of the text
                 var text = sel.anchorNode.parentNode;
-                console.log("sel.anchorNode.parentNode = " + sel.anchorNode.parentNode);
+                // console.log("sel.anchorNode.parentNode = " + sel.anchorNode.parentNode);
+
+                // The range finder for the selected text
                 if (sel.rangeCount) {
                     var range = sel.getRangeAt(0).cloneRange();
                     text.style.fontSize = in_font_size + "px";
@@ -96,7 +101,7 @@
             //   selectedText = document.selection.createRange().text;
             // }
 
-            console.log("Current selectedText is " + sel);
+            // console.log("Current selectedText is " + sel);
 					}
 				});
 				//Render button
@@ -106,3 +111,45 @@
 		}
 	});
 }));
+
+function getFontSize() {
+
+  var font_size = document.getElementById("fontSize");
+
+  // Acquiring the selected text
+  if (document.getSelection) {
+      var sel = document.getSelection(); // Contains the raw text of the selected text
+      console.log("The selected text is " + sel);
+
+      // Variable for acquiring the selected text, specifically the p element of the text
+      var text = sel.anchorNode.parentNode;
+      // console.log("sel.anchorNode.parentNode = " + sel.anchorNode.parentNode);
+
+      // The range finder for the selected text
+      var range = sel.getRangeAt(0).cloneRange();
+      var current_fSize = text.style.fontSize;
+      console.log("Current font size is " + current_fSize);
+      var fSize_val = Number(current_fSize.replace(/[^0-9\.]+/g,""));
+      if(fSize_val > 0){
+        font_size.value = fSize_val;
+      }
+      else if(fSize_val == 0){
+        font_size.value = "";
+      }
+      sel.removeAllRanges();
+      sel.addRange(range);
+  }
+};
+
+$(document).ready(function() {
+   var container = document.getElementById("summernote_container");
+   var text = container.getElementsByTagName('p')[1];
+   console.log(text);
+
+   // container.getElementsByClassName("note-editable").firstChild;
+   // container.getElementsByTagName("p");
+
+   text.style.fontSize = 14 + "px";
+   container.addEventListener("click", getFontSize);
+   container.addEventListener("select", getFontSize);
+ });

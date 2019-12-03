@@ -97,7 +97,7 @@
 
               //Paste countimer into editor
    						context.invoke('editor.pasteHTML', $counter);
-              console.log("Current number of clicks are = " + clicks);
+              // console.log("Current number of clicks are = " + clicks);
 
               var i = 1;
               //Starts a loop for setting the id for each input elements
@@ -116,7 +116,7 @@
 
                     $('#c_countDown' + i-1).attr('id', 'c_countDown' + i);
 
-                    console.log("Initialised input elements with number of clicks > 1");
+                    // console.log("Initialised input elements with number of clicks > 1");
                   }
                   else{
                     $('#c_title_in').attr('id', 'c_title_in' + i);
@@ -131,10 +131,10 @@
 
                     $('#c_countDown').attr('id', 'c_countDown' + i);
 
-                    console.log("Initialised input elements with number of clicks == 1");
+                    // console.log("Initialised input elements with number of clicks == 1");
                   }
                 }
-                console.log("The value of i is " + i);
+                // console.log("The value of i is " + i);
                 i++;
               }
 
@@ -162,6 +162,8 @@
    var i = 1;
 
    for(var j=1; j <= clicks; j++){
+     console.log("Current number of clicks are = " + clicks);
+
      if(i == clicks){
        if(clicks > 1){
          //Assign input elements based on ID
@@ -172,7 +174,7 @@
          var c_minute = document.getElementById('c_minute' + i);
          var c_second = document.getElementById('c_second' + i);
          var c_countDown = document.getElementById('c_countDown' + i);
-         console.log("Initialised output elements, with number of clicks > 1");
+         // console.log("Initialised output elements, with number of clicks > 1");
 
          $('#timer_div' + i-1).attr('id', 'timer_div' + i);
          var timer_div = document.getElementById('timer_div' + i);
@@ -197,8 +199,8 @@
 
          //Set the title
          var title = c_title_in.value;
-         console.log("Successfully set title");
-         console.log(title);
+         // console.log("Successfully set title");
+         // console.log(title);
          title_show.value = title;
          title_show.innerHTML = title;
 
@@ -216,9 +218,9 @@
 
          //Insert into variable for calculation
          var countDown = countDownDate.getTime();
-         console.log("Successfully fetched set time");
+         // console.log("Successfully fetched set time");
          c_countDown.innerHTML = countDown;
-         console.log(c_countDown.innerHTML);
+         // console.log(c_countDown.innerHTML);
 
          //Update the count down every 1 second
          var x = setInterval(function() {
@@ -253,26 +255,25 @@
              c_seconds.innerHTML = "0";
            }
 
-         console.log("Counting down time");
+         // console.log("Counting down time");
          }, 1000);
 
          //Enters a whitespace into summernote editor
          $('#summernote').summernote('insertText', '');
 
-         console.log("Current number of clicks are = " + clicks);
          clicks++;
        }
 
        else{
          //Assign input elements based on ID
          var c_title_in = document.getElementById('c_title_in' + i);
-         console.log(c_title_in.value);
+         // console.log(c_title_in.value);
          var c_date = document.getElementById('c_date' + i);
          var c_hour = document.getElementById('c_hour' + i);
          var c_minute = document.getElementById('c_minute' + i);
          var c_second = document.getElementById('c_second' + i);
          var c_countDown = document.getElementById('c_countDown' + i);
-         console.log("Initialised output elements, with number of clicks == 1");
+         // console.log("Initialised output elements, with number of clicks == 1");
 
          $('#timer_div').attr('id', 'timer_div' + i);
          var timer_div = document.getElementById('timer_div' + i);
@@ -297,8 +298,8 @@
 
          //Set the title
          var title = c_title_in.value;
-         console.log("Successfully set title");
-         console.log(title);
+         // console.log("Successfully set title");
+         // console.log(title);
          title_show.value = title;
          title_show.innerHTML = title;
 
@@ -316,9 +317,9 @@
 
          //Insert into variable for calculation
          var countDown = countDownDate.getTime();
-         console.log("Successfully fetched set time which is " + countDown);
+         // console.log("Successfully fetched set time which is " + countDown);
          c_countDown.innerHTML = countDown;
-         console.log(c_countDown.innerHTML);
+         // console.log(c_countDown.innerHTML);
 
          //Update the count down every 1 second
          var x = setInterval(function() {
@@ -353,13 +354,13 @@
              c_seconds.innerHTML = "0";
            }
 
-         console.log("Counting down time");
+         // console.log("Counting down time");
          }, 1000);
 
          //Enters a whitespace into summernote editor
          $('#summernote').summernote('insertText', '');
 
-         console.log("Current number of clicks are = " + clicks);
+         // console.log("Current number of clicks are = " + clicks);
          clicks++;
        }
      }

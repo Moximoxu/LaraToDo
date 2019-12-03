@@ -43,9 +43,6 @@
 	<!--Image attributes plugin-->
 	<script type="text/javascript" src="{{URL::asset('js/summernote-image-attributes.js')}}"></script>
 
-	<!--Custom Font Size plugin-->
-	<script type="text/javascript" src="{{URL::asset('js/custom_font_Size.js')}}"></script>
-
 	<style>
 		body{
 			width:80%;
@@ -107,7 +104,7 @@
         	@endif
 
 				    @if(!isset($summernote_content))
-				    <form action="{{route('summernotePersist')}}" method="POST">
+				    <form action="{{route('summernotePersist')}}" method="POST" id="summernote_container">
 				        @csrf
 				        <textarea name="summernoteInput" class="summernote" id="summernote"></textarea>
 				        <br>
@@ -148,5 +145,8 @@
 		});
 	});
 </script>
+
+<!--Custom Font Size plugin-->
+<script type="text/javascript" src="{{URL::asset('js/custom_font_Size.js')}}"></script>
 
 </html>
