@@ -119,7 +119,7 @@ function getFontSize() {
   // Acquiring the selected text
   if (document.getSelection) {
       var sel = document.getSelection(); // Contains the raw text of the selected text
-      console.log("The selected text is " + sel);
+      // console.log("The selected text is " + sel);
 
       // Variable for acquiring the selected text, specifically the p element of the text
       var text = sel.anchorNode.parentNode;
@@ -128,16 +128,18 @@ function getFontSize() {
       // The range finder for the selected text
       var range = sel.getRangeAt(0).cloneRange();
       var current_fSize = text.style.fontSize;
-      console.log("Current font size is " + current_fSize);
+      // console.log("Current font size is " + current_fSize);
       var fSize_val = Number(current_fSize.replace(/[^0-9\.]+/g,""));
       if(fSize_val > 0){
         font_size.value = fSize_val;
+        sel.removeAllRanges();
+        sel.addRange(range);
       }
       else if(fSize_val == 0){
         font_size.value = "";
+        sel.removeAllRanges();
+        sel.addRange(range);
       }
-      sel.removeAllRanges();
-      sel.addRange(range);
   }
 };
 
@@ -151,5 +153,5 @@ $(document).ready(function() {
 
    text.style.fontSize = 14 + "px";
    container.addEventListener("click", getFontSize);
-   container.addEventListener("select", getFontSize);
+   // container.addEventListener("select", getFontSize);
  });

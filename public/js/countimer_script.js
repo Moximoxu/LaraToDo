@@ -5,7 +5,7 @@
  * license: Your chosen license, or link to a license file.
  *
  */
- var clicks = 1;
+ var clicks = 0;
 
    (function (factory) {
      /* Global define */
@@ -79,10 +79,10 @@
    						'			<h3 id="c_countDown" style="display:none"></h3>'+
    						'		</div>'+
    						'		<div class="row">'+
-   						'			<div class="col-sm-1"><h3 class="text-center" id="c_days_label">Days</h3></div>'+
-   						'			<div class="col-sm-1"><h3 class="text-center" id="c_hours_label">Hours</h3></div>'+
-   						'			<div class="col-sm-1"><h3 class="text-center" id="c_minutes_label">Minutes</h3></div>'+
-   						'			<div class="col-sm-1"><h3 class="text-center" id="c_seconds_label">Seconds</h3></div>'+
+   						'			<div class="col-sm-1"><h3 class="text-center">Days</h3></div>'+
+   						'			<div class="col-sm-1"><h3 class="text-center">Hours</h3></div>'+
+   						'			<div class="col-sm-1"><h3 class="text-center">Minutes</h3></div>'+
+   						'			<div class="col-sm-1"><h3 class="text-center">Seconds</h3></div>'+
    						'		</div>'+
    						'		<div class="row">'+
    						'			<div class="col-sm-1"><h3 class="text-center" id="c_days"></h3></div>'+
@@ -97,46 +97,9 @@
 
               //Paste countimer into editor
    						context.invoke('editor.pasteHTML', $counter);
-              // console.log("Current number of clicks are = " + clicks);
 
-              var i = 1;
-              //Starts a loop for setting the id for each input elements
-              for(var j=1; j <= clicks; j++){
-                if(i == clicks){
-                  if(clicks > 1){
-                    $('#c_title_in' + i-1).attr('id', 'c_title_in' + i);
-
-                    $('#c_date' + i-1).attr('id', 'c_date' + i);
-
-                    $('#c_hour' + i-1).attr('id', 'c_hour' + i);
-
-                    $('#c_minute' + i-1).attr('id', 'c_minute' + i);
-
-                    $('#c_second' + i-1).attr('id', 'c_second' + i);
-
-                    $('#c_countDown' + i-1).attr('id', 'c_countDown' + i);
-
-                    // console.log("Initialised input elements with number of clicks > 1");
-                  }
-                  else{
-                    $('#c_title_in').attr('id', 'c_title_in' + i);
-
-                    $('#c_date').attr('id', 'c_date' + i);
-
-                    $('#c_hour').attr('id', 'c_hour' + i);
-
-                    $('#c_minute').attr('id', 'c_minute' + i);
-
-                    $('#c_second').attr('id', 'c_second' + i);
-
-                    $('#c_countDown').attr('id', 'c_countDown' + i);
-
-                    // console.log("Initialised input elements with number of clicks == 1");
-                  }
-                }
-                // console.log("The value of i is " + i);
-                i++;
-              }
+              clicks++;
+              console.log("Current number of clicks are = " + clicks);
 
    						//Automatically opens the modal once the button is pressed
    						$('#setModal').modal('show');
@@ -158,6 +121,9 @@
    //Variable for number of timers present in the editor
    var num_of_timers = $(".timer_div").length;
 
+   console.log("Current number of clicks are = " + clicks);
+   console.log("Current value of i is = " + i);
+
    //Loop for detecting multiple timers
    var i = 1;
 
@@ -165,115 +131,16 @@
      console.log("Current number of clicks are = " + clicks);
 
      if(i == clicks){
-       if(clicks > 1){
          //Assign input elements based on ID
-         var c_title_in = document.getElementById('c_title_in' + i);
+         var c_title_in = document.getElementById('c_title_in');
          console.log(c_title_in.value);
-         var c_date = document.getElementById('c_date' + i);
-         var c_hour = document.getElementById('c_hour' + i);
-         var c_minute = document.getElementById('c_minute' + i);
-         var c_second = document.getElementById('c_second' + i);
+         var c_date = document.getElementById('c_date');
+         var c_hour = document.getElementById('c_hour');
+         var c_minute = document.getElementById('c_minute');
+         var c_second = document.getElementById('c_second');
+
+         $('#c_countDown').attr('id', 'c_countDown' + i);
          var c_countDown = document.getElementById('c_countDown' + i);
-         // console.log("Initialised output elements, with number of clicks > 1");
-
-         $('#timer_div' + i-1).attr('id', 'timer_div' + i);
-         var timer_div = document.getElementById('timer_div' + i);
-
-         $('#c_title' + i-1).attr('id', 'c_title' + i);
-         var c_title = document.getElementById('c_title' + i);
-
-         $('#title_show' + i-1).attr('id', 'title_show' + i);
-         var title_show = document.getElementById('title_show' + i);
-
-         $('#c_days' + i-1).attr('id', 'c_days' + i);
-         var c_days = document.getElementById('c_days' + i);
-
-         $('#c_hours' + i-1).attr('id', 'c_hours' + i);
-         var c_hours = document.getElementById('c_hours' + i);
-
-         $('#c_minutes' + i-1).attr('id', 'c_minutes' + i);
-         var c_minutes = document.getElementById('c_minutes' + i);
-
-         $('#c_seconds' + i-1).attr('id', 'c_seconds' + i);
-         var c_seconds = document.getElementById('c_seconds' + i);
-
-         //Set the title
-         var title = c_title_in.value;
-         // console.log("Successfully set title");
-         // console.log(title);
-         title_show.value = title;
-         title_show.innerHTML = title;
-
-         //Set date of the endpoint
-         var countDownDate = new Date(c_date.value);
-
-         //Set hour of the endpoint
-         countDownDate.setHours(c_hour.value);
-
-         //Set minute of the endpoint
-         countDownDate.setMinutes(c_minute.value);
-
-         //Set second of the endpoint
-         countDownDate.setSeconds(c_second.value);
-
-         //Insert into variable for calculation
-         var countDown = countDownDate.getTime();
-         // console.log("Successfully fetched set time");
-         c_countDown.innerHTML = countDown;
-         // console.log(c_countDown.innerHTML);
-
-         //Update the count down every 1 second
-         var x = setInterval(function() {
-
-           //Get today's date and time
-           var now = new Date().getTime();
-
-           //Find the distance between now and the count down date
-           var distance = countDown - now;
-
-           //Time calculations for days, hours, minutes and seconds
-           var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-           var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-           var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-           var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-           //Output the result in an element with id="timer"
-           c_title.innerHTML = title;
-           c_title.value = title;
-
-           c_days.innerHTML = days;
-           c_hours.innerHTML = hours;
-           c_minutes.innerHTML = minutes;
-           c_seconds.innerHTML = seconds;
-
-           //If the count down is over, write some text
-           if (distance < 0) {
-             c_title.innerHTML = "EXPIRED";
-             c_days.innerHTML = "0";
-             c_hours.innerHTML = "0";
-             c_minutes.innerHTML = "0";
-             c_seconds.innerHTML = "0";
-           }
-
-         // console.log("Counting down time");
-         }, 1000);
-
-         //Enters a whitespace into summernote editor
-         $('#summernote').summernote('insertText', '');
-
-         clicks++;
-       }
-
-       else{
-         //Assign input elements based on ID
-         var c_title_in = document.getElementById('c_title_in' + i);
-         // console.log(c_title_in.value);
-         var c_date = document.getElementById('c_date' + i);
-         var c_hour = document.getElementById('c_hour' + i);
-         var c_minute = document.getElementById('c_minute' + i);
-         var c_second = document.getElementById('c_second' + i);
-         var c_countDown = document.getElementById('c_countDown' + i);
-         // console.log("Initialised output elements, with number of clicks == 1");
 
          $('#timer_div').attr('id', 'timer_div' + i);
          var timer_div = document.getElementById('timer_div' + i);
@@ -360,9 +227,6 @@
          //Enters a whitespace into summernote editor
          $('#summernote').summernote('insertText', '');
 
-         // console.log("Current number of clicks are = " + clicks);
-         clicks++;
-       }
      }
      i++;
    }
