@@ -24,7 +24,11 @@
 
 #summernote_div{
 	margin:auto;
-	width:70%;
+	width:80%;
+}
+
+.timer.row{
+	width: 30% !important;
 }
 
 #setModal{
@@ -37,6 +41,7 @@
 
 #fontSize{
 	font-size: 10px !important;
+	user-select: auto;
 }
 
 .note-btn-group {

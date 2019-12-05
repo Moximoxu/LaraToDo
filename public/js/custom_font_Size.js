@@ -65,44 +65,13 @@
 			// Context for button in plugin toolbar
 			context.memo('button.customFontSize', function () {
 				var button = ui.button({
-					contents: '<i class="fas fa-font"></i> <input id="fontSize" name="fontSize" type="number" max="80" min="8" step="0.1" value="14"> px',
+					contents: '<i class="fas fa-font"></i> <input id="fontSize" name="fontSize" type="number" max="80" min="8" step="0.1" value="14" onfocus="setFontSize()" onchange="setFontSize()"> px',
 					tooltip: 'Change font size',
 
 					// Changes the font size according to the input in #fontSize
-					click: function () {
-            var in_font_size = document.getElementById("fontSize").value;
-            // console.log("Current font size is " + in_font_size);
-
-            // Acquiring the selected text that is needed to have different font size
-            if (document.getSelection) {
-                var sel = document.getSelection(); //Contains the raw text of the selected text
-
-                // Variable for acquiring the selected text, specifically the p element of the text
-                var text = sel.anchorNode.parentNode;
-                // console.log("sel.anchorNode.parentNode = " + sel.anchorNode.parentNode);
-
-                // The range finder for the selected text
-                if (sel.rangeCount) {
-                    var range = sel.getRangeAt(0).cloneRange();
-                    text.style.fontSize = in_font_size + "px";
-                    sel.removeAllRanges();
-                    sel.addRange(range);
-                }
-            }
-
-            // var selectedText = "";
-            // if(window.getSelection()){
-            //   selectedText = window.getSelection();
-            // }
-            // else if(document.getSelection()){
-            //   selectedText = document.getSelection();
-            // }
-            // else if(document.selection()){
-            //   selectedText = document.selection.createRange().text;
-            // }
-
-            // console.log("Current selectedText is " + sel);
-					}
+					click: function(){
+            setFontSize();
+          }
 				});
 				//Render button
 				this.customFontSize = button.render();
@@ -143,15 +112,65 @@ function getFontSize() {
   }
 };
 
+function clearSelection(){
+  if(document.selection && document.selection.empty) {
+        document.selection.empty();
+    } else if(window.getSelection) {
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+    }
+};
+
 $(document).ready(function() {
    var container = document.getElementById("summernote_container");
    var text = container.getElementsByTagName('p')[1];
-   console.log(text);
+   // console.log(text);
 
    // container.getElementsByClassName("note-editable").firstChild;
    // container.getElementsByTagName("p");
 
    text.style.fontSize = 14 + "px";
    container.addEventListener("click", getFontSize);
-   // container.addEventListener("select", getFontSize);
- });
+   $("#summernote_container").blur(function(){
+     setFontSize();
+   });
+   $("#summernote_container").dblclick(function(){
+     clearSelection();
+   });
+
+});
+
+function setFontSize() {
+ var in_font_size = document.getElementById("fontSize").value;
+ // console.log("Current font size is " + in_font_size);
+
+ // Acquiring the selected text that is needed to have different font size
+ if (document.getSelection) {
+     var sel = document.getSelection(); //Contains the raw text of the selected text
+
+     // Variable for acquiring the selected text, specifically the p element of the text
+     var text = sel.anchorNode.parentNode;
+     // console.log("sel.anchorNode.parentNode = " + sel.anchorNode.parentNode);
+
+     // The range finder for the selected text
+     if (sel.rangeCount) {
+         var range = sel.getRangeAt(0).cloneRange();
+         text.style.fontSize = in_font_size + "px";
+         sel.removeAllRanges();
+         sel.addRange(range);
+     }
+ }
+
+ // var selectedText = "";
+ // if(window.getSelection()){
+ //   selectedText = window.getSelection();
+ // }
+ // else if(document.getSelection()){
+ //   selectedText = document.getSelection();
+ // }
+ // else if(document.selection()){
+ //   selectedText = document.selection.createRange().text;
+ // }
+
+ // console.log("Current selectedText is " + sel);
+}

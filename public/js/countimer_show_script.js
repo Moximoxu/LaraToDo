@@ -7,13 +7,12 @@
  *
  * Countimer Plugin
 */
-function startTimer() {
+function startTimer(num_of_timers) {
 
-  var num_of_timers = document.getElementsByClassName("timer").length;
+  var i = num_of_timers;
 
-  // var i = timer_num;
+  // for(var i=1; i<= num_of_timers; i++){
 
-  for(var i=1; i<= num_of_timers; i++){
 	//Set the title
 	var title = document.getElementById("title_show" + i).innerHTML;
 	// console.log("Successfully set title");
@@ -59,20 +58,19 @@ function startTimer() {
 	  seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
 	  //Output the result into each element
-		var new_i = i - 1;
-	  document.getElementById("c_title" + new_i).innerHTML = title;
-	  document.getElementById("c_days" + new_i).innerHTML = days;
-	  document.getElementById("c_hours" + new_i).innerHTML = hours;
-	  document.getElementById("c_minutes" + new_i).innerHTML = minutes;
-	  document.getElementById("c_seconds" + new_i).innerHTML = seconds;
+	  document.getElementById("c_title" + i).innerHTML = title;
+	  document.getElementById("c_days" + i).innerHTML = days;
+	  document.getElementById("c_hours" + i).innerHTML = hours;
+	  document.getElementById("c_minutes" + i).innerHTML = minutes;
+	  document.getElementById("c_seconds" + i).innerHTML = seconds;
 
 	  //If the count down is over, write some text
 	  if (distance < 0) {
-			document.getElementById("c_title" + new_i).innerHTML = "EXPIRED";
-			document.getElementById("c_days" + new_i).innerHTML = "0";
-			document.getElementById("c_hours" + new_i).innerHTML = "0";
-			document.getElementById("c_minutes" + new_i).innerHTML = "0";
-			document.getElementById("c_seconds" + new_i).innerHTML = "0";
+			document.getElementById("c_title" + i).innerHTML = "EXPIRED";
+			document.getElementById("c_days" + i).innerHTML = "0";
+			document.getElementById("c_hours" + i).innerHTML = "0";
+			document.getElementById("c_minutes" + i).innerHTML = "0";
+			document.getElementById("c_seconds" + i).innerHTML = "0";
 	  }
 
 	  console.log("Counting down time");
@@ -80,20 +78,21 @@ function startTimer() {
 
 	console.log("Current value of i = " + i);
 
-}
+// }
 
 };
 
 $(document).ready(function() {
+
   //Fetch number of timers present
   var num_of_timers = document.getElementsByClassName("timer").length;
-  // console.log("Number of timers present in this file is " + num_of_timers);
+  console.log("Number of timers present in this file is " + num_of_timers);
 
-  // for(var i=1; i<= num_of_timers; i++){
-  //   startTimer(num_of_timers);
-  // }
+  for(var i=1; i<= num_of_timers; i++){
+    startTimer(i);
+  }
 
-  startTimer();
+  // startTimer();
 
   $(document).on("click", "a.delete", function(){
 		var dataId = $(this).data("id");
