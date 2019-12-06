@@ -102,6 +102,7 @@
               console.log("Current number of clicks are = " + clicks);
 
    						//Automatically opens the modal once the button is pressed
+              clearSelection();
    						$('#setModal').modal('show');
 
    					}
@@ -113,6 +114,15 @@
    		}
    	});
    }));
+
+function clearSelection(){
+ if(document.selection && document.selection.empty) {
+       document.selection.empty();
+   } else if(window.getSelection) {
+       var sel = window.getSelection();
+       sel.removeAllRanges();
+   }
+};
 
  function setDate() {
    //Close the modal
