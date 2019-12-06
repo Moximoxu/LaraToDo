@@ -66,7 +66,7 @@
 			context.memo('button.customFontSize', function () {
 				var button = ui.button({
 					contents: '<i class="fas fa-font"></i> <input id="fontSize" name="fontSize" type="number" max="80" min="8" step="0.1" value="14" onfocus="setFontSize()" onchange="setFontSize()"> px',
-					tooltip: 'Change font size',
+					tooltip: 'Decimal font size',
 
 					// Changes the font size according to the input in #fontSize
 					click: function(){
@@ -121,25 +121,6 @@ function clearSelection(){
     }
 };
 
-$(document).ready(function() {
-   var container = document.getElementById("summernote_container");
-   var text = container.getElementsByTagName('p')[1];
-   // console.log(text);
-
-   // container.getElementsByClassName("note-editable").firstChild;
-   // container.getElementsByTagName("p");
-
-   text.style.fontSize = 14 + "px";
-   container.addEventListener("click", getFontSize);
-   $("#summernote_container").blur(function(){
-     setFontSize();
-   });
-   $("#summernote_container").dblclick(function(){
-     clearSelection();
-   });
-
-});
-
 function setFontSize() {
  var in_font_size = document.getElementById("fontSize").value;
  // console.log("Current font size is " + in_font_size);
@@ -174,3 +155,26 @@ function setFontSize() {
 
  // console.log("Current selectedText is " + sel);
 }
+
+$(document).ready(function() {
+   var container = document.getElementById("summernote_container");
+   var text = container.getElementsByTagName('p')[1];
+   // console.log(text);
+
+   // container.getElementsByClassName("note-editable").firstChild;
+   // container.getElementsByTagName("p");
+
+   text.style.fontSize = 14 + "px";
+   container.addEventListener("click", getFontSize);
+   var modal = document.getElementById("setModal");
+
+   $(".note-editable").blur(function(){
+       console.log("Unfocused from summernote_container");
+       setFontSize();
+   });
+   // $("#summernote_container").click(function(){
+   //   console.log("Double clicked in summernote_container");
+   //   clearSelection();
+   // });
+
+});

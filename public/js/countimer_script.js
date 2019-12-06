@@ -74,21 +74,21 @@
    						$counter = '<div class="col timer" id="timer_div">'+
    						'<div class="container my-3 mx-3">'+
    						'		<div class="row">'+
-   						'			<div class="col-sm-4 mx-2"><h2 class="text-center" id="c_title">Title</h2></div>'+
+   						'			<div class="col-sm-4 mx-2"><h1 class="text-center" id="c_title">Title</h1></div>'+
    						'			<p id="title_show" name="title_show" style="display:none"></p>'+
    						'			<h3 id="c_countDown" style="display:none"></h3>'+
    						'		</div>'+
    						'		<div class="row">'+
-   						'			<div class="col-sm-1"><h3 class="text-center">Days</h3></div>'+
-   						'			<div class="col-sm-1"><h3 class="text-center">Hours</h3></div>'+
-   						'			<div class="col-sm-1"><h3 class="text-center">Minutes</h3></div>'+
-   						'			<div class="col-sm-1"><h3 class="text-center">Seconds</h3></div>'+
+   						'			<div class="col-sm-1"><h5 class="text-center">Days</h5></div>'+
+   						'			<div class="col-sm-1"><h5 class="text-center">Hours</h5></div>'+
+   						'			<div class="col-sm-1"><h5 class="text-center">Minutes</h5></div>'+
+   						'			<div class="col-sm-1"><h5 class="text-center" style="color:red;">Seconds</h5></div>'+
    						'		</div>'+
    						'		<div class="row">'+
-   						'			<div class="col-sm-1"><h3 class="text-center" id="c_days"></h3></div>'+
-   						'			<div class="col-sm-1"><h3 class="text-center" id="c_hours"></h3></div>'+
-   						'			<div class="col-sm-1"><h3 class="text-center" id="c_minutes"></h3></div>'+
-   						'			<div class="col-sm-1"><h3 class="text-center" id="c_seconds" style="color:red;"></h3></div>'+
+   						'			<div class="col-sm-1"><h1 class="text-center" id="c_days"></h1></div>'+
+   						'			<div class="col-sm-1"><h1 class="text-center" id="c_hours"></h1></div>'+
+   						'			<div class="col-sm-1"><h1 class="text-center" id="c_minutes"></h1></div>'+
+   						'			<div class="col-sm-1"><h1 class="text-center" id="c_seconds" style="color:red;"></h1></div>'+
    						'		</div>'+
    						'</div'+
    					'</div'+
