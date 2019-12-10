@@ -7,11 +7,9 @@
  *
  * Countimer Plugin
 */
-function startTimer(num_of_timers) {
 
-  var i = num_of_timers;
-
-  // for(var i=1; i<= num_of_timers; i++){
+// Starts all of the timer(s) present in the content
+function startTimer(i) {
 
 	//Set the title
 	var title = document.getElementById("title_show" + i).innerHTML;
@@ -73,10 +71,10 @@ function startTimer(num_of_timers) {
 			document.getElementById("c_seconds" + i).innerHTML = "0";
 	  }
 
-	  console.log("Counting down time");
+	  // console.log("Counting down time");
 	}, 1000);
 
-	console.log("Current value of i = " + i);
+	// console.log("Current value of i = " + i);
 
 // }
 
@@ -85,15 +83,15 @@ function startTimer(num_of_timers) {
 $(document).ready(function() {
 
   //Fetch number of timers present
-  var num_of_timers = document.getElementsByClassName("timer").length;
-  console.log("Number of timers present in this file is " + num_of_timers);
+  var num_of_timers = document.getElementsByClassName("col timer").length;
+  console.log("Number of col timer is = " + num_of_timers);
 
-  for(var i=1; i<= num_of_timers; i++){
+  // Loop for running the timer(s) in the content where the function startTimer() runs in accordance to number of timers
+  for(var i=1; i <= num_of_timers; i++){
     startTimer(i);
   }
 
-  // startTimer();
-
+  // Button that deletes the currently displayed content
   $(document).on("click", "a.delete", function(){
 		var dataId = $(this).data("id");
 
@@ -107,6 +105,6 @@ $(document).ready(function() {
 	        window.close();
 		}
 		});
-		console.log("Ajax 'delete' successful");
+		// console.log("Ajax 'delete' successful");
 	});
 });

@@ -91,7 +91,7 @@
 				<div class="col">
 
 					@if(isset($summernote_content))
-					<form method="POST" action="{{ url('save/summernote') }}">
+					<form method="POST" action="{{ url('save/summernote') }}" id="summernote_container">
 			    	@csrf
 				    <textarea name="summernoteUpdate" class="summernote" id="summernote">
 			       {{$summernote_content}}
@@ -103,17 +103,17 @@
 	        </form>
         	@endif
 
-				    @if(!isset($summernote_content))
-				    <form action="{{route('summernotePersist')}}" method="POST" id="summernote_container">
-				        @csrf
-				        <textarea name="summernoteInput" class="summernote" id="summernote"></textarea>
-				        <br>
-				        <button class="btn btn-success" type="submit">Store <i class="fas fa-save"></i></button>
-				        @foreach ($summernotes as $summernote)
-									<a class="btn btn-info my-3" href="/get/{{$summernote->id}}/summernote" id="get_Content" target="_blank">Content #{{$summernote->id}}</a>
-								@endforeach
-				    </form>
-			      @endif
+			    @if(!isset($summernote_content))
+			    <form action="{{route('summernotePersist')}}" method="POST" id="summernote_container">
+			        @csrf
+			        <textarea name="summernoteInput" class="summernote" id="summernote"></textarea>
+			        <br>
+			        <button class="btn btn-success" type="submit">Store <i class="fas fa-save"></i></button>
+			        @foreach ($summernotes as $summernote)
+								<a class="btn btn-info my-3" href="/get/{{$summernote->id}}/summernote" id="get_Content" target="_blank">Content #{{$summernote->id}}</a>
+							@endforeach
+			    </form>
+		      @endif
 
 					<a class="btn btn-dark" href="/"><i class="fas fa-chevron-circle-left"></i> Menu</a>
 				</div>

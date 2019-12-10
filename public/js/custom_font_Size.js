@@ -65,7 +65,7 @@
 			// Context for button in plugin toolbar
 			context.memo('button.customFontSize', function () {
 				var button = ui.button({
-					contents: '<i class="fas fa-font"></i> <input id="fontSize" name="fontSize" type="number" max="80" min="8" step="0.1" value="14" onfocus="setFontSize()" onchange="setFontSize()"> px',
+					contents: '<i class="fas fa-font"></i> <input id="fontSize" name="fontSize" type="number" max="120" min="8" step="0.1" value="14" onfocus="setFontSize()" onchange="setFontSize()"> px',
 					tooltip: 'Decimal font size',
 
 					// Changes the font size according to the input in #fontSize
@@ -81,6 +81,7 @@
 	});
 }));
 
+// Fetch current font size of selected text and throw the value into input space of "#fontSize"
 function getFontSize() {
 
   var font_size = document.getElementById("fontSize");
@@ -97,6 +98,7 @@ function getFontSize() {
       // The range finder for the selected text
       var range = sel.getRangeAt(0).cloneRange();
       var current_fSize = text.style.fontSize;
+
       // console.log("Current font size is " + current_fSize);
       var fSize_val = Number(current_fSize.replace(/[^0-9\.]+/g,""));
       if(fSize_val > 0){
@@ -112,6 +114,7 @@ function getFontSize() {
   }
 };
 
+// For clearing highlighted text
 function clearSelection(){
   if(document.selection && document.selection.empty) {
         document.selection.empty();
@@ -121,12 +124,13 @@ function clearSelection(){
     }
 };
 
+// Set font size according to value of input space #fontSize
 function setFontSize() {
  var in_font_size = document.getElementById("fontSize").value;
  // console.log("Current font size is " + in_font_size);
 
- // Acquiring the selected text that is needed to have different font size
- if (document.getSelection) {
+  // Acquiring the selected text that is needed to have different font size
+  if (document.getSelection) {
      var sel = document.getSelection(); //Contains the raw text of the selected text
 
      // Variable for acquiring the selected text, specifically the p element of the text
@@ -140,23 +144,13 @@ function setFontSize() {
          sel.removeAllRanges();
          sel.addRange(range);
      }
- }
 
- // var selectedText = "";
- // if(window.getSelection()){
- //   selectedText = window.getSelection();
- // }
- // else if(document.getSelection()){
- //   selectedText = document.getSelection();
- // }
- // else if(document.selection()){
- //   selectedText = document.selection.createRange().text;
- // }
+  }
+};
 
- // console.log("Current selectedText is " + sel);
-}
-
+// Contains the functions that runs immediately after the page is fully loaded
 $(document).ready(function() {
+   // Fetch the summernote container that wraps around the editable space
    var container = document.getElementById("summernote_container");
    var text = container.getElementsByTagName('p')[1];
    // console.log(text);
@@ -164,17 +158,18 @@ $(document).ready(function() {
    // container.getElementsByClassName("note-editable").firstChild;
    // container.getElementsByTagName("p");
 
+   // Sets the intial value of input space #fontSize
    text.style.fontSize = 14 + "px";
-   container.addEventListener("click", getFontSize);
-   var modal = document.getElementById("setModal");
 
+   // "Click" event in editable space
+   $(".note-editable").click(function(){
+     getFontSize();
+   });
+
+   // Runs when the editable space is blurred (out of focus)
    $(".note-editable").blur(function(){
-       console.log("Unfocused from summernote_container");
+       // console.log("Unfocused from summernote_container");
        setFontSize();
    });
-   // $("#summernote_container").click(function(){
-   //   console.log("Double clicked in summernote_container");
-   //   clearSelection();
-   // });
 
 });
