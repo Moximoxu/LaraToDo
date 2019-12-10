@@ -65,12 +65,12 @@
 			// Context for button in plugin toolbar
 			context.memo('button.customFontSize', function () {
 				var button = ui.button({
-					contents: '<i class="fas fa-font"></i> <input id="fontSize" name="fontSize" type="number" max="120" min="8" step="0.1" value="14" onfocus="setFontSize()" onchange="setFontSize()"> px',
+					contents: '<i class="fas fa-font"></i>',
 					tooltip: 'Decimal font size',
 
 					// Changes the font size according to the input in #fontSize
 					click: function(){
-            setFontSize();
+            $('#setFontSizeModal').modal('show');
           }
 				});
 				//Render button
@@ -84,7 +84,7 @@
 // Fetch current font size of selected text and throw the value into input space of "#fontSize"
 function getFontSize() {
 
-  var font_size = document.getElementById("fontSize");
+  var font_size = document.getElementById("font_size_in");
 
   // Acquiring the selected text
   if (document.getSelection) {
@@ -99,7 +99,7 @@ function getFontSize() {
       var range = sel.getRangeAt(0).cloneRange();
       var current_fSize = text.style.fontSize;
 
-      // console.log("Current font size is " + current_fSize);
+      console.log("Current font size is " + current_fSize);
       var fSize_val = Number(current_fSize.replace(/[^0-9\.]+/g,""));
       if(fSize_val > 0){
         font_size.value = fSize_val;
@@ -126,7 +126,7 @@ function clearSelection(){
 
 // Set font size according to value of input space #fontSize
 function setFontSize() {
- var in_font_size = document.getElementById("fontSize").value;
+ var in_font_size = document.getElementById("font_size_in").value;
  // console.log("Current font size is " + in_font_size);
 
   // Acquiring the selected text that is needed to have different font size
@@ -170,6 +170,15 @@ $(document).ready(function() {
    $(".note-editable").blur(function(){
        // console.log("Unfocused from summernote_container");
        setFontSize();
+   });
+
+   $("#submit_fontSize").click(function(){
+     setFontSize();
+     clearSelection();
+   });
+
+   $("#cancel_fontSize").click(function(){
+     clearSelection();
    });
 
 });

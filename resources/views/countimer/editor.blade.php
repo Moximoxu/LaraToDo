@@ -73,13 +73,34 @@
 					<label for="c_second">Second</label>
 				<input type="number" id="c_second" required value="00" min="0" step="1" max="59"><br>
 
-					<button type="button" onclick="setDate()" class="btn btn-info my-3" data-dismiss="modal">Set</button>
+					<button type="button" onclick="setTimer()" class="btn btn-info my-3" data-dismiss="modal">Set</button>
 			  </div>
 			  <div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 			  </div>
 		</div>
 	</div>
+</div>
+
+<!-- Modal for setting font size -->
+<div id="setFontSizeModal" class="modal fade" role="dialog">
+<div class="modal-dialog modal-sm">
+	<div class="modal-content">
+		<div class="modal-header">
+			<h4 class="modal-title" id="font_modal_title">Set Font Size</h4>
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+		</div>
+		<div class="modal-body" id="font_size">
+			<label for="font_size_in">Font size</label>
+			<input id="font_size_in" name="font_size_in" type="number" max="120" min="8" step="0.1" value="14"> px<br>
+
+				<button type="button" id="submit_fontSize" class="btn btn-info my-3" data-dismiss="modal">Set</button>
+			</div>
+			<div class="modal-footer">
+				<button type="button" id="cancel_fontSize" class="btn btn-danger" data-dismiss="modal">Close</button>
+			</div>
+	</div>
+</div>
 </div>
 
 </head>
@@ -130,7 +151,7 @@
 			focus: true,
 			toolbar:[
 				['insert', ['countimer', 'picture']],
-				['font', ['fontname', 'fontsize', 'customFontSize']],
+				['font', ['fontname', 'customFontSize']],
 				['tool', ['undo', 'redo', 'codeview']],
 				['style',['style']],
 			],
