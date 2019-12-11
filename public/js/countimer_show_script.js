@@ -34,6 +34,7 @@ function startTimer(i) {
 
   //Output the result into each element
 	// console.log("Current title is " + title);
+
   document.getElementById("c_title" + i).innerHTML = title;
   document.getElementById("c_days" + i).innerHTML = days;
   document.getElementById("c_hours" + i).innerHTML = hours;

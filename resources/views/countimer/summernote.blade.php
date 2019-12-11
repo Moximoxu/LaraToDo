@@ -7,12 +7,12 @@
 	<meta name="viewport" content="width=device-width, intial-scale=1">
 
 	<!--Link-->
-	<link rel="stylesheet" 
+	<link rel="stylesheet"
 		href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-	<link rel='stylesheet' 
+	<link rel='stylesheet'
 		href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
 	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	
+
 	<!--Script sources-->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -23,27 +23,30 @@
 	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	
+
 	<!--Summernote sources-->
 	<!-- include libraries(jQuery, bootstrap, fontawesome) -->
 	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
-	<link rel='stylesheet' 
-		href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'> 
+	<link rel='stylesheet'
+		href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
 
 	<!-- include summernote css/js -->
 	<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
-	<script type="text/javascript" src="{{URL::asset('js/summernote.min.js')}}"></script> 
-	
+	<script type="text/javascript" src="{{URL::asset('js/summernote.min.js')}}"></script>
+
 	<!--Countimer plugin-->
 	<script type="text/javascript" src="{{URL::asset('js/countimer_show_script.js')}}"></script>
 	<link rel="stylesheet" type="text/css" href="{{ url('/css/countimer.css') }}" />
-	
+
 	<style>
 		body{
 			width:80%;
 			margin: 20px auto 0;
+		}
+		.close{
+			display:none;
 		}
 	</style>
 </head>

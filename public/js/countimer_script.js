@@ -72,8 +72,9 @@
    					//HTML that will be inserted into editor
    					click: function () {
    						$counter = '<div class="col timer" id="timer_div">'+
+              '<p id="timer_num" class="t_num" style="display:none"></p>'+
    						'<div class="container my-3 mx-3">'+
-   						'		<div class="row">'+
+   						'		<div class="row"><a id="btn_deleteTimer" class="close"><i class="far fa-times-circle"></i></a>'+
    						'			<div class="col-sm-4 mx-2"><h1 class="text-center" id="c_title">Title</h1></div>'+
    						'			<p id="title_show" name="title_show" style="display:none"></p>'+
    						'			<h3 id="c_countDown" style="display:none"></h3>'+
@@ -130,6 +131,9 @@ function setTimer() {
   //Close the modal
   $("#setModal.close").click();
 
+  var container = document.getElementById("summernote_container")
+  clicks = container.getElementsByClassName("col timer").length;
+  console.log(clicks);
   // console.log("Current number of clicks are = " + clicks);
   // console.log("Current value of i is = " + i);
 
@@ -147,10 +151,14 @@ function setTimer() {
        var c_minute = document.getElementById('c_minute');
        var c_second = document.getElementById('c_second');
 
+       $("#timer_num").attr("id", "timer_num" + i);
+       var timer_num = document.getElementById('timer_num' + i);
+
        $('#c_countDown').attr('id', 'c_countDown' + i);
        var c_countDown = document.getElementById('c_countDown' + i);
 
        $('#timer_div').attr('id', 'timer_div' + i);
+       $('#timer_div').attr('data-id', i);
        var timer_div = document.getElementById('timer_div' + i);
 
        $('#c_title').attr('id', 'c_title' + i);
@@ -174,6 +182,8 @@ function setTimer() {
        //Set the title
        var title = c_title_in.value;
 
+       timer_num.innerHTML = i;
+       timer_num.value = i;
        // console.log("Successfully set title");
        // console.log(title);
        title_show.value = title;
@@ -254,6 +264,16 @@ function startTimer(i) {
 	// console.log("Successfully fetched set time");
 	// console.log(countDown);
 
+  $("#btn_deleteTimer").attr("data-id", i);
+  $("#btn_deleteTimer").attr("id", "btn_deleteTimer" + i);
+  console.log(document.getElementById("btn_deleteTimer" + i));
+  $("#btn_deleteTimer" + i).click(function(){
+    var data_id = $(this).data("id");
+    console.log("Data id of this button is = " + data_id);
+    var timer_div = document.getElementById("timer_div" + data_id);
+    $(timer_div).remove();
+  });
+
  //Get today's date and time
  var now = new Date().getTime();
 
@@ -317,12 +337,15 @@ $(document).ready(function() {
   setTimeout(function(){
     //Fetch number of timers present
     var container = document.getElementById("summernote_container")
-    var num_of_timers = container.getElementsByClassName("col timer");
-    console.log(num_of_timers.length);
+
+    var timer_num = container.getElementsByClassName("t_num");
+    console.log(timer_num);
 
     // Loop for running the timer(s) in the content where the function startTimer() runs in accordance to number of timers
-    for(var i=1; i <= 2; i++){
-      startTimer(i);
+    for(var i=0; i < timer_num.length; i++){
+      var data_id = timer_num[i].innerHTML;
+      console.log("Data-id of this timer is = " + data_id);
+      startTimer(data_id);
     }
   }, 100);
 
