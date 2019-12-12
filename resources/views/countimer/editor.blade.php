@@ -50,12 +50,13 @@
 		}
 	</style>
 
+	<!-- Modal for setting up timer -->
 	<div id="setModal" class="modal fade" role="dialog">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h4 class="modal-title" id="c_modal_title">Set Countimer</h4>
-				<button type="button" class="close" data-dismiss="modal"><i class="far fa-times-circle"></i></button>
+				<h4 class="modal-title" id="c_modal_title">Set Countimer <i id="logo_timer_down" class="fas fa-arrow-down"></i><i class="far fa-clock"></i></h4>
+				<button type="button" id="cancel_Timer" class="close" data-dismiss="modal"><i class="far fa-times-circle"></i></button>
 			</div>
 			<div class="modal-body" id="timer">
 				<label for="c_title_in">Title of Countdown</label>
@@ -73,10 +74,9 @@
 					<label for="c_second">Second</label>
 				<input type="number" id="c_second" required value="00" min="0" step="1" max="59"><br>
 
-					<button type="button" onclick="setTimer()" class="btn btn-info my-3" data-dismiss="modal">Set</button>
 			  </div>
 			  <div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" id="btn_setTimer" onclick="setTimer()" class="btn btn-info btn-block my-3" data-dismiss="modal">SET</button>
 			  </div>
 		</div>
 	</div>
@@ -87,17 +87,16 @@
 <div class="modal-dialog modal-sm">
 	<div class="modal-content">
 		<div class="modal-header">
-			<h4 class="modal-title" id="font_modal_title">Set Font Size</h4>
-			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h4 class="modal-title" id="font_modal_title">Set Font Size <i class="fas fa-font"></i> <i id="logo_fontSize_dot" class="fas fa-circle"></i><i id="logo_fontSize_ast" class="fas fa-asterisk"></i></h4>
+			<button type="button" class="close" data-dismiss="modal"><i class="far fa-times-circle"></i></button>
 		</div>
 		<div class="modal-body" id="font_size">
 			<label for="font_size_in">Font size</label>
 			<input id="font_size_in" name="font_size_in" type="number" max="120" min="8" step="0.1" value="14"> px<br>
 
-				<button type="button" id="submit_fontSize" class="btn btn-info my-3" data-dismiss="modal">Set</button>
 			</div>
 			<div class="modal-footer">
-				<button type="button" id="cancel_fontSize" class="btn btn-danger" data-dismiss="modal">Close</button>
+				<button type="button" id="submit_fontSize" class="btn btn-info btn-block my-3" data-dismiss="modal">SET</button>
 			</div>
 	</div>
 </div>
@@ -131,7 +130,7 @@
 			        <br>
 			        <button class="btn btn-success" type="submit">Store <i class="fas fa-save"></i></button>
 			        @foreach ($summernotes as $summernote)
-								<a class="btn btn-info my-3" href="/get/{{$summernote->id}}/summernote" id="get_Content" target="_blank">Content #{{$summernote->id}}</a>
+								<a class="btn btn-info my-3" href="/get/{{$summernote->id}}/summernote" id="get_Content">Content #{{$summernote->id}}</a>
 							@endforeach
 			    </form>
 		      @endif

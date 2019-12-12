@@ -36,12 +36,30 @@
 }
 
 #c_modal_title{
-	margin-right: 65%;
+	margin-right: 55%;
 }
 
 #fontSize{
 	font-size: 10px !important;
 	user-select: auto;
+}
+
+#logo_fontSize_dot{
+	font-size: 20%;
+}
+
+#logo_fontSize_ast{
+	font-size:60%;
+	vertical-align: text-top;
+}
+
+#logo_timer_down{
+	font-size: 70%;
+}
+
+#btn_setTimer, #submit_fontSize, #submit_contentName{
+	font-weight: bold;
+	font-family: "Candara";
 }
 
 .note-btn-group {

@@ -66,7 +66,7 @@
    			//Context for button in plugin toolbar
    			context.memo('button.countimer', function () {
    				var button = ui.button({
-   					contents: '<i class="far fa-clock"></i>',
+   					contents: '<i id="logo_timer_down" class="fas fa-arrow-down"></i><i class="far fa-clock"></i>',
    					tooltip: 'Insert Countimer',
 
    					//HTML that will be inserted into editor
@@ -105,6 +105,14 @@
    						//Automatically opens the modal once the button is pressed
               clearSelection();
    						$('#setModal').modal('show');
+
+              $("#cancel_Timer").click(function(){
+                $("#timer_div").remove();
+              });
+
+              $("#btn_deleteTimer").click(function(){
+                $("#timer_div").remove();
+              });
 
    					}
    				});
@@ -150,6 +158,16 @@ function setTimer() {
        var c_hour = document.getElementById('c_hour');
        var c_minute = document.getElementById('c_minute');
        var c_second = document.getElementById('c_second');
+
+       $("#btn_deleteTimer").attr("data-id", i);
+       $("#btn_deleteTimer").attr("id", "btn_deleteTimer" + i);
+       console.log(document.getElementById("btn_deleteTimer" + i));
+       $("#btn_deleteTimer" + i).click(function(){
+         var data_id = $(this).data("id");
+         console.log("Data id of this button is = " + data_id);
+         var timer_div = document.getElementById("timer_div" + data_id);
+         $(timer_div).remove();
+       });
 
        $("#timer_num").attr("id", "timer_num" + i);
        var timer_num = document.getElementById('timer_num' + i);
@@ -243,9 +261,6 @@ function setTimer() {
        // console.log("Counting down time");
        }, 1000);
 
-       //Enters a whitespace into summernote editor
-       $('#summernote').summernote('insertText', '');
-
    }
    i++;
   }
@@ -255,6 +270,14 @@ function setTimer() {
 // Starts the timers that are present in the editor
 function startTimer(i) {
 
+  // Set delete Button
+  $("#btn_deleteTimer" + i).click(function(){
+    var data_id = $(this).data("id");
+    console.log("Data id of this button is = " + data_id);
+    var timer_div = document.getElementById("timer_div" + data_id);
+    $(timer_div).remove();
+  });
+
 	//Set the title
 	var title = document.getElementById("title_show" + i).innerHTML;
 	// console.log("Successfully set title");
@@ -263,16 +286,6 @@ function startTimer(i) {
 	var countDown = document.getElementById("c_countDown" + i).innerHTML;
 	// console.log("Successfully fetched set time");
 	// console.log(countDown);
-
-  $("#btn_deleteTimer").attr("data-id", i);
-  $("#btn_deleteTimer").attr("id", "btn_deleteTimer" + i);
-  console.log(document.getElementById("btn_deleteTimer" + i));
-  $("#btn_deleteTimer" + i).click(function(){
-    var data_id = $(this).data("id");
-    console.log("Data id of this button is = " + data_id);
-    var timer_div = document.getElementById("timer_div" + data_id);
-    $(timer_div).remove();
-  });
 
  //Get today's date and time
  var now = new Date().getTime();

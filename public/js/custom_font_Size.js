@@ -65,8 +65,8 @@
 			// Context for button in plugin toolbar
 			context.memo('button.customFontSize', function () {
 				var button = ui.button({
-					contents: '<i class="fas fa-font"></i>',
-					tooltip: 'Decimal font size',
+					contents: '<i class="fas fa-font"></i> <i id="logo_fontSize_dot" class="fas fa-circle"></i><i id="logo_fontSize_ast" class="fas fa-asterisk"></i>',
+					tooltip: 'Decimal Font Size',
 
 					// Changes the font size according to the input in #fontSize
 					click: function(){
@@ -133,9 +133,11 @@ function setFontSize() {
   if (document.getSelection) {
      var sel = document.getSelection(); //Contains the raw text of the selected text
 
+     // Insert new method of acquiring selected text here
+
      // Variable for acquiring the selected text, specifically the p element of the text
-     var text = sel.anchorNode.parentNode;
-     // console.log("sel.anchorNode.parentNode = " + sel.anchorNode.parentNode);
+     // var text = sel.anchorNode.parentNode;
+     console.log("sel = " + sel);
 
      // The range finder for the selected text
      if (sel.rangeCount) {
