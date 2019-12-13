@@ -95,6 +95,7 @@ $(document).ready(function() {
   // Button that deletes the currently displayed content
   $(document).on("click", "a.delete", function(){
 		var dataId = $(this).data("id");
+    var url_editor = "http://laratodo.test/editor";
 
 		$.ajax({
 		headers: {
@@ -103,7 +104,7 @@ $(document).ready(function() {
 		url: "/summernote/" + dataId,
 		type:"DELETE",
 		success:function(){
-	        window.close();
+	        window.location.assign(url_editor)
 		}
 		});
 		// console.log("Ajax 'delete' successful");

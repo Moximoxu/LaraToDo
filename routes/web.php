@@ -138,4 +138,4 @@ Route::group(['middleware' => 'LaraToDo\Http\Middleware\MemberMiddleware'], func
 	Route::get('/edit/{summernote}/summernote', 'SummernoteController@edit');
 	Route::post('save/summernote', 'SummernoteController@update');
 
-	Route::get('editor', 'SummernoteController@index');
+	Route::get('editor', 'SummernoteController@index')->name("show-editor");

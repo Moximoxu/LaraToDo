@@ -55,7 +55,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h4 class="modal-title" id="c_modal_title">Set Countimer <i id="logo_timer_down" class="fas fa-arrow-down"></i><i class="far fa-clock"></i></h4>
+				<h4 class="modal-title" id="c_modal_title">Set Countimer</h4>
 				<button type="button" id="cancel_Timer" class="close" data-dismiss="modal"><i class="far fa-times-circle"></i></button>
 			</div>
 			<div class="modal-body" id="timer">
@@ -87,7 +87,7 @@
 <div class="modal-dialog modal-sm">
 	<div class="modal-content">
 		<div class="modal-header">
-			<h4 class="modal-title" id="font_modal_title">Set Font Size <i class="fas fa-font"></i> <i id="logo_fontSize_dot" class="fas fa-circle"></i><i id="logo_fontSize_ast" class="fas fa-asterisk"></i></h4>
+			<h4 class="modal-title" id="font_modal_title">Set Font Size</h4>
 			<button type="button" class="close" data-dismiss="modal"><i class="far fa-times-circle"></i></button>
 		</div>
 		<div class="modal-body" id="font_size">
@@ -128,14 +128,23 @@
 			        @csrf
 			        <textarea name="summernoteInput" class="summernote" id="summernote"></textarea>
 			        <br>
-			        <button class="btn btn-success" type="submit">Store <i class="fas fa-save"></i></button>
-			        @foreach ($summernotes as $summernote)
-								<a class="btn btn-info my-3" href="/get/{{$summernote->id}}/summernote" id="get_Content">Content #{{$summernote->id}}</a>
-							@endforeach
+
+							<button class="btn btn-success" type="submit">Store <i class="fas fa-save"></i></button>
+
+							<div class="dropdown dropright">
+						    <button type="button" class="btn btn-info mt-3 dropdown-toggle" data-toggle="dropdown">
+						      Show content
+						    </button>
+						    <div class="dropdown-menu">
+									@foreach ($summernotes as $summernote)
+										<a class="dropdown-item" href="/get/{{$summernote->id}}/summernote" id="get_Content">Content #{{$summernote->id}}</a>
+									@endforeach
+						    </div>
+						  </div>
+
+							<a class="btn btn-dark my-3" href="/"><i class="fas fa-chevron-circle-left"></i> Menu</a>
 			    </form>
 		      @endif
-
-					<a class="btn btn-dark" href="/"><i class="fas fa-chevron-circle-left"></i> Menu</a>
 				</div>
 			</div>
 		</div>
