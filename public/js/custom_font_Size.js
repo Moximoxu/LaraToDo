@@ -5,7 +5,7 @@
  * license: Your chosen license, or link to a license file.
  *
  */
-var text;
+ var clicks = 0;
 
 (function (factory) {
   /* Global define */
@@ -75,14 +75,23 @@ var text;
             $('#setFontSizeModal').modal('show');
 
             // Acquiring the selected text that is needed to have different font size
-            if (document.getSelection) {
-               var sel = document.getSelection(); //Contains the raw text of the selected text
+              // Variable for acquiring the selected text, specifically the p element of the text
+              clicks++;
+              console.log("Clicks = " + clicks);
 
-               // Variable for acquiring the selected text, specifically the p element of the text
-               text = sel.anchorNode.parentNode;
-               getFontSize(text);
+              const sel = getSelection().getRangeAt(0); //Contains the raw text of the selected text
+              const nNd = document.createElement("span");
+              $(nNd).attr({"id" : "span" + clicks, "style": "font-size:", "class" : "font_span"});
+              sel.surroundContents(nNd);
+              nNd.insertAdjacentHTML('afterend', "&nbsp;")
+              var closest = $(sel).closest('span');
+              console.log(closest);
+              // if(closest){
+              //
+              // }
+
                console.log("sel = " + sel);
-            }
+               getFontSize();
           }
 				});
 				//Render button
@@ -94,12 +103,13 @@ var text;
 }));
 
 // Fetch current font size of selected text and throw the value into input space of "#fontSize"
-function getFontSize(text) {
+function getFontSize() {
 
   var font_size = document.getElementById("font_size_in");
 
   // Acquiring the font size of selected text
-  var current_fSize = text.style.fontSize;
+  var selected_span = $(sel).closest(".font_span");
+  var current_fSize = selected_span.style.fontSize;
 
   console.log("Current font size is " + current_fSize);
   var fSize_val = Number(current_fSize.replace(/[^0-9\.]+/g,""));
@@ -116,31 +126,55 @@ function clearSelection(){
   if(document.selection && document.selection.empty) {
         document.selection.empty();
     } else if(window.getSelection) {
-        var sel = window.getSelection();
+        sel = window.getSelection();
         sel.removeAllRanges();
     }
 };
 
 // Set font size according to value of input space #fontSize
 function setFontSize() {
- var in_font_size = document.getElementById("font_size_in").value;
- // console.log("Current font size is " + in_font_size);
+  var in_font_size = document.getElementById("font_size_in").value;
+  // console.log("Current font size is " + in_font_size);
 
-  text.style.fontSize = in_font_size + "px";
+  console.log("Selected span = " + document.getElementById("span" + clicks));
+  // $(sel).css("font-size", in_font_size + "px");
+  $("#span" + clicks).css("font-size", in_font_size + "px");
+};
+
+function selectHTML() {
+    try {
+        if (window.ActiveXObject) {
+            var c = document.selection.createRange();
+            return c.htmlText;
+        }
+
+        clicks++;
+        console.log("In selectHTML() Clicks = " + clicks);
+
+        var nNd = document.createElement("span");
+        $(nNd).attr({"id" : "span" + clicks, "style": "font-size: 14px"});
+        var w = getSelection().getRangeAt(0);
+        w.surroundContents(nNd);
+        // console.log("Ran selectHTML");
+        // return nNd.innerHTML;
+    } catch (e) {
+        if (window.ActiveXObject) {
+            return document.selection.createRange();
+        } else {
+            return getSelection();
+        }
+    }
 };
 
 // Contains the functions that runs immediately after the page is fully loaded
 $(document).ready(function() {
    // Fetch the summernote container that wraps around the editable space
-   var container = document.getElementById("summernote_container");
-   var initial_text = container.getElementsByTagName('p')[1];
    // console.log(text);
 
    // container.getElementsByClassName("note-editable").firstChild;
    // container.getElementsByTagName("p");
 
    // Sets the intial value of input space #fontSize
-   initial_text.style.fontSize = 14 + "px";
 
    // Runs when the editable space is blurred (out of focus)
    // $(".note-editable").blur(function(){
@@ -148,8 +182,12 @@ $(document).ready(function() {
    //     setFontSize();
    // });
 
+   var container = document.getElementById("summernote_container")
+
+   clicks = container.getElementsByClassName("font_span").length;
+
    $("#submit_fontSize").click(function(){
-     setFontSize(text);
+     setFontSize();
      clearSelection();
    });
 

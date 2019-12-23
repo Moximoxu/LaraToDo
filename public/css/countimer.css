@@ -1,24 +1,24 @@
-#c_title{
+.timer_label_title{
 	font-size:40px;
 }
 
-#c_days_label{
-	font-size:20px;
+.timer_label_days{
+	font-size:13px;
 }
 
-#c_hours_label{
-	font-size:20px;
+.timer_label_hours{
+	font-size:13px;
 }
 
-#c_minutes_label{
-	font-size:18px;
+.timer_label_minutes{
+	font-size:13px;
 }
 
-#c_seconds_label{
-	font-size:16px;
+.timer_label_seconds{
+	font-size:12px;
 }
 
-#c_days, #c_hours, #c_minutes, #c_seconds{
+.timer_value_days, .timer_value_hours, .timer_value_minutes, .timer_value_seconds{
 	font-size:40px;
 }
 
@@ -27,8 +27,9 @@
 	width:80%;
 }
 
-.timer.row{
-	width: 30% !important;
+.timer{
+	width: 100%;
+  justify-content: center;
 }
 
 #setModal{

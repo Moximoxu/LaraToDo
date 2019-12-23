@@ -73,28 +73,26 @@
    					click: function () {
    						$counter = '<div class="col timer" id="timer_div">'+
               '<p id="timer_num" class="t_num" style="display:none"></p>'+
-   						'<div class="container my-3 mx-3">'+
-   						'		<div class="row"><a id="btn_deleteTimer" class="close"><i class="far fa-times-circle"></i></a>'+
-   						'			<div class="col-sm-4 mx-2"><h1 class="text-center" id="c_title">Title</h1></div>'+
+   						'		<div class="timer row"><a id="btn_deleteTimer" class="close"><i class="far fa-times-circle"></i></a>'+
+   						'			<div class="col-sm-4 mx-2"><h1 class="text-center timer_label_title" id="c_title">Title</h1></div>'+
    						'			<p id="title_show" name="title_show" style="display:none"></p>'+
    						'			<h3 id="c_countDown" style="display:none"></h3>'+
    						'		</div>'+
-   						'		<div class="row">'+
-   						'			<div class="col-sm-1"><h5 class="text-center">Days</h5></div>'+
-   						'			<div class="col-sm-1"><h5 class="text-center">Hours</h5></div>'+
-   						'			<div class="col-sm-1"><h5 class="text-center">Minutes</h5></div>'+
-   						'			<div class="col-sm-1"><h5 class="text-center" style="color:red;">Seconds</h5></div>'+
+   						'		<div class="timer row">'+
+   						'			<div class="col-sm-1"><h5 class="text-center timer_label_days">Days</h5></div>'+
+   						'			<div class="col-sm-1"><h5 class="text-center timer_label_hours">Hours</h5></div>'+
+   						'			<div class="col-sm-1"><h5 class="text-center timer_label_minutes">Minutes</h5></div>'+
+   						'			<div class="col-sm-1"><h5 class="text-center timer_label_seconds" style="color:red;">Seconds</h5></div>'+
    						'		</div>'+
-   						'		<div class="row">'+
-   						'			<div class="col-sm-1"><h1 class="text-center" id="c_days"></h1></div>'+
-   						'			<div class="col-sm-1"><h1 class="text-center" id="c_hours"></h1></div>'+
-   						'			<div class="col-sm-1"><h1 class="text-center" id="c_minutes"></h1></div>'+
-   						'			<div class="col-sm-1"><h1 class="text-center" id="c_seconds" style="color:red;"></h1></div>'+
+   						'		<div class="timer row">'+
+   						'			<div class="col-sm-1"><h1 class="text-center timer_value_days" id="c_days"></h1></div>'+
+   						'			<div class="col-sm-1"><h1 class="text-center timer_value_hours" id="c_hours"></h1></div>'+
+   						'			<div class="col-sm-1"><h1 class="text-center timer_value_minutes" id="c_minutes"></h1></div>'+
+   						'			<div class="col-sm-1"><h1 class="text-center timer_value_seconds" id="c_seconds" style="color:red;"></h1></div>'+
    						'		</div>'+
-   						'</div'+
-   					'</div'+
+     					'</div'+
 
-   					'</div>';
+     					'</div>';
 
               //Paste countimer into editor
    						context.invoke('editor.pasteHTML', $counter);
@@ -104,7 +102,7 @@
 
    						//Automatically opens the modal once the button is pressed
               clearSelection();
-   						$('#setModal').modal('show');
+   						$('#setTimer_Modal').modal('show');
 
               $("#cancel_Timer").click(function(){
                 $("#timer_div").remove();
@@ -137,7 +135,7 @@ function clearSelection(){
 // Sets the timer and runs the timer immediately
 function setTimer() {
   //Close the modal
-  $("#setModal.close").click();
+  $("#setTimer_Modal.close").click();
 
   var container = document.getElementById("summernote_container")
   clicks = container.getElementsByClassName("col timer").length;

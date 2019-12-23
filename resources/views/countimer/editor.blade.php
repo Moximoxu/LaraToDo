@@ -39,6 +39,7 @@
 	<!--Countimer plugin-->
 	<script type="text/javascript" src="{{URL::asset('js/countimer_script.js')}}"></script>
 	<link rel="stylesheet" type="text/css" href="{{ url('/css/countimer.css') }}" />
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 	<!--Image attributes plugin-->
 	<script type="text/javascript" src="{{URL::asset('js/summernote-image-attributes.js')}}"></script>
@@ -51,28 +52,58 @@
 	</style>
 
 	<!-- Modal for setting up timer -->
-	<div id="setModal" class="modal fade" role="dialog">
+	<div id="setTimer_Modal" class="modal fade" role="dialog">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4 class="modal-title" id="c_modal_title">Set Countimer</h4>
 				<button type="button" id="cancel_Timer" class="close" data-dismiss="modal"><i class="far fa-times-circle"></i></button>
 			</div>
-			<div class="modal-body" id="timer">
-				<label for="c_title_in">Title of Countdown</label>
-				<input type="text" id="c_title_in"><br>
+			<div class="modal-body" id="timer_modal_container">
+				<div class="row">
+					<div class="col-sm-5">
+						<label for="c_title_in">Title of Countdown</label>
+					</div>
+					<div class="col">
+						<input class="w3-input w3-animate-input" type="text" id="c_title_in" style="width:30%">
+					</div>
+				</div>
 
-					<label for="c_date">Countdown Date</label>
-					<input type="date" id="c_date"><br>
+				<div class="row">
+					<div class="col-sm-5">
+						<label for="c_date">Countdown Date</label>
+					</div>
+					<div class="col">
+						<input type="date" class="w3-input w3-animate-input" id="c_date" style="width:65%">
+					</div>
+				</div>
 
-				<label for="c_hour">Hour</label>
-					<input type="number" id="c_hour" required value="00" min="0" step="1" max="23">:
+				<div class="row">
+					<div class="col-sm-5">
+						<label for="c_hour">Hour</label>
+					</div>
+					<div class="col">
+						<input class="w3-input w3-animate-input" type="number" id="c_hour" required value="00" min="0" step="1" max="23" style="width:30%">
+					</div>
+				</div>
 
-					<label for="c_minute">Minute</label>
-					<input type="number" id="c_minute" required value="00" min="0" step="1" max="59">:
+				<div class="row">
+					<div class="col-sm-5">
+						<label for="c_minute">Minute</label>
+					</div>
+					<div class="col">
+						<input class="w3-input w3-animate-input" type="number" id="c_minute" required value="00" min="0" step="1" max="59" style="width:30%">
+					</div>
+				</div>
 
-					<label for="c_second">Second</label>
-				<input type="number" id="c_second" required value="00" min="0" step="1" max="59"><br>
+				<div class="row">
+					<div class="col-sm-5">
+						<label for="c_second">Second</label>
+					</div>
+					<div class="col">
+						<input class="w3-input w3-animate-input" type="number" id="c_second" required value="00" min="0" step="1" max="59" style="width:30%">
+					</div>
+				</div>
 
 			  </div>
 			  <div class="modal-footer">
@@ -106,47 +137,44 @@
 
 <body>
 	<div class="row">
-		<div class="col-lg-12">
-			<div class="row">
-				<div class="col">
+		<div class="col-lg-12 mx-auto">
 
-					@if(isset($summernote_content))
-					<form method="POST" action="{{ url('save/summernote') }}" id="summernote_container">
-			    	@csrf
-				    <textarea name="summernoteUpdate" class="summernote" id="summernote">
-			       {{$summernote_content}}
-			      </textarea>
-			        <input id="content_id" name="content_id" value="{{$summernote_id}}" style="display:none" readonly>
-			        <br>
-		        	<button class="btn btn-success my-3" type="submit">Save Changes <i class="fas fa-save"></i></button>
-		        	<a class="btn btn-danger my-3" href="/get/{{$summernote_id}}/summernote" id="get_Content">Cancel</a>
-	        </form>
-        	@endif
+			@if(isset($summernote_content))
+			<form method="POST" action="{{ url('save/summernote') }}" id="summernote_container">
+	    	@csrf
+		    <textarea name="summernoteUpdate" class="summernote" id="summernote">
+	       {{$summernote_content}}
+	      </textarea>
+	        <input id="content_id" name="content_id" value="{{$summernote_id}}" style="display:none" readonly>
+	        <br>
+        	<button class="btn btn-success my-3" type="submit">Save Changes <i class="fas fa-save"></i></button>
+        	<a class="btn btn-danger my-3" href="/get/{{$summernote_id}}/summernote" id="get_Content">Cancel</a>
+      </form>
+    	@endif
 
-			    @if(!isset($summernote_content))
-			    <form action="{{route('summernotePersist')}}" method="POST" id="summernote_container">
-			        @csrf
-			        <textarea name="summernoteInput" class="summernote" id="summernote"></textarea>
-			        <br>
+	    @if(!isset($summernote_content))
+	    <form action="{{route('summernotePersist')}}" method="POST" id="summernote_container">
+	        @csrf
+	        <textarea name="summernoteInput" class="summernote" id="summernote"></textarea>
+	        <br>
 
-							<button class="btn btn-success" type="submit">Store <i class="fas fa-save"></i></button>
+					<button class="btn btn-success" type="submit">Store <i class="fas fa-save"></i></button>
 
-							<div class="dropdown dropright">
-						    <button type="button" class="btn btn-info mt-3 dropdown-toggle" data-toggle="dropdown">
-						      Show content
-						    </button>
-						    <div class="dropdown-menu">
-									@foreach ($summernotes as $summernote)
-										<a class="dropdown-item" href="/get/{{$summernote->id}}/summernote" id="get_Content">Content #{{$summernote->id}}</a>
-									@endforeach
-						    </div>
-						  </div>
+					<div class="dropdown float-right mr-auto">
+				    <button type="button" class="btn btn-info mt-3 dropdown-toggle" data-toggle="dropdown">
+				      Show content
+				    </button>
+				    <div class="dropdown-menu">
+							@foreach ($summernotes as $summernote)
+								<a class="dropdown-item" href="/get/{{$summernote->id}}/summernote" id="get_Content">Content #{{$summernote->id}}</a>
+							@endforeach
+				    </div>
+				  </div>
 
-							<a class="btn btn-dark my-3" href="/"><i class="fas fa-chevron-circle-left"></i> Menu</a>
-			    </form>
-		      @endif
-				</div>
-			</div>
+					<br><a class="btn btn-dark my-3" href="/"><i class="fas fa-chevron-circle-left"></i> Menu</a>
+	    </form>
+      @endif
+
 		</div>
 	</div>
 </body>
@@ -154,7 +182,7 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#summernote').summernote({
-			width: 600,
+			width: 1000,
 			height: 400,
 			focus: true,
 			toolbar:[
