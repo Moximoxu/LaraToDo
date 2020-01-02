@@ -16,5 +16,10 @@ vi) Implemented as a plugin for Summernote where a button will insert the timer 
 vii) Needed to be compact in order to be a plugin which requires the JavaScript file to be able to function almost independently without any additional files besides CSS file.
 viii) Any and all methods and variables are subject to change which will be updated progressively.
 
+CUSTOM FONT SIZE:
+i) Any and all methods are variables are subject to change which will be updated progressively.
+ii) Implemented alongside LaraToDo where blades and controllers are placed in the same project file.
+iii)
+
 By: Mohd Ikhmal Hafiq Zubir
 GitHub Username: Moximoxu

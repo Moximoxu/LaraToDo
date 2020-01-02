@@ -7,8 +7,7 @@
 	<meta name="viewport" content="width=device-width, intial-scale=1">
 
 	<!--Link-->
-	<link rel="stylesheet"
-		href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 	<link rel='stylesheet'
 		href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
 	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -16,8 +15,8 @@
 	<!--Script sources-->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	<script src="https://jqueryvalidation.org/files/lib/jquery.js"></script>
 	<script src="https://jqueryvalidation.org/files/dist/jquery.validate.js"></script>
 	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
@@ -65,7 +64,7 @@
 						<label for="c_title_in">Title of Countdown</label>
 					</div>
 					<div class="col">
-						<input class="w3-input w3-animate-input" type="text" id="c_title_in" style="width:30%">
+						<input type="text" id="c_title_in" style="width:30%">
 					</div>
 				</div>
 
@@ -74,7 +73,7 @@
 						<label for="c_date">Countdown Date</label>
 					</div>
 					<div class="col">
-						<input class="w3-input w3-animate-input" type="date" id="c_date" style="width:65%">
+						<input type="date" id="c_date" style="width:30%">
 					</div>
 				</div>
 
@@ -83,7 +82,7 @@
 						<label for="c_hour">Hour</label>
 					</div>
 					<div class="col">
-						<input class="w3-input w3-animate-input" type="number" id="c_hour" required value="00" min="0" step="1" max="23" style="width:30%">
+						<input type="number" id="c_hour" required value="00" min="0" step="1" max="23" style="width:30%">
 					</div>
 				</div>
 
@@ -92,7 +91,7 @@
 						<label for="c_minute">Minute</label>
 					</div>
 					<div class="col">
-						<input class="w3-input w3-animate-input" type="number" id="c_minute" required value="00" min="0" step="1" max="59" style="width:30%">
+						<input type="number" id="c_minute" required value="00" min="0" step="1" max="59" style="width:30%">
 					</div>
 				</div>
 
@@ -101,7 +100,7 @@
 						<label for="c_second">Second</label>
 					</div>
 					<div class="col">
-						<input class="w3-input w3-animate-input" type="number" id="c_second" required value="00" min="0" step="1" max="59" style="width:30%">
+						<input type="number" id="c_second" required value="00" min="0" step="1" max="59" style="width:30%">
 					</div>
 				</div>
 
@@ -112,6 +111,7 @@
 		</div>
 	</div>
 </div>
+<!-- End -->
 
 <!-- Modal for setting font size -->
 <div id="setFontSizeModal" class="modal fade" role="dialog">
@@ -119,7 +119,7 @@
 	<div class="modal-content">
 		<div class="modal-header">
 			<h4 class="modal-title" id="font_modal_title">Set Font Size</h4>
-			<button type="button" class="close" data-dismiss="modal"><i class="far fa-times-circle"></i></button>
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
 		</div>
 		<div class="modal-body" id="font_size">
 			<label for="font_size_in">Font size</label>
@@ -132,6 +132,7 @@
 	</div>
 </div>
 </div>
+<!-- End -->
 
 </head>
 
@@ -160,18 +161,17 @@
 
 					<button class="btn btn-success" type="submit">Store <i class="fas fa-save"></i></button>
 
-					<div class="dropdown float-right mr-auto">
-				    <button type="button" class="btn btn-info mt-3 dropdown-toggle" data-toggle="dropdown">
-				      Show content
-				    </button>
-				    <div class="dropdown-menu">
+					<div class="dropup">
+				    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Dropup Example
+				    <span class="caret"></span></button>
+				    <ul class="dropdown-menu">
 							@foreach ($summernotes as $summernote)
-								<a class="dropdown-item" href="/get/{{$summernote->id}}/summernote" id="get_Content">Content #{{$summernote->id}}</a>
+								<li><a href="/get/{{$summernote->id}}/summernote" id="get_Content">Content #{{$summernote->id}}</a></li>
 							@endforeach
-				    </div>
+				    </ul>
 				  </div>
 
-					<br><a class="btn btn-dark my-3" href="/"><i class="fas fa-chevron-circle-left"></i> Menu</a>
+					<br><a class="btn btn-default mb-3" href="/"><i class="fas fa-chevron-circle-left"></i> Menu</a>
 	    </form>
       @endif
 
