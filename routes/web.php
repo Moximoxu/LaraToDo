@@ -139,3 +139,4 @@ Route::group(['middleware' => 'LaraToDo\Http\Middleware\MemberMiddleware'], func
 	Route::post('save/summernote', 'SummernoteController@update');
 
 	Route::get('editor', 'SummernoteController@index')->name("show-editor");
+	Route::get('editorbs3', 'SummernoteController@indexbs3'); // BootStrap 3 version of countimer's modal

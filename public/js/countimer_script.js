@@ -108,17 +108,19 @@ var clicks = 0;
    						//Automatically opens the modal once the button is pressed
               clearSelection(); // For clearing anything that is highlighted
 
-              // $("#setTimer_Modalbs3").remove();
-              // $('#setTimer_Modal').modal('show');
-
               var options = context.options;
 
+              // Choose between modal in BootStrap version 4 or version 3
               if(options.countimer.modalVer == 'bs4') {
                 $("#setTimer_Modalbs3").remove();
                 $('#setTimer_Modal').modal('show');
               }
               else if(options.countimer.modalVer == 'bs3'){
                 $("#setTimer_Modalbs4").remove();
+                $('#setTimer_Modal').modal('show');
+              }
+              else {
+                $("#setTimer_Modalbs3").remove();
                 $('#setTimer_Modal').modal('show');
               }
 

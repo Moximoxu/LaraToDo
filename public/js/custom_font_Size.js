@@ -195,24 +195,24 @@ $(document).ready(function() {
      clearSelection();
    });
 
-   var font_modal = '<div id="setFontSizeModal" class="modal fade" role="dialog">'+
-   '<div class="modal-dialog modal-sm">'+
-   '	<div class="modal-content">'+
-   '		<div class="modal-header">'+
-   '			<h4 class="modal-title" id="font_modal_title">Set Font Size</h4>'+
-   '			<button type="button" class="close" data-dismiss="modal"><i class="far fa-times-circle"></i></button>'+
-   '		</div>'+
-   '		<div class="modal-body" id="font_size">'+
-   '			<label for="font_size_in">Font size</label>'+
-   '			<input id="font_size_in" name="font_size_in" type="number" max="120" min="8" step="0.1" value="14" style="width:25%"> px<br>'+
-   '			</div>'+
-   '			<div class="modal-footer">'+
-   '				<button type="button" id="submit_fontSize" class="btn btn-info btn-block my-3" data-dismiss="modal">SET</button>'+
-   '			</div>'+
-   '	</div>'+
-   '</div>'+
-   '</div>';
-
-   $("body").append(font_modal);
+   // var font_modal = '<div id="setFontSizeModal" class="modal fade" role="dialog">'+
+   // '<div class="modal-dialog modal-sm">'+
+   // '	<div class="modal-content">'+
+   // '		<div class="modal-header">'+
+   // '			<h4 class="modal-title" id="font_modal_title">Set Font Size</h4>'+
+   // '			<button type="button" class="close" data-dismiss="modal"><i class="far fa-times-circle"></i></button>'+
+   // '		</div>'+
+   // '		<div class="modal-body" id="font_size">'+
+   // '			<label for="font_size_in">Font size</label>'+
+   // '			<input id="font_size_in" name="font_size_in" type="number" max="120" min="8" step="0.1" value="14" style="width:25%"> px<br>'+
+   // '			</div>'+
+   // '			<div class="modal-footer">'+
+   // '				<button type="button" id="submit_fontSize" class="btn btn-info btn-block my-3" data-dismiss="modal">SET</button>'+
+   // '			</div>'+
+   // '	</div>'+
+   // '</div>'+
+   // '</div>';
+   //
+   // $("body").append(font_modal);
 
 });

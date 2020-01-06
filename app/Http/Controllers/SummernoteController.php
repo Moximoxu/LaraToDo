@@ -21,6 +21,11 @@ class SummernoteController extends Controller
         return View::make('countimer/editor', ['summernotes' => $summernotes]);
     }
 
+    public function indexbs3(){
+      $summernotes = Summernote::get();
+      return View::make('countimer/editorbs3', ['summernotes' => $summernotes]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
