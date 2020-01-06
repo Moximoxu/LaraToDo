@@ -2,10 +2,10 @@
  *
  * copyright 2019, Mohd Ikhmal Hafiq Zubir.
  * email: ikhmal.zubir@gmail.com
- * license: Your chosen license, or link to a license file.
+ * license: -
  *
  */
- var clicks = 0;
+var clicks = 0;
 
    (function (factory) {
      /* Global define */
@@ -74,24 +74,23 @@
    						$counter = '<div class="col timer" id="timer_div">'+
               '<p id="timer_num" class="t_num" style="display:none"></p>'+
    						'		<div class="timer row"><a id="btn_deleteTimer" class="close"><i class="far fa-times-circle"></i></a>'+
-   						'			<div class="col-sm-4 mx-2"><h1 class="text-center timer_label_title" id="c_title">Title</h1></div>'+
+   						'			<div class="col-sm-8 mx-2"><h1 class="text-center timer_label_title" id="c_title">Title</h1></div>'+
    						'			<p id="title_show" name="title_show" style="display:none"></p>'+
    						'			<h3 id="c_countDown" style="display:none"></h3>'+
    						'		</div>'+
+              '		<div class="timer row">'+
+              '			<div class="col-sm-2"><h1 class="text-center timer_value_days" id="c_days"></h1></div>'+
+              '			<div class="col-sm-2"><h1 class="text-center timer_value_hours" id="c_hours"></h1></div>'+
+              '			<div class="col-sm-2"><h1 class="text-center timer_value_minutes" id="c_minutes"></h1></div>'+
+              '			<div class="col-sm-2"><h1 class="text-center timer_value_seconds" id="c_seconds" style="color:red;"></h1></div>'+
+              '		</div>'+
    						'		<div class="timer row">'+
-   						'			<div class="col-sm-1"><h5 class="text-center timer_label_days">Days</h5></div>'+
-   						'			<div class="col-sm-1"><h5 class="text-center timer_label_hours">Hours</h5></div>'+
-   						'			<div class="col-sm-1"><h5 class="text-center timer_label_minutes">Minutes</h5></div>'+
-   						'			<div class="col-sm-1"><h5 class="text-center timer_label_seconds" style="color:red;">Seconds</h5></div>'+
-   						'		</div>'+
-   						'		<div class="timer row">'+
-   						'			<div class="col-sm-1"><h1 class="text-center timer_value_days" id="c_days"></h1></div>'+
-   						'			<div class="col-sm-1"><h1 class="text-center timer_value_hours" id="c_hours"></h1></div>'+
-   						'			<div class="col-sm-1"><h1 class="text-center timer_value_minutes" id="c_minutes"></h1></div>'+
-   						'			<div class="col-sm-1"><h1 class="text-center timer_value_seconds" id="c_seconds" style="color:red;"></h1></div>'+
+   						'			<div class="col-sm-2"><h4 class="text-center timer_label_days">Days</h4></div>'+
+   						'			<div class="col-sm-2"><h4 class="text-center timer_label_hours">Hours</h4></div>'+
+   						'			<div class="col-sm-2"><h4 class="text-center timer_label_minutes">Minutes</h4></div>'+
+   						'			<div class="col-sm-2"><h4 class="text-center timer_label_seconds" style="color:red;">Seconds</h4></div>'+
    						'		</div>'+
      					'</div'+
-
      					'</div>';
 
               //Paste countimer into editor
@@ -101,13 +100,26 @@
               // console.log("Current number of clicks are = " + clicks);
 
    						//Automatically opens the modal once the button is pressed
-              clearSelection();
-   						$('#setTimer_Modal').modal('show');
+              clearSelection(); // For clearing anything that is highlighted
 
+              $("#setTimer_Modalbs3").remove();
+              $('#setTimer_Modal').modal('show');
+
+              // if() {
+              //   $("#setTimer_Modalbs3").remove();
+              //   $('#setTimer_Modal').modal('show');
+              // }
+              // else {
+              //   $("#setTimer_Modalbs4").remove();
+              //   $('#setTimer_Modal').modal('show');
+              // }
+
+              // Remove timer when cancel button was pressed
               $("#cancel_Timer").click(function(){
                 $("#timer_div").remove();
               });
 
+              // Deletes timer when remove button was pressed
               $("#btn_deleteTimer").click(function(){
                 $("#timer_div").remove();
               });
@@ -126,7 +138,8 @@
 function clearSelection(){
  if(document.selection && document.selection.empty) {
        document.selection.empty();
-   } else if(window.getSelection) {
+   }
+   else if(window.getSelection) {
        var sel = window.getSelection();
        sel.removeAllRanges();
    }
@@ -134,8 +147,7 @@ function clearSelection(){
 
 // Sets the timer and runs the timer immediately
 function setTimer() {
-  //Close the modal
-  $("#setTimer_Modal.close").click();
+  $("#setTimer_Modal.close").click(); // Close the modal
 
   var container = document.getElementById("summernote_container")
   clicks = container.getElementsByClassName("col timer").length;
@@ -240,8 +252,7 @@ function setTimer() {
 
          //Output the result in an element with id="timer"
          c_title.innerHTML = title;
-         c_title.value = title
-
+         c_title.value = title;
          c_days.innerHTML = days;
          c_hours.innerHTML = hours;
          c_minutes.innerHTML = minutes;
@@ -269,86 +280,85 @@ function setTimer() {
 function startTimer(i) {
 
   // Set delete Button
-  $("#btn_deleteTimer" + i).click(function(){
+  $("#btn_deleteTimer" + i).click(function() {
     var data_id = $(this).data("id");
     console.log("Data id of this button is = " + data_id);
     var timer_div = document.getElementById("timer_div" + data_id);
     $(timer_div).remove();
   });
 
-	//Set the title
-	var title = document.getElementById("title_show" + i).innerHTML;
-	// console.log("Successfully set title");
+  //Set the title
+  var title = document.getElementById("title_show" + i).innerHTML;
+  // console.log("Successfully set title");
 
-	//Insert into variable for calculation
-	var countDown = document.getElementById("c_countDown" + i).innerHTML;
-	// console.log("Successfully fetched set time");
-	// console.log(countDown);
+  //Insert into variable for calculation
+  var countDown = document.getElementById("c_countDown" + i).innerHTML;
+  // console.log("Successfully fetched set time");
+  // console.log(countDown);
 
- //Get today's date and time
- var now = new Date().getTime();
+  //Get today's date and time
+  var now = new Date().getTime();
 
- //Find the distance between now and the count down date
- var distance = countDown - now;
+  //Find the distance between now and the count down date
+  var distance = countDown - now;
 
- //Time calculations for days, hours, minutes and seconds
- var days = Math.floor(distance / (1000 * 60 * 60 * 24));
- var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
- var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
- var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  //Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
- //Output the result into each element
- // console.log("Current title is " + title);
- document.getElementById("c_title" + i).innerHTML = title;
- document.getElementById("c_days" + i).innerHTML = days;
- document.getElementById("c_hours" + i).innerHTML = hours;
- document.getElementById("c_minutes" + i).innerHTML = minutes;
- document.getElementById("c_seconds" + i).innerHTML = seconds;
+  //Output the result into each element
+  // console.log("Current title is " + title);
+  document.getElementById("c_title" + i).innerHTML = title;
+  document.getElementById("c_days" + i).innerHTML = days;
+  document.getElementById("c_hours" + i).innerHTML = hours;
+  document.getElementById("c_minutes" + i).innerHTML = minutes;
+  document.getElementById("c_seconds" + i).innerHTML = seconds;
 
-	//Update the count down every 1 second
-	var x = setInterval(function() {
+  //Update the count down every 1 second
+  var x = setInterval(function() {
 
-	  //Get today's date and time
-	  now = new Date().getTime();
+    //Get today's date and time
+    now = new Date().getTime();
 
-	  //Find the distance between now and the count down date
-	  distance = countDown - now;
+    //Find the distance between now and the count down date
+    distance = countDown - now;
 
-	  //Time calculations for days, hours, minutes and seconds
-	  days = Math.floor(distance / (1000 * 60 * 60 * 24));
-	  hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-	  minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-	  seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    //Time calculations for days, hours, minutes and seconds
+    days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-	  //Output the result into each element
-	  document.getElementById("c_title" + i).innerHTML = title;
-	  document.getElementById("c_days" + i).innerHTML = days;
-	  document.getElementById("c_hours" + i).innerHTML = hours;
-	  document.getElementById("c_minutes" + i).innerHTML = minutes;
-	  document.getElementById("c_seconds" + i).innerHTML = seconds;
+    //Output the result into each element
+    document.getElementById("c_title" + i).innerHTML = title;
+    document.getElementById("c_days" + i).innerHTML = days;
+    document.getElementById("c_hours" + i).innerHTML = hours;
+    document.getElementById("c_minutes" + i).innerHTML = minutes;
+    document.getElementById("c_seconds" + i).innerHTML = seconds;
 
-	  //If the count down is over, write some text
-	  if (distance < 0) {
-			document.getElementById("c_title" + i).innerHTML = "EXPIRED";
-			document.getElementById("c_days" + i).innerHTML = "0";
-			document.getElementById("c_hours" + i).innerHTML = "0";
-			document.getElementById("c_minutes" + i).innerHTML = "0";
-			document.getElementById("c_seconds" + i).innerHTML = "0";
-	  }
+    //If the count down is over, write some text
+    if (distance < 0) {
+    	document.getElementById("c_title" + i).innerHTML = "EXPIRED";
+    	document.getElementById("c_days" + i).innerHTML = "0";
+    	document.getElementById("c_hours" + i).innerHTML = "0";
+    	document.getElementById("c_minutes" + i).innerHTML = "0";
+    	document.getElementById("c_seconds" + i).innerHTML = "0";
+    }
 
-	  // console.log("Counting down time");
-	}, 1000);
+    // console.log("Counting down time");
+  }, 1000);
 
-	// console.log("Current value of i = " + i);
+  // console.log("Current value of i = " + i);
 
 };
 
 $(document).ready(function() {
-
+  // Function for executing the function after a certain period of time
   setTimeout(function(){
     //Fetch number of timers present
     var container = document.getElementById("summernote_container")
-
     var timer_num = container.getElementsByClassName("t_num");
     console.log(timer_num);
 
@@ -359,5 +369,124 @@ $(document).ready(function() {
       startTimer(data_id);
     }
   }, 100);
+
+  var c_modalbs4 = '<div id="setTimer_Modalbs4">'+
+  '<div id="setTimer_Modal" class="modal fade" role="dialog">'+
+  '<div class="modal-dialog">'+
+  '	<div class="modal-content">'+
+  '		<div class="modal-header">'+
+  '			<h4 class="modal-title" id="c_modal_title">Set Countimer</h4>'+
+  '			<button type="button" id="cancel_Timer" class="close" data-dismiss="modal"><i class="far fa-times-circle"></i></button>'+
+  '		</div>'+
+  '		<div class="modal-body" id="timer_modal_container">'+
+  '			<div class="row">'+
+  '				<div class="col-sm-5">'+
+  '					<label for="c_title_in">Title of Countdown</label>'+
+  '				</div>'+
+  '				<div class="col">'+
+  '					<input class="w3-input w3-animate-input" type="text" id="c_title_in" style="width:30%">'+
+  '				</div>'+
+  '			</div>'+
+  '			<div class="row">'+
+  '				<div class="col-sm-5">'+
+  '					<label for="c_date">Countdown Date</label>'+
+  '				</div>'+
+  '				<div class="col">'+
+  '					<input class="w3-input w3-animate-input" type="date" id="c_date" style="width:65%">'+
+  '				</div>'+
+  '			</div>'+
+  '			<div class="row">'+
+  '				<div class="col-sm-5">'+
+  '					<label for="c_hour">Hour</label>'+
+  '				</div>'+
+  '				<div class="col">'+
+  '					<input class="w3-input w3-animate-input" type="number" id="c_hour" required value="00" min="0" step="1" max="23" style="width:30%">'+
+  '				</div>'+
+  '			</div>'+
+  '			<div class="row">'+
+  '				<div class="col-sm-5">'+
+  '					<label for="c_minute">Minute</label>'+
+  '				</div>'+
+  '				<div class="col">'+
+  '					<input class="w3-input w3-animate-input" type="number" id="c_minute" required value="00" min="0" step="1" max="59" style="width:30%">'+
+  '				</div>'+
+  '			</div>'+
+  '			<div class="row">'+
+  '				<div class="col-sm-5">'+
+  '					<label for="c_second">Second</label>'+
+  '				</div>'+
+  '				<div class="col">'+
+  '					<input class="w3-input w3-animate-input" type="number" id="c_second" required value="00" min="0" step="1" max="59" style="width:30%">'+
+  '				</div>'+
+  '			</div>'+
+  '		  </div>'+
+  '		  <div class="modal-footer">'+
+  '				<button type="button" id="btn_setTimer" onclick="setTimer()" class="btn btn-info btn-block my-3" data-dismiss="modal">SET</button>'+
+  '		  </div>'+
+  '	</div>'+
+  '</div>'+
+  '</div>'+
+  '</div>';
+
+  var c_modalbs3 = '<div id="setTimer_Modalbs3">'+
+  '<div id="setTimer_Modal" class="modal fade" role="dialog">'+
+  '	<div class="modal-dialog">'+
+  '		<div class="modal-content">'+
+  '			<div class="modal-header">'+
+  '				<h4 class="modal-title" id="c_modal_title">Set Countimer</h4>'+
+  '				<button type="button" id="cancel_Timer" class="close" data-dismiss="modal"><i class="far fa-times-circle"></i></button>'+
+  '			</div>'+
+  '			<div class="modal-body" id="timer_modal_container">'+
+  '				<div class="row">'+
+  '					<div class="col-sm-5">'+
+  '						<label for="c_title_in">Title of Countdown</label>'+
+  '					</div>'+
+  '					<div class="col">'+
+  '						<input type="text" id="c_title_in" style="width:30%" placeholder="Insert a title">'+
+  '					</div>'+
+  '				</div>'+
+  '				<div class="row">'+
+  '					<div class="col-sm-5">'+
+  '						<label for="c_date">Countdown Date</label>'+
+  '					</div>'+
+  '					<div class="col">'+
+  '						<input type="date" id="c_date" style="width:30%">'+
+  '					</div>'+
+  '				</div>'+
+  '				<div class="row">'+
+  '					<div class="col-sm-5">'+
+  '						<label for="c_hour">Hour</label>'+
+  '					</div>'+
+  '					<div class="col">'+
+  '						<input type="number" id="c_hour" required value="00" min="0" step="1" max="23" style="width:30%">'+
+  '					</div>'+
+  '				</div>'+
+  '				<div class="row">'+
+  '					<div class="col-sm-5">'+
+  '						<label for="c_minute">Minute</label>'+
+  '					</div>'+
+  '					<div class="col">'+
+  '						<input type="number" id="c_minute" required value="00" min="0" step="1" max="59" style="width:30%">'+
+  '					</div>'+
+  '				</div>'+
+  '				<div class="row">'+
+  '					<div class="col-sm-5">'+
+  '						<label for="c_second">Second</label>'+
+  '					</div>'+
+  '					<div class="col">'+
+  '						<input type="number" id="c_second" required value="00" min="0" step="1" max="59" style="width:30%">'+
+  '					</div>'+
+  '				</div>'+
+  '			  </div>'+
+  '			  <div class="modal-footer">'+
+  '					<button type="button" id="btn_setTimer" onclick="setTimer()" class="btn btn-info btn-block my-3" data-dismiss="modal">SET</button>'+
+  '			  </div>'+
+  '		</div>'+
+  '	</div>'+
+  '</div>'+
+  '</div>';
+
+  $("body").append(c_modalbs3);
+  $("body").append(c_modalbs4);
 
 });

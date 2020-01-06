@@ -87,7 +87,6 @@
                 <button type="button" class="btn btn-info" onclick="location.href='{{ url('login') }}'">Login</button>&nbsp;
                 <button type="button" class="btn btn-success" onclick="location.href='{{ url('register') }}'">Register</button>
                 <button type="button" class="btn btn-warning" onclick="location.href='{{ url('editor') }}'">Summernote Editor</button>
-                <button type="button" class="btn btn-warning" onclick="location.href='{{ url('editorbs3') }}'">Summernote Editor BootStrap 3</button>
             </div>
 
             <div class="content">

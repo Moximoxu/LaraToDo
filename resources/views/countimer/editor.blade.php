@@ -49,89 +49,15 @@
 			width:80%;
 			margin: 20px auto 0;
 		}
+
+		.timer_value_days, .timer_value_hours, .timer_value_minutes, .timer_value_seconds{
+			font-size:70px;
+		}
+
+		.timer_label_title{
+			font-size:50px;
+		}
 	</style>
-
-	<!-- Modal for setting up timer -->
-	<div id="setTimer_Modal" class="modal fade" role="dialog">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h4 class="modal-title" id="c_modal_title">Set Countimer</h4>
-				<button type="button" id="cancel_Timer" class="close" data-dismiss="modal"><i class="far fa-times-circle"></i></button>
-			</div>
-			<div class="modal-body" id="timer_modal_container">
-				<div class="row">
-					<div class="col-sm-5">
-						<label for="c_title_in">Title of Countdown</label>
-					</div>
-					<div class="col">
-						<input class="w3-input w3-animate-input" type="text" id="c_title_in" style="width:30%">
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-sm-5">
-						<label for="c_date">Countdown Date</label>
-					</div>
-					<div class="col">
-						<input class="w3-input w3-animate-input" type="date" id="c_date" style="width:65%">
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-sm-5">
-						<label for="c_hour">Hour</label>
-					</div>
-					<div class="col">
-						<input class="w3-input w3-animate-input" type="number" id="c_hour" required value="00" min="0" step="1" max="23" style="width:30%">
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-sm-5">
-						<label for="c_minute">Minute</label>
-					</div>
-					<div class="col">
-						<input class="w3-input w3-animate-input" type="number" id="c_minute" required value="00" min="0" step="1" max="59" style="width:30%">
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-sm-5">
-						<label for="c_second">Second</label>
-					</div>
-					<div class="col">
-						<input class="w3-input w3-animate-input" type="number" id="c_second" required value="00" min="0" step="1" max="59" style="width:30%">
-					</div>
-				</div>
-
-			  </div>
-			  <div class="modal-footer">
-					<button type="button" id="btn_setTimer" onclick="setTimer()" class="btn btn-info btn-block my-3" data-dismiss="modal">SET</button>
-			  </div>
-		</div>
-	</div>
-</div>
-
-<!-- Modal for setting font size -->
-<div id="setFontSizeModal" class="modal fade" role="dialog">
-<div class="modal-dialog modal-sm">
-	<div class="modal-content">
-		<div class="modal-header">
-			<h4 class="modal-title" id="font_modal_title">Set Font Size</h4>
-			<button type="button" class="close" data-dismiss="modal"><i class="far fa-times-circle"></i></button>
-		</div>
-		<div class="modal-body" id="font_size">
-			<label for="font_size_in">Font size</label>
-			<input id="font_size_in" name="font_size_in" type="number" max="120" min="8" step="0.1" value="14" style="width:25%"> px<br>
-
-			</div>
-			<div class="modal-footer">
-				<button type="button" id="submit_fontSize" class="btn btn-info btn-block my-3" data-dismiss="modal">SET</button>
-			</div>
-	</div>
-</div>
-</div>
 
 </head>
 
@@ -183,13 +109,13 @@
 	$(document).ready(function() {
 		$('#summernote').summernote({
 			width: 1000,
-			height: 400,
+			height: 600,
 			focus: true,
 			toolbar:[
 				['insert', ['countimer', 'picture']],
 				['font', ['fontname', 'customFontSize']],
 				['tool', ['undo', 'redo', 'codeview']],
-				['style',['style']],
+				['style', ['style']],
 			],
 			popover:{
 				image:[
