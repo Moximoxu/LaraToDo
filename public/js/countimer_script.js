@@ -63,6 +63,12 @@ var clicks = 0;
    			};
    		}
 
+      $.extend($.summernote.options, {
+          countimer: {
+            modalVer : 'bs4'
+          }
+        });
+
    			//Context for button in plugin toolbar
    			context.memo('button.countimer', function () {
    				var button = ui.button({
@@ -102,17 +108,19 @@ var clicks = 0;
    						//Automatically opens the modal once the button is pressed
               clearSelection(); // For clearing anything that is highlighted
 
-              $("#setTimer_Modalbs3").remove();
-              $('#setTimer_Modal').modal('show');
+              // $("#setTimer_Modalbs3").remove();
+              // $('#setTimer_Modal').modal('show');
 
-              // if() {
-              //   $("#setTimer_Modalbs3").remove();
-              //   $('#setTimer_Modal').modal('show');
-              // }
-              // else {
-              //   $("#setTimer_Modalbs4").remove();
-              //   $('#setTimer_Modal').modal('show');
-              // }
+              var options = context.options;
+
+              if(options.countimer.modalVer == 'bs4') {
+                $("#setTimer_Modalbs3").remove();
+                $('#setTimer_Modal').modal('show');
+              }
+              else if(options.countimer.modalVer == 'bs3'){
+                $("#setTimer_Modalbs4").remove();
+                $('#setTimer_Modal').modal('show');
+              }
 
               // Remove timer when cancel button was pressed
               $("#cancel_Timer").click(function(){

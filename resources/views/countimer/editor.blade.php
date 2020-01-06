@@ -117,6 +117,9 @@
 				['tool', ['undo', 'redo', 'codeview']],
 				['style', ['style']],
 			],
+			countimer:{
+				modalVer : 'bs4' // Or bs3. Default is bs4
+			},
 			popover:{
 				image:[
 					['custom', ['imageAttributes']],
