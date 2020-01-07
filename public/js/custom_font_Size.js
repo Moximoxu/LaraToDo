@@ -192,6 +192,14 @@ $(document).ready(function() {
 
    clicks = container.getElementsByClassName("font_span").length;
 
+   var confirm = document.getElementById("font_size_in");
+    confirm.addEventListener("keyup", function(event) {
+      if (event.keyCode === 13) {
+       event.preventDefault();
+       document.getElementById("submit_fontSize").click();
+      }
+    });
+
    $("#submit_fontSize").click(function(){
      setFontSize();
      clearSelection();

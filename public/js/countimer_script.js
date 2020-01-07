@@ -79,7 +79,7 @@ var clicks = 0;
    					click: function () {
    						$counter = '<div class="col timer" id="timer_div">'+
               '<p id="timer_num" class="t_num" style="display:none"></p>'+
-   						'		<div class="timer row"><a id="btn_deleteTimer" class="close"><i class="far fa-times-circle"></i></a>'+
+   						'		<div class="timer row"><a id="btn_deleteTimer" class="close_timer"><i class="far fa-times-circle"></i></a>'+
    						'			<div class="col-sm-8 mx-2"><h1 class="text-center timer_label_title" id="c_title">Title</h1></div>'+
    						'			<p id="title_show" name="title_show" style="display:none"></p>'+
    						'			<h3 id="c_countDown" style="display:none"></h3>'+
@@ -247,8 +247,8 @@ function setTimer() {
 
        // Reset timer modal
        document.getElementById("timer_form").reset();
-       var title_div = document.getElementsByClassName("c_title_in_div");
-       title_div[0].style.display = "none";
+       var title_div = document.getElementById("c_title_in_div");
+       title_div.style.display = "none";
 
 
        //Update the count down every 1 second
@@ -401,12 +401,12 @@ $(document).ready(function() {
   '         <input type="checkbox" name="include_title"> Include title'+
   '				</div>'+
   '			</div>'+
-  '			<div class="row form-group c_title_in_div" style="display:none">'+
+  '			<div id="c_title_in_div" class="row form-group" style="display:none">'+
   '				<div class="col-sm-5">'+
   '					<label for="c_title_in">Title of Countdown</label>'+
   '				</div>'+
   '				<div class="col">'+
-  '					<input class="w3-input w3-animate-input form-control" type="text" id="c_title_in" style="width:30%">'+
+  '					<input type="text" class="w3-input w3-animate-input form-control" id="c_title_in" style="width:30%">'+
   '				</div>'+
   '			</div>'+
   '			<div class="row form-group">'+
@@ -466,44 +466,44 @@ $(document).ready(function() {
   '           <input type="checkbox" name="include_title"> Include title'+
   '				 </div>'+
   '			  </div>'+
-  '				<div class="row c_title_in_div" style="display:none">'+
-  '					<div class="col-sm-5 form-group">'+
+  '				<div id="c_title_in_div" class="row form-group" style="display:none">'+
+  '					<div class="col-sm-5">'+
   '						<label for="c_title_in">Title of Countdown</label>'+
   '					</div>'+
-  '					<div class="col">'+
-  '						<input class="form-control" type="text" id="c_title_in" placeholder="Insert a title">'+
+  '					<div class="col-sm-5">'+
+  '						<input class="form-control" type="text" id="c_title_in" placeholder="Insert a title" style="width:90%">'+
   '					</div>'+
   '				</div>'+
-  '				<div class="row">'+
-  '					<div class="col-sm-5 form-group">'+
+  '				<div class="row form-group">'+
+  '					<div class="col-sm-5">'+
   '						<label for="c_date">Countdown Date</label>'+
   '					</div>'+
-  '					<div class="col">'+
-  '						<input class="form-control" type="date" id="c_date">'+
+  '					<div class="col-sm-5">'+
+  '						<input class="form-control" type="date" id="c_date" style="width:80%">'+
   '					</div>'+
   '				</div>'+
-  '				<div class="row">'+
-  '					<div class="col-sm-5 form-group">'+
+  '				<div class="row form-group">'+
+  '					<div class="col-sm-5">'+
   '						<label for="c_hour">Hour</label>'+
   '					</div>'+
-  '					<div class="col">'+
-  '						<input class="form-control" type="number" id="c_hour" required value="00" min="0" step="1" max="23">'+
+  '					<div class="col-sm-5">'+
+  '						<input class="form-control" type="number" id="c_hour" required value="00" min="0" step="1" max="23" style="width:30%">'+
   '					</div>'+
   '				</div>'+
-  '				<div class="row">'+
-  '					<div class="col-sm-5 form-group">'+
+  '				<div class="row form-group">'+
+  '					<div class="col-sm-5">'+
   '						<label for="c_minute">Minute</label>'+
   '					</div>'+
-  '					<div class="col">'+
-  '						<input class="form-control" type="number" id="c_minute" required value="00" min="0" step="1" max="59">'+
+  '					<div class="col-sm-5">'+
+  '						<input class="form-control" type="number" id="c_minute" required value="00" min="0" step="1" max="59" style="width:30%">'+
   '					</div>'+
   '				</div>'+
-  '				<div class="row">'+
-  '					<div class="col-sm-5 form-group">'+
+  '				<div class="row form-group">'+
+  '					<div class="col-sm-5">'+
   '						<label for="c_second">Second</label>'+
   '					</div>'+
-  '					<div class="col">'+
-  '						<input class="form-control" type="number" id="c_second" required value="00" min="0" step="1" max="59">'+
+  '					<div class="col-sm-5">'+
+  '						<input class="form-control" type="number" id="c_second" required value="00" min="0" step="1" max="59" style="width:30%">'+
   '					</div>'+
   '				</div>'+
   '			  </div>'+
@@ -516,17 +516,25 @@ $(document).ready(function() {
   '</div>'+
   '</div>';
 
-  $("body").append(c_modalbs3);
   $("body").append(c_modalbs4);
+  $("body").append(c_modalbs3);
+
+  var confirm = document.getElementById("c_date");
+   confirm.addEventListener("keyup", function(event) {
+     if (event.keyCode === 13) {
+      event.preventDefault();
+      document.getElementById("btn_setTimer").click();
+     }
+   });
 
   $('input[name="include_title"]').click(function(){
-    var title_div = document.getElementsByClassName("c_title_in_div");
+    var title_div = document.getElementById("c_title_in_div");
 
       if($(this).prop("checked") == true){
-          title_div[0].style.display = "block";
+          title_div.style.display = "";
       }
       else if($(this).prop("checked") == false){
-          title_div[0].style.display = "none";
+          title_div.style.display = "none";
       }
   });
 

@@ -48,6 +48,13 @@
 			width:80%;
 			margin: 20px auto 0;
 		}
+    .col.timer{
+      width:80%;
+      margin: 20px auto 0;
+    }
+    .close_timer{
+      float: left;
+    }
 	</style>
 
 </head>
