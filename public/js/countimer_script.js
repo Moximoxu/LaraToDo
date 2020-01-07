@@ -245,6 +245,12 @@ function setTimer() {
        c_countDown.innerHTML = countDown;
        // console.log(c_countDown.innerHTML);
 
+       // Reset timer modal
+       document.getElementById("timer_form").reset();
+       var title_div = document.getElementsByClassName("c_title_in_div");
+       title_div[0].style.display = "none";
+
+
        //Update the count down every 1 second
        var x = setInterval(function() {
 
@@ -389,50 +395,57 @@ $(document).ready(function() {
   '			<button type="button" id="cancel_Timer" class="close" data-dismiss="modal"><i class="far fa-times-circle"></i></button>'+
   '		</div>'+
   '		<div class="modal-body" id="timer_modal_container">'+
-  '			<div class="row">'+
+  '   <form id="timer_form">'+
+  '     <div class="row form-group">'+
+  '				<div class="col-sm-5">'+
+  '         <input type="checkbox" name="include_title"> Include title'+
+  '				</div>'+
+  '			</div>'+
+  '			<div class="row form-group c_title_in_div" style="display:none">'+
   '				<div class="col-sm-5">'+
   '					<label for="c_title_in">Title of Countdown</label>'+
   '				</div>'+
   '				<div class="col">'+
-  '					<input class="w3-input w3-animate-input" type="text" id="c_title_in" style="width:30%">'+
+  '					<input class="w3-input w3-animate-input form-control" type="text" id="c_title_in" style="width:30%">'+
   '				</div>'+
   '			</div>'+
-  '			<div class="row">'+
+  '			<div class="row form-group">'+
   '				<div class="col-sm-5">'+
   '					<label for="c_date">Countdown Date</label>'+
   '				</div>'+
   '				<div class="col">'+
-  '					<input class="w3-input w3-animate-input" type="date" id="c_date" style="width:65%">'+
+  '					<input class="w3-input w3-animate-input form-control" type="date" id="c_date" style="width:65%">'+
   '				</div>'+
   '			</div>'+
-  '			<div class="row">'+
+  '			<div class="row form-group">'+
   '				<div class="col-sm-5">'+
   '					<label for="c_hour">Hour</label>'+
   '				</div>'+
   '				<div class="col">'+
-  '					<input class="w3-input w3-animate-input" type="number" id="c_hour" required value="00" min="0" step="1" max="23" style="width:30%">'+
+  '					<input class="w3-input w3-animate-input form-control" type="number" id="c_hour" required value="00" min="0" step="1" max="23" style="width:30%">'+
   '				</div>'+
   '			</div>'+
-  '			<div class="row">'+
+  '			<div class="row form-group">'+
   '				<div class="col-sm-5">'+
   '					<label for="c_minute">Minute</label>'+
   '				</div>'+
   '				<div class="col">'+
-  '					<input class="w3-input w3-animate-input" type="number" id="c_minute" required value="00" min="0" step="1" max="59" style="width:30%">'+
+  '					<input class="w3-input w3-animate-input form-control" type="number" id="c_minute" required value="00" min="0" step="1" max="59" style="width:30%">'+
   '				</div>'+
   '			</div>'+
-  '			<div class="row">'+
+  '			<div class="row form-group">'+
   '				<div class="col-sm-5">'+
   '					<label for="c_second">Second</label>'+
   '				</div>'+
   '				<div class="col">'+
-  '					<input class="w3-input w3-animate-input" type="number" id="c_second" required value="00" min="0" step="1" max="59" style="width:30%">'+
+  '					<input class="w3-input w3-animate-input form-control" type="number" id="c_second" required value="00" min="0" step="1" max="59" style="width:30%">'+
   '				</div>'+
   '			</div>'+
   '		  </div>'+
   '		  <div class="modal-footer">'+
-  '				<button type="button" id="btn_setTimer" onclick="setTimer()" class="btn btn-info btn-block my-3" data-dismiss="modal">SET</button>'+
+  '				<button type="submit" id="btn_setTimer" onclick="setTimer()" class="btn btn-info btn-block my-3" data-dismiss="modal">SET</button>'+
   '		  </div>'+
+  '   </form>'+
   '	</div>'+
   '</div>'+
   '</div>'+
@@ -447,50 +460,57 @@ $(document).ready(function() {
   '				<button type="button" id="cancel_Timer" class="close" data-dismiss="modal"><i class="far fa-times-circle"></i></button>'+
   '			</div>'+
   '			<div class="modal-body" id="timer_modal_container">'+
-  '				<div class="row">'+
-  '					<div class="col-sm-5">'+
+  '   <form id="timer_form">'+
+  '       <div class="row form-group">'+
+  '				 <div class="col-sm-5">'+
+  '           <input type="checkbox" name="include_title"> Include title'+
+  '				 </div>'+
+  '			  </div>'+
+  '				<div class="row c_title_in_div" style="display:none">'+
+  '					<div class="col-sm-5 form-group">'+
   '						<label for="c_title_in">Title of Countdown</label>'+
   '					</div>'+
   '					<div class="col">'+
-  '						<input type="text" id="c_title_in" style="width:30%" placeholder="Insert a title">'+
+  '						<input class="form-control" type="text" id="c_title_in" placeholder="Insert a title">'+
   '					</div>'+
   '				</div>'+
   '				<div class="row">'+
-  '					<div class="col-sm-5">'+
+  '					<div class="col-sm-5 form-group">'+
   '						<label for="c_date">Countdown Date</label>'+
   '					</div>'+
   '					<div class="col">'+
-  '						<input type="date" id="c_date" style="width:30%">'+
+  '						<input class="form-control" type="date" id="c_date">'+
   '					</div>'+
   '				</div>'+
   '				<div class="row">'+
-  '					<div class="col-sm-5">'+
+  '					<div class="col-sm-5 form-group">'+
   '						<label for="c_hour">Hour</label>'+
   '					</div>'+
   '					<div class="col">'+
-  '						<input type="number" id="c_hour" required value="00" min="0" step="1" max="23" style="width:30%">'+
+  '						<input class="form-control" type="number" id="c_hour" required value="00" min="0" step="1" max="23">'+
   '					</div>'+
   '				</div>'+
   '				<div class="row">'+
-  '					<div class="col-sm-5">'+
+  '					<div class="col-sm-5 form-group">'+
   '						<label for="c_minute">Minute</label>'+
   '					</div>'+
   '					<div class="col">'+
-  '						<input type="number" id="c_minute" required value="00" min="0" step="1" max="59" style="width:30%">'+
+  '						<input class="form-control" type="number" id="c_minute" required value="00" min="0" step="1" max="59">'+
   '					</div>'+
   '				</div>'+
   '				<div class="row">'+
-  '					<div class="col-sm-5">'+
+  '					<div class="col-sm-5 form-group">'+
   '						<label for="c_second">Second</label>'+
   '					</div>'+
   '					<div class="col">'+
-  '						<input type="number" id="c_second" required value="00" min="0" step="1" max="59" style="width:30%">'+
+  '						<input class="form-control" type="number" id="c_second" required value="00" min="0" step="1" max="59">'+
   '					</div>'+
   '				</div>'+
   '			  </div>'+
   '			  <div class="modal-footer">'+
-  '					<button type="button" id="btn_setTimer" onclick="setTimer()" class="btn btn-info btn-block my-3" data-dismiss="modal">SET</button>'+
+  '					<button type="submit" id="btn_setTimer" onclick="setTimer()" class="btn btn-info btn-block my-3" data-dismiss="modal">SET</button>'+
   '			  </div>'+
+  '   </form>'+
   '		</div>'+
   '	</div>'+
   '</div>'+
@@ -498,5 +518,16 @@ $(document).ready(function() {
 
   $("body").append(c_modalbs3);
   $("body").append(c_modalbs4);
+
+  $('input[name="include_title"]').click(function(){
+    var title_div = document.getElementsByClassName("c_title_in_div");
+
+      if($(this).prop("checked") == true){
+          title_div[0].style.display = "block";
+      }
+      else if($(this).prop("checked") == false){
+          title_div[0].style.display = "none";
+      }
+  });
 
 });
