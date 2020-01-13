@@ -12,11 +12,11 @@
 function startTimer(i) {
 
 	//Set the title
-	var title = document.getElementById("title_show" + i).innerHTML;
+	var title = document.getElementById("summernote_countimer_titleShow" + i).innerHTML;
 	// console.log("Successfully set title");
 
 	//Insert into variable for calculation
-	var countDown = document.getElementById("c_countDown" + i).innerHTML;
+	var countDown = document.getElementById("summernote_countimer_countDown" + i).innerHTML;
 	// console.log("Successfully fetched set time");
 	// console.log(countDown);
 
@@ -35,11 +35,11 @@ function startTimer(i) {
   //Output the result into each element
 	// console.log("Current title is " + title);
 
-  document.getElementById("c_title" + i).innerHTML = title;
-  document.getElementById("c_days" + i).innerHTML = days;
-  document.getElementById("c_hours" + i).innerHTML = hours;
-  document.getElementById("c_minutes" + i).innerHTML = minutes;
-  document.getElementById("c_seconds" + i).innerHTML = seconds;
+  document.getElementById("summernote_countimer_label_title" + i).innerHTML = title;
+  document.getElementById("summernote_countimer_days" + i).innerHTML = days;
+  document.getElementById("summernote_countimer_hours" + i).innerHTML = hours;
+  document.getElementById("summernote_countimer_minutes" + i).innerHTML = minutes;
+  document.getElementById("summernote_countimer_seconds" + i).innerHTML = seconds;
 
 	//Update the count down every 1 second
 	var x = setInterval(function() {
@@ -57,19 +57,19 @@ function startTimer(i) {
 	  seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
 	  //Output the result into each element
-	  document.getElementById("c_title" + i).innerHTML = title;
-	  document.getElementById("c_days" + i).innerHTML = days;
-	  document.getElementById("c_hours" + i).innerHTML = hours;
-	  document.getElementById("c_minutes" + i).innerHTML = minutes;
-	  document.getElementById("c_seconds" + i).innerHTML = seconds;
+	  document.getElementById("summernote_countimer_label_title" + i).innerHTML = title;
+	  document.getElementById("summernote_countimer_days" + i).innerHTML = days;
+	  document.getElementById("summernote_countimer_hours" + i).innerHTML = hours;
+	  document.getElementById("summernote_countimer_minutes" + i).innerHTML = minutes;
+	  document.getElementById("summernote_countimer_seconds" + i).innerHTML = seconds;
 
 	  //If the count down is over, write some text
 	  if (distance < 0) {
-			document.getElementById("c_title" + i).innerHTML = "EXPIRED";
-			document.getElementById("c_days" + i).innerHTML = "0";
-			document.getElementById("c_hours" + i).innerHTML = "0";
-			document.getElementById("c_minutes" + i).innerHTML = "0";
-			document.getElementById("c_seconds" + i).innerHTML = "0";
+			document.getElementById("summernote_countimer_label_title" + i).innerHTML = "EXPIRED";
+			document.getElementById("summernote_countimer_days" + i).innerHTML = "0";
+			document.getElementById("summernote_countimer_hours" + i).innerHTML = "0";
+			document.getElementById("summernote_countimer_minutes" + i).innerHTML = "0";
+			document.getElementById("summernote_countimer_seconds" + i).innerHTML = "0";
 	  }
 
 	  // console.log("Counting down time");
@@ -84,7 +84,7 @@ function startTimer(i) {
 $(document).ready(function() {
 
   //Fetch number of timers present
-  var num_of_timers = document.getElementsByClassName("col timer").length;
+  var num_of_timers = document.getElementsByClassName("col summernote_countimer_timer").length;
   console.log("Number of col timer is = " + num_of_timers);
 
   // Loop for running the timer(s) in the content where the function startTimer() runs in accordance to number of timers

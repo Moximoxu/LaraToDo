@@ -57,10 +57,6 @@
 		.timer_label_title{
 			font-size:50px;
 		}
-
-		input#c_title_in:focus {
-		 width: 40%;
-		}
 	</style>
 
 </head>

@@ -45,7 +45,7 @@
 			width:80%;
 			margin: 20px auto 0;
 		}
-		.close{
+		.summernote_countimer_close_timer{
 			display:none;
 		}
 	</style>

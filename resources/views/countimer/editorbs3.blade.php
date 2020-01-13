@@ -45,14 +45,14 @@
 
 	<style>
 		body{
-			width:80%;
-			margin: 20px auto 0;
+			width: 80%;
+			margin: 20px auto 20px;
 		}
-    .col.timer{
-      width:80%;
-      margin: 20px auto 0;
+    .col.summernote_countimer_timer{
+      width: 80%;
+      margin: auto;
     }
-    .close_timer{
+    .summernote_countimer_close_timer{
       float: left;
     }
 	</style>
@@ -71,7 +71,7 @@
 	      </textarea>
 	        <input id="content_id" name="content_id" value="{{$summernote_id}}" style="display:none" readonly>
 	        <br>
-        	<button class="btn btn-success my-3" type="submit">Save Changes <i class="fas fa-save"></i></button>
+        	<button class="btn btn-success my-3" type="submit">Save Changes <i class="fa fa-save" aria-hidden="true"></i></button>
         	<a class="btn btn-danger my-3" href="/get/{{$summernote_id}}/summernote" id="get_Content">Cancel</a>
       </form>
     	@endif
@@ -82,7 +82,7 @@
 	        <textarea name="summernoteInput" class="summernote" id="summernote"></textarea>
 	        <br>
 
-					<button class="btn btn-success" type="submit">Store <i class="fas fa-save"></i></button>
+					<button class="btn btn-success" type="submit">Store <i class="fa fa-save" aria-hidden="true"></i></button>
 
 					<div class="dropup">
 				    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Dropup Example
@@ -94,7 +94,7 @@
 				    </ul>
 				  </div>
 
-					<br><a class="btn btn-default mb-3" href="/"><i class="fas fa-chevron-circle-left"></i> Menu</a>
+					<br><a class="btn btn-default mb-3" href="/"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i> Menu</a>
 	    </form>
       @endif
 
