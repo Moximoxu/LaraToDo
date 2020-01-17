@@ -137,6 +137,7 @@ var clicks = 0;
               });
 
               $("#summernote_countimer_modalFooter").tooltip('show');
+              $("#summernote_countimer_modalFooter").tooltip('hide');
 
               $('[data-toggle="tooltip"]').tooltip();
 
