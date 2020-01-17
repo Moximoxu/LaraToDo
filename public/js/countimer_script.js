@@ -27,7 +27,7 @@ var clicks = 0;
    */
    (function ($) {
    	$.extend($.summernote.plugins, {
-   		'countimer' : function setTimer(context) {
+   		'countimer' : function summernote_countimer_setTimer(context) {
    			var ui = $.summernote.ui;
    			var self = this;
    			var KEY_ESC = 27;
@@ -72,14 +72,14 @@ var clicks = 0;
    			//Context for button in plugin toolbar
    			context.memo('button.countimer', function () {
    				var button = ui.button({
-   					contents: '<i id="logo_timer_down" class="fas fa-arrow-down"></i><i class="far fa-clock"></i>',
+   					contents: '<i id="summernote_countimer_clock" class="fa fa-clock-o" aria-hidden="true"></i>',
    					tooltip: 'Insert Countimer',
 
    					//HTML that will be inserted into editor
    					click: function () {
    						$counter = '<div class="col summernote_countimer_timer" id="summernote_countimer_timerDiv">'+
               '<p id="summernote_countimer_timerNum" class="summernote_countimer_timerNum" style="display:none"></p>'+
-   						'		<div class="summernote_countimer_timer row"><a id="summernote_countimer_btn_deleteTimer" class="summernote_countimer_close_timer" style="float:left"><i class="far fa-times-circle"></i></a>'+
+   						'		<div class="row summernote_countimer_timer"><a id="summernote_countimer_btn_deleteTimer" class="summernote_countimer_close_timer" style="float:left"><i class="far fa-times-circle"></i></a>'+
    						'			<div class="col-sm-8 mx-2"><h1 class="text-center summernote_countimer_label_title" id="summernote_countimer_label_title">Title</h1></div>'+
    						'			<p id="summernote_countimer_titleShow" name="summernote_countimer_titleShow" style="display:none"></p>'+
    						'			<h3 id="summernote_countimer_countDown" style="display:none"></h3>'+
@@ -106,7 +106,7 @@ var clicks = 0;
               // console.log("Current number of clicks are = " + clicks);
 
    						//Automatically opens the modal once the button is pressed
-              clearSelection(); // For clearing anything that is highlighted
+              summernote_countimer_clearSelection(); // For clearing anything that is highlighted
 
               var options = context.options;
 
@@ -125,15 +125,23 @@ var clicks = 0;
               }
 
               // Remove timer when cancel button was pressed
-              $("#summernote_countimer_cancel_Timer").click(function(){
+              $("#summernote_countimer_close_modal").click(function(){
                 $("#summernote_countimer_timerDiv").remove();
-                resetTimerModal();
+                summernote_countimer_resetTimerModal();
                 $('#summernote_countimer_styliseTimer_check').prop('checked', false);
               });
 
               // Deletes timer when remove button was pressed
               $("#summernote_countimer_btn_deleteTimer").click(function(){
                 $("#summernote_countimer_timerDiv").remove();
+              });
+
+              $("#summernote_countimer_modalFooter").tooltip('show');
+
+              $('[data-toggle="tooltip"]').tooltip();
+
+              $("#summernote_countimer_dateIn").change(function() {
+                  summernote_countimer_undisableButton();
               });
 
    					}
@@ -147,7 +155,7 @@ var clicks = 0;
    }));
 
 // Clears any currently highlighted text which allows the modal to be interactable
-function clearSelection(){
+function summernote_countimer_clearSelection(){
  if(document.selection && document.selection.empty) {
        document.selection.empty();
    }
@@ -158,8 +166,8 @@ function clearSelection(){
 };
 
 // Sets the timer and runs the timer immediately
-function setTimer() {
-  $("#summernote_countimer_setTimer_Modal.close").click(); // Close the modal
+function summernote_countimer_setTimer() {
+  $("#summernote_countimer_setTimer_Modal").modal('hide'); // Close the modal
   $('#summernote_countimer_styliseTimer_check').prop('checked', false);
 
   clicks = document.getElementsByClassName("col summernote_countimer_timer").length;
@@ -167,170 +175,170 @@ function setTimer() {
   // console.log("Current number of clicks are = " + clicks);
   // console.log("Current value of i is = " + i);
 
-  //Loop for detecting multiple timers
-  var i = 1;
-  for(var j=1; j <= clicks; j++){
-   // console.log("Current number of clicks are = " + clicks);
+    //Loop for detecting multiple timers
+    var i = 1;
+    for(var j=1; j <= clicks; j++){
+     // console.log("Current number of clicks are = " + clicks);
 
-   if(i == clicks){
-       // Assign input elements based on ID
-       var summernote_countimer_titleIn = document.getElementById('summernote_countimer_titleIn');
-       // console.log(c_title_in.value);
-       var summernote_countimer_dateIn = document.getElementById('summernote_countimer_dateIn');
-       var summernote_countimer_hourIn = document.getElementById('summernote_countimer_hourIn');
-       var summernote_countimer_minuteIn = document.getElementById('summernote_countimer_minuteIn');
-       var summernote_countimer_secondIn = document.getElementById('summernote_countimer_secondIn');
-       var summernote_countimer_styleTimer_bgcolor = document.getElementById('summernote_countimer_styleTimer_bgcolor');
-       var summernote_countimer_styleTimer_border = document.getElementById('summernote_countimer_styleTimer_border');
+     if(i == clicks){
+         // Assign input elements based on ID
+         var summernote_countimer_titleIn = document.getElementById('summernote_countimer_titleIn');
+         // console.log(c_title_in.value);
+         var summernote_countimer_dateIn = document.getElementById('summernote_countimer_dateIn');
+         var summernote_countimer_hourIn = document.getElementById('summernote_countimer_hourIn');
+         var summernote_countimer_minuteIn = document.getElementById('summernote_countimer_minuteIn');
+         var summernote_countimer_secondIn = document.getElementById('summernote_countimer_secondIn');
+         var summernote_countimer_styleTimer_bgColor = document.getElementById('summernote_countimer_styleTimer_bgColor');
+         var summernote_countimer_styleTimer_border = document.getElementById('summernote_countimer_styleTimer_border');
 
-       $("#summernote_countimer_btn_deleteTimer").attr("data-id", i);
-       $("#summernote_countimer_btn_deleteTimer").attr("id", "summernote_countimer_btn_deleteTimer" + i);
-       console.log(document.getElementById("summernote_countimer_btn_deleteTimer" + i));
-       $("#summernote_countimer_btn_deleteTimer" + i).click(function(){
-         var data_id = $(this).data("id");
-         console.log("Data id of this button is = " + data_id);
-         var summernote_countimer_timerDiv = document.getElementById("summernote_countimer_timerDiv" + data_id);
-         $(summernote_countimer_timerDiv).remove();
-       });
+         $("#summernote_countimer_btn_deleteTimer").attr("data-id", i);
+         $("#summernote_countimer_btn_deleteTimer").attr("id", "summernote_countimer_btn_deleteTimer" + i);
+         console.log(document.getElementById("summernote_countimer_btn_deleteTimer" + i));
+         $("#summernote_countimer_btn_deleteTimer" + i).click(function(){
+           var data_id = $(this).data("id");
+           console.log("Data id of this button is = " + data_id);
+           var summernote_countimer_timerDiv = document.getElementById("summernote_countimer_timerDiv" + data_id);
+           $(summernote_countimer_timerDiv).remove();
+         });
 
-       $("#summernote_countimer_timerNum").attr("id", "summernote_countimer_timerNum" + i);
-       var summernote_countimer_timerNum = document.getElementById('summernote_countimer_timerNum' + i);
+         $("#summernote_countimer_timerNum").attr("id", "summernote_countimer_timerNum" + i);
+         var summernote_countimer_timerNum = document.getElementById('summernote_countimer_timerNum' + i);
 
-       $('#summernote_countimer_countDown').attr('id', 'summernote_countimer_countDown' + i);
-       var summernote_countimer_countDown = document.getElementById('summernote_countimer_countDown' + i);
+         $('#summernote_countimer_countDown').attr('id', 'summernote_countimer_countDown' + i);
+         var summernote_countimer_countDown = document.getElementById('summernote_countimer_countDown' + i);
 
-       $('#summernote_countimer_timerDiv').attr('id', 'summernote_countimer_timerDiv' + i);
-       $('#summernote_countimer_timerDiv').attr('data-id', i);
-       var summernote_countimer_timerDiv = document.getElementById('summernote_countimer_timerDiv' + i);
+         $('#summernote_countimer_timerDiv').attr('id', 'summernote_countimer_timerDiv' + i);
+         $('#summernote_countimer_timerDiv').attr('data-id', i);
+         var summernote_countimer_timerDiv = document.getElementById('summernote_countimer_timerDiv' + i);
 
-       $('#summernote_countimer_label_title').attr('id', 'summernote_countimer_label_title' + i);
-       var summernote_countimer_label_title = document.getElementById('summernote_countimer_label_title' + i);
+         $('#summernote_countimer_label_title').attr('id', 'summernote_countimer_label_title' + i);
+         var summernote_countimer_label_title = document.getElementById('summernote_countimer_label_title' + i);
 
-       $('#summernote_countimer_titleShow').attr('id', 'summernote_countimer_titleShow' + i);
-       var summernote_countimer_titleShow = document.getElementById('summernote_countimer_titleShow' + i);
+         $('#summernote_countimer_titleShow').attr('id', 'summernote_countimer_titleShow' + i);
+         var summernote_countimer_titleShow = document.getElementById('summernote_countimer_titleShow' + i);
 
-       $('#summernote_countimer_days').attr('id', 'summernote_countimer_days' + i);
-       var summernote_countimer_days = document.getElementById('summernote_countimer_days' + i);
-       $('#summernote_countimer_days_label').attr('id', 'summernote_countimer_days_label' + i);
-       var summernote_countimer_label_days = document.getElementById('summernote_countimer_days_label' + i);
+         $('#summernote_countimer_days').attr('id', 'summernote_countimer_days' + i);
+         var summernote_countimer_days = document.getElementById('summernote_countimer_days' + i);
+         $('#summernote_countimer_days_label').attr('id', 'summernote_countimer_days_label' + i);
+         var summernote_countimer_label_days = document.getElementById('summernote_countimer_days_label' + i);
 
-       $('#summernote_countimer_hours').attr('id', 'summernote_countimer_hours' + i);
-       var summernote_countimer_hours = document.getElementById('summernote_countimer_hours' + i);
-       $('#summernote_countimer_hours_label').attr('id', 'summernote_countimer_hours_label' + i);
-       var summernote_countimer_label_hours = document.getElementById('summernote_countimer_hours_label' + i);
+         $('#summernote_countimer_hours').attr('id', 'summernote_countimer_hours' + i);
+         var summernote_countimer_hours = document.getElementById('summernote_countimer_hours' + i);
+         $('#summernote_countimer_hours_label').attr('id', 'summernote_countimer_hours_label' + i);
+         var summernote_countimer_label_hours = document.getElementById('summernote_countimer_hours_label' + i);
 
-       $('#summernote_countimer_minutes').attr('id', 'summernote_countimer_minutes' + i);
-       var summernote_countimer_minutes = document.getElementById('summernote_countimer_minutes' + i);
-       $('#summernote_countimer_minutes_label').attr('id', 'summernote_countimer_minutes_label' + i);
-       var summernote_countimer_label_minutes = document.getElementById('summernote_countimer_minutes_label' + i);
+         $('#summernote_countimer_minutes').attr('id', 'summernote_countimer_minutes' + i);
+         var summernote_countimer_minutes = document.getElementById('summernote_countimer_minutes' + i);
+         $('#summernote_countimer_minutes_label').attr('id', 'summernote_countimer_minutes_label' + i);
+         var summernote_countimer_label_minutes = document.getElementById('summernote_countimer_minutes_label' + i);
 
-       $('#summernote_countimer_seconds').attr('id', 'summernote_countimer_seconds' + i);
-       var summernote_countimer_seconds = document.getElementById('summernote_countimer_seconds' + i);
-       $('#summernote_countimer_seconds_label').attr('id', 'summernote_countimer_seconds_label' + i);
-       var summernote_countimer_label_seconds = document.getElementById('summernote_countimer_seconds_label' + i);
+         $('#summernote_countimer_seconds').attr('id', 'summernote_countimer_seconds' + i);
+         var summernote_countimer_seconds = document.getElementById('summernote_countimer_seconds' + i);
+         $('#summernote_countimer_seconds_label').attr('id', 'summernote_countimer_seconds_label' + i);
+         var summernote_countimer_label_seconds = document.getElementById('summernote_countimer_seconds_label' + i);
 
-       //Set the title
-       var title = summernote_countimer_titleIn.value;
+         //Set the title
+         var title = summernote_countimer_titleIn.value;
 
-       summernote_countimer_timerNum.innerHTML = i;
-       summernote_countimer_timerNum.value = i;
-       // console.log("Successfully set title");
-       // console.log(title);
-       summernote_countimer_titleShow.value = title;
-       summernote_countimer_titleShow.innerHTML = title;
+         summernote_countimer_timerNum.innerHTML = i;
+         summernote_countimer_timerNum.value = i;
+         // console.log("Successfully set title");
+         // console.log(title);
+         summernote_countimer_titleShow.value = title;
+         summernote_countimer_titleShow.innerHTML = title;
 
-       //Set date of the endpoint
-       var countDownDate = new Date(summernote_countimer_dateIn.value);
+         //Set date of the endpoint
+         var countDownDate = new Date(summernote_countimer_dateIn.value);
 
-       //Set hour of the endpoint
-       countDownDate.setHours(summernote_countimer_hourIn.value);
+         //Set hour of the endpoint
+         countDownDate.setHours(summernote_countimer_hourIn.value);
 
-       //Set minute of the endpoint
-       countDownDate.setMinutes(summernote_countimer_minuteIn.value);
+         //Set minute of the endpoint
+         countDownDate.setMinutes(summernote_countimer_minuteIn.value);
 
-       //Set second of the endpoint
-       countDownDate.setSeconds(summernote_countimer_secondIn.value);
+         //Set second of the endpoint
+         countDownDate.setSeconds(summernote_countimer_secondIn.value);
 
-       //Insert into variable for calculation
-       var countDown = countDownDate.getTime();
-       // console.log("Successfully fetched set time which is " + countDown);
-       summernote_countimer_countDown.innerHTML = countDown;
-       // console.log(c_countDown.innerHTML);
+         //Insert into variable for calculation
+         var countDown = countDownDate.getTime();
+         // console.log("Successfully fetched set time which is " + countDown);
+         summernote_countimer_countDown.innerHTML = countDown;
+         // console.log(c_countDown.innerHTML);
 
-       var summernote_countimer_btn_deleteTimer = document.getElementById("summernote_countimer_btn_deleteTimer" + i);
+         var summernote_countimer_btn_deleteTimer = document.getElementById("summernote_countimer_btn_deleteTimer" + i);
 
-       // Set style of timer
-       summernote_countimer_timerDiv.style.backgroundColor = summernote_countimer_styleTimer_bgcolor.value;
-       summernote_countimer_label_title.style.color = summernote_countimer_styleTimer_titlecolor.value;
-       summernote_countimer_btn_deleteTimer.style.color = summernote_countimer_styleTimer_titlecolor.value;
+         // Set style of timer
+         summernote_countimer_timerDiv.style.backgroundColor = summernote_countimer_styleTimer_bgColor.value;
+         summernote_countimer_label_title.style.color = summernote_countimer_styleTimer_titleColor.value;
+         summernote_countimer_btn_deleteTimer.style.color = summernote_countimer_styleTimer_titleColor.value;
 
-       summernote_countimer_days.style.color = summernote_countimer_styleTimer_numberscolor.value;
-       summernote_countimer_label_days.style.color = summernote_countimer_styleTimer_numberscolor.value;
+         summernote_countimer_days.style.color = summernote_countimer_styleTimer_numbersColor.value;
+         summernote_countimer_label_days.style.color = summernote_countimer_styleTimer_numbersColor.value;
 
-       summernote_countimer_hours.style.color = summernote_countimer_styleTimer_numberscolor.value;
-       summernote_countimer_label_hours.style.color = summernote_countimer_styleTimer_numberscolor.value;
+         summernote_countimer_hours.style.color = summernote_countimer_styleTimer_numbersColor.value;
+         summernote_countimer_label_hours.style.color = summernote_countimer_styleTimer_numbersColor.value;
 
-       summernote_countimer_minutes.style.color = summernote_countimer_styleTimer_numberscolor.value;
-       summernote_countimer_label_minutes.style.color = summernote_countimer_styleTimer_numberscolor.value;
+         summernote_countimer_minutes.style.color = summernote_countimer_styleTimer_numbersColor.value;
+         summernote_countimer_label_minutes.style.color = summernote_countimer_styleTimer_numbersColor.value;
 
-       summernote_countimer_seconds.style.color = summernote_countimer_styleTimer_secondscolor.value;
-       summernote_countimer_label_seconds.style.color = summernote_countimer_styleTimer_secondscolor.value;
+         summernote_countimer_seconds.style.color = summernote_countimer_styleTimer_secondsColor.value;
+         summernote_countimer_label_seconds.style.color = summernote_countimer_styleTimer_secondsColor.value;
 
-       summernote_countimer_timerDiv.style.border = summernote_countimer_styleTimer_border.value + "px ";
-       summernote_countimer_timerDiv.style.borderStyle = summernote_countimer_styleTimer_borderStyle.value;
-       summernote_countimer_timerDiv.style.borderRadius = summernote_countimer_styleTimer_borderRadius.value + "px";
-       summernote_countimer_timerDiv.style.borderColor = summernote_countimer_styleTimer_bordercolor.value;
+         summernote_countimer_timerDiv.style.border = summernote_countimer_styleTimer_border.value + "px ";
+         summernote_countimer_timerDiv.style.borderStyle = summernote_countimer_styleTimer_borderStyle.value;
+         summernote_countimer_timerDiv.style.borderRadius = summernote_countimer_styleTimer_borderRadius.value + "px";
+         summernote_countimer_timerDiv.style.borderColor = summernote_countimer_styleTimer_borderColor.value;
 
-       // Reset timer modal
-       document.getElementById("summernote_countimer_form").reset();
+         // Reset timer modal
+         document.getElementById("summernote_countimer_form").reset();
 
-       // Rehide the optional attributes
-       c_title_in_div.style.display = "none";
-       summernote_countimer_styleTimer_container.style.display = "none";
+         // Rehide the optional attributes
+         summernote_countimer_titleIn_div.style.display = "none";
+         summernote_countimer_styleTimer_container.style.display = "none";
 
-       //Update the count down every 1 second
-       var x = setInterval(function() {
+         //Update the count down every 1 second
+         var x = setInterval(function() {
 
-         //Get today's date and time
-         var now = new Date().getTime();
+           //Get today's date and time
+           var now = new Date().getTime();
 
-         //Find the distance between now and the count down date
-         var distance = countDown - now;
+           //Find the distance between now and the count down date
+           var distance = countDown - now;
 
-         //Time calculations for days, hours, minutes and seconds
-         var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-         var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-         var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-         var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+           //Time calculations for days, hours, minutes and seconds
+           var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+           var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+           var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+           var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-         //Output the result in an element with id="timer"
-         summernote_countimer_label_title.innerHTML = title;
-         summernote_countimer_label_title.value = title;
-         summernote_countimer_days.innerHTML = days;
-         summernote_countimer_hours.innerHTML = hours;
-         summernote_countimer_minutes.innerHTML = minutes;
-         summernote_countimer_seconds.innerHTML = seconds;
+           //Output the result in an element with id="timer"
+           summernote_countimer_label_title.innerHTML = title;
+           summernote_countimer_label_title.value = title;
+           summernote_countimer_days.innerHTML = days;
+           summernote_countimer_hours.innerHTML = hours;
+           summernote_countimer_minutes.innerHTML = minutes;
+           summernote_countimer_seconds.innerHTML = seconds;
 
-         //If the count down is over, write some text
-         if (distance < 0) {
-           summernote_countimer_label_title.innerHTML = "EXPIRED";
-           summernote_countimer_days.innerHTML = "0";
-           summernote_countimer_hours.innerHTML = "0";
-           summernote_countimer_minutes.innerHTML = "0";
-           summernote_countimer_seconds.innerHTML = "0";
-         }
+           //If the count down is over, write some text
+           if (distance < 0) {
+             summernote_countimer_label_title.innerHTML = "EXPIRED";
+             summernote_countimer_days.innerHTML = "0";
+             summernote_countimer_hours.innerHTML = "0";
+             summernote_countimer_minutes.innerHTML = "0";
+             summernote_countimer_seconds.innerHTML = "0";
+           }
 
-       // console.log("Counting down time");
-       }, 1000);
-       resetTimerModal(); // Resets modal and preview
-   }
-   i++;
-  }
+         // console.log("Counting down time");
+         }, 1000);
+         summernote_countimer_resetTimerModal(); // Resets modal and preview
+     }
+     i++;
+    }
 
 };
 
 // Starts the timers that are present in the editor
-function startTimer(i) {
+function summernote_countimer_startTimer(i) {
 
   // Set delete Button
   $("#summernote_countimer_btn_deleteTimer" + i).click(function() {
@@ -408,15 +416,17 @@ function startTimer(i) {
 };
 
 // Reset all inputs and preview in modal
-function resetTimerModal(){
-  summernote_countimer_styleTimer_bgcolor.value = "#ffffff";
-  summernote_countimer_styleTimer_titlecolor.value = "#000000";
-  summernote_countimer_styleTimer_numberscolor.value = "#000000";
-  summernote_countimer_styleTimer_secondscolor.value = "#ff0000";
+function summernote_countimer_resetTimerModal(){
+  document.getElementById("summernote_countimer_btn_setTimer").disabled = true; // Redisable button
+
+  summernote_countimer_styleTimer_bgColor.value = "#ffffff";
+  summernote_countimer_styleTimer_titleColor.value = "#000000";
+  summernote_countimer_styleTimer_numbersColor.value = "#000000";
+  summernote_countimer_styleTimer_secondsColor.value = "#ff0000";
   summernote_countimer_styleTimer_border.value = "";
   summernote_countimer_styleTimer_borderRadius.value = "";
   summernote_countimer_styleTimer_borderStyle.value = "";
-  summernote_countimer_styleTimer_bordercolor.value = "";
+  summernote_countimer_styleTimer_borderColor.value = "";
 
   summernote_countimer_previewTimer_div.style.backgroundColor = "#ffffff";
   summernote_countimer_previewTimer_title.style.color = "#000000";
@@ -436,6 +446,11 @@ function resetTimerModal(){
   summernote_countimer_previewLabel_minutes.style.color = "#000000";
 };
 
+function summernote_countimer_undisableButton(){
+  document.getElementById("summernote_countimer_btn_setTimer").disabled = false;
+  $("#summernote_countimer_modalFooter").tooltip('destroy');
+};
+
 $(document).ready(function() {
   // Function for executing the function after a certain period of time
   setTimeout(function(){
@@ -447,11 +462,11 @@ $(document).ready(function() {
     for(var i=0; i < summernote_countimer_timerNum.length; i++){
       var data_id = summernote_countimer_timerNum[i].innerHTML;
       console.log("Data-id of this timer is = " + data_id);
-      startTimer(data_id);
+      summernote_countimer_startTimer(data_id);
     }
   }, 100);
 
-  var c_modalbs4 = '<div id="summernote_countimer_setTimer_Modalbs4">'+
+  var summernote_countimer_modalbs4 = '<div id="summernote_countimer_setTimer_Modalbs4">'+
   '<div id="summernote_countimer_setTimer_Modal" class="modal fade" role="dialog">'+
   '<div class="modal-dialog">'+
   '	<div class="modal-content">'+
@@ -461,7 +476,7 @@ $(document).ready(function() {
   '			    <h4 class="modal-title" id="summernote_countimer_modal_title">Set Countimer</h4>'+
   '       </div>'+
   '       <div class="col-sm-2">'+
-  '			    <button type="button" id="summernote_countimer_cancel_Timer" class="close" data-dismiss="modal"><i class="far fa-times-circle"></i></button>'+
+  '			    <button type="button" id="summernote_countimer_close_modal" class="btn btn-light summernote_countimer_close_modal" data-dismiss="modal" style="float:right"><i class="far fa-times-circle"></i></button>'+
   '       </div>'+
   '     </div>'+
   '		</div>'+
@@ -474,7 +489,7 @@ $(document).ready(function() {
   '         </label>'+
   '				</div>'+
   '			</div>'+
-  '			<div id="c_title_in_div" class="row form-group" style="display:none">'+
+  '			<div id="summernote_countimer_titleIn_div" class="row form-group" style="display:none">'+
   '				<div class="col-sm-5">'+
   '					<label for="summernote_countimer_titleIn">Title of Countdown</label>'+
   '				</div>'+
@@ -525,7 +540,8 @@ $(document).ready(function() {
 
   '   <div id="summernote_countimer_styleTimer_container" style="display:none">'+
 
-  '<h5>Preview</h5>'+
+  '   <fieldset>'+
+  '    <legend id="summernote_countimer_styliseLegend">Stylise Timer</legend>'+
 
   '<div class="col" id="summernote_countimer_previewTimer_div">'+
   '		<div class="row">'+
@@ -549,37 +565,37 @@ $(document).ready(function() {
 
   '     <div id="div_styleTimer_bgcolor" class="row form-group">'+
   '       <div class="col-sm-5">'+
-  '         <label for="summernote_countimer_styleTimer_bgcolor">Background Color</label>'+
+  '         <label for="summernote_countimer_styleTimer_bgColor">Background Color</label>'+
   '       </div>'+
   '       <div class="col">'+
-  '         <input type="color" id="summernote_countimer_styleTimer_bgcolor" value="#ffffff">'+
+  '         <input type="color" id="summernote_countimer_styleTimer_bgColor" value="#ffffff">'+
   '       </div>'+
   '     </div>'+
 
   '     <div id="div_styleTimer_titlecolor" class="row form-group">'+
   '       <div class="col-sm-5">'+
-  '         <label for="summernote_countimer_styleTimer_titlecolor">Title Color</label>'+
+  '         <label for="summernote_countimer_styleTimer_titleColor">Title Color</label>'+
   '       </div>'+
   '       <div class="col">'+
-  '         <input type="color" id="summernote_countimer_styleTimer_titlecolor" value="#000000">'+
+  '         <input type="color" id="summernote_countimer_styleTimer_titleColor" value="#000000">'+
   '       </div>'+
   '     </div>'+
 
   '     <div id="div_styleTimer_numberscolor" class="row form-group">'+
   '       <div class="col-sm-5">'+
-  '         <label for="summernote_countimer_styleTimer_numberscolor">Numbers Color</label>'+
+  '         <label for="summernote_countimer_styleTimer_numbersColor">Numbers Color</label>'+
   '       </div>'+
   '       <div class="col">'+
-  '         <input type="color" id="summernote_countimer_styleTimer_numberscolor" value="#000000">'+
+  '         <input type="color" id="summernote_countimer_styleTimer_numbersColor" value="#000000">'+
   '       </div>'+
   '     </div>'+
 
   '     <div id="div_styleTimer_secondscolor" class="row form-group">'+
   '       <div class="col-sm-5">'+
-  '         <label for="summernote_countimer_styleTimer_secondscolor">Seconds Color</label>'+
+  '         <label for="summernote_countimer_styleTimer_secondsColor">Seconds Color</label>'+
   '       </div>'+
   '       <div class="col">'+
-  '         <input type="color" id="summernote_countimer_styleTimer_secondscolor" value="#ff0000">'+
+  '         <input type="color" id="summernote_countimer_styleTimer_secondsColor" value="#ff0000">'+
   '       </div>'+
   '     </div>'+
 
@@ -620,10 +636,10 @@ $(document).ready(function() {
 
   '     <div id="div_styleTimer_bordercolor" class="row form-group">'+
   '       <div class="col-sm-5">'+
-  '         <label for="summernote_countimer_styleTimer_bordercolor">Border Color</label>'+
+  '         <label for="summernote_countimer_styleTimer_borderColor">Border Color</label>'+
   '       </div>'+
   '       <div class="col">'+
-  '         <input type="color" id="summernote_countimer_styleTimer_bordercolor" value="#000000">'+
+  '         <input type="color" id="summernote_countimer_styleTimer_borderColor" value="#000000">'+
   '       </div>'+
   '     </div>'+
 
@@ -631,8 +647,10 @@ $(document).ready(function() {
 
   '	</div>'+
 
-  '		  <div class="modal-footer">'+
-  '				<button type="submit" id="summernote_countimer_btn_setTimer" onclick="setTimer()" class="btn btn-info btn-block my-3" data-dismiss="modal">SET</button>'+
+  ' </fieldset>'+
+
+  '		  <div id="summernote_countimer_modalFooter" class="modal-footer" data-toggle="tooltip" title="Please choose a date" >'+
+  '				<button type="submit" id="summernote_countimer_btn_setTimer" onclick="summernote_countimer_setTimer()" class="btn btn-info btn-block my-3" data-dismiss="modal" disabled>SET</button>'+
   '		  </div>'+
   '   </form>'+
   '	</div>'+
@@ -641,13 +659,13 @@ $(document).ready(function() {
   '</div>';
 
 
-  var c_modalbs3 = '<div id="summernote_countimer_setTimer_Modalbs3">'+
+  var summernote_countimer_modalbs3 = '<div id="summernote_countimer_setTimer_Modalbs3">'+
   '<div id="summernote_countimer_setTimer_Modal" class="modal fade" role="dialog">'+
   '	<div class="modal-dialog">'+
   '		<div class="modal-content">'+
   '			<div class="modal-header">'+
   '				<h4 class="modal-title" id="summernote_countimer_modal_title">Set Countimer</h4>'+
-  '				<button type="button" id="summernote_countimer_cancel_Timer" class="close" data-dismiss="modal"><i class="fa fa-times-circle" aria-hidden="true"></i></button>'+
+  '				<button type="button" id="summernote_countimer_close_modal" class="btn btn-light summernote_countimer_close_modal" data-dismiss="modal" style="float:right"><i class="fa fa-times-circle" aria-hidden="true"></i></button>'+
   '			</div>'+
   '			<div class="modal-body" id="summernote_countimer_modal_container">'+
   '   <form id="summernote_countimer_form">'+
@@ -656,7 +674,7 @@ $(document).ready(function() {
   '           <input type="checkbox" class="form-check-input" name="summernote_countimer_includeTitle_check" id="summernote_countimer_includeTitle_check"> Include title'+
   '				 </div>'+
   '			  </div>'+
-  '				<div id="c_title_in_div" class="row form-group" style="display:none">'+
+  '				<div id="summernote_countimer_titleIn_div" class="row form-group" style="display:none">'+
   '					<div class="col-sm-5">'+
   '						<label for="summernote_countimer_titleIn">Title of Countdown</label>'+
   '					</div>'+
@@ -699,39 +717,59 @@ $(document).ready(function() {
 
   '   <div id="summernote_countimer_styleTimer_container" style="display:none">'+
 
+  '<div class="col" id="summernote_countimer_previewTimer_div">'+
+  '		<div class="row">'+
+  '			<div class="col-sm-8 mx-auto">'+
+  '       <h1 id="summernote_countimer_previewTimer_title" class="text-center" style="color:#000000;">Title</h1>'+
+  '     </div>'+
+  '		</div>'+
+  '		<div class="row">'+
+  '			<div class="col-sm-2 mx-auto"><h1 id="summernote_countimer_previewTimer_days" class="text-center" style="color:#000000;">31</h1></div>'+
+  '			<div class="col-sm-2 mx-auto"><h1 id="summernote_countimer_previewTimer_hours" class="text-center" style="color:#000000;">08</h1></div>'+
+  '			<div class="col-sm-2 mx-auto"><h1 id="summernote_countimer_previewTimer_minutes" class="text-center" style="color:#000000;">19</h1></div>'+
+  '			<div class="col-sm-2 mx-auto"><h1 id="summernote_countimer_previewTimer_seconds" class="text-center" style="color:red;">57</h1></div>'+
+  '		</div>'+
+  '		<div class="row">'+
+  '			<div class="col-sm-2 mx-auto"><h4 id="summernote_countimer_previewLabel_days" class="text-center" style="color:#000000;">Days</h4></div>'+
+  '			<div class="col-sm-2 mx-auto"><h4 id="summernote_countimer_previewLabel_hours" class="text-center" style="color:#000000;">Hours</h4></div>'+
+  '			<div class="col-sm-2 mx-auto"><h4 id="summernote_countimer_previewLabel_minutes" class="text-center" style="color:#000000;">Minutes</h4></div>'+
+  '			<div class="col-sm-2 mx-auto"><h4 id="summernote_countimer_previewLabel_seconds" class="text-center" style="color:red;">Seconds</h4></div>'+
+  '		</div>'+
+  '</div><br>'+
+
   '     <div id="div_styleTimer_bgcolor" class="row form-group">'+
   '       <div class="col-sm-5">'+
-  '         <label for="summernote_countimer_styleTimer_bgcolor">Background Color</label>'+
+  '         <label for="summernote_countimer_styleTimer_bgColor">Background Color</label>'+
   '       </div>'+
   '       <div class="col">'+
-  '         <input type="color" id="summernote_countimer_styleTimer_bgcolor" value="#ffffff">'+
+  '         <input type="color" id="summernote_countimer_styleTimer_bgColor" value="#ffffff">'+
   '       </div>'+
   '     </div>'+
 
   '     <div id="div_styleTimer_titlecolor" class="row form-group">'+
   '       <div class="col-sm-5">'+
-  '         <label for="summernote_countimer_styleTimer_titlecolor">Title Color</label>'+
+  '         <label for="summernote_countimer_styleTimer_titleColor">Title Color</label>'+
   '       </div>'+
   '       <div class="col">'+
-  '         <input type="color" id="summernote_countimer_styleTimer_titlecolor" value="#000000">'+
+  '         <input type="color" id="summernote_countimer_styleTimer_titleColor" value="#000000">'+
   '       </div>'+
   '     </div>'+
 
   '     <div id="div_styleTimer_numberscolor" class="row form-group">'+
   '       <div class="col-sm-5">'+
-  '         <label for="summernote_countimer_styleTimer_numberscolor">Numbers Color</label>'+
+  '         <label for="summernote_countimer_styleTimer_numbersColor">Numbers Color</label>'+
   '       </div>'+
   '       <div class="col">'+
-  '         <input type="color" id="summernote_countimer_styleTimer_numberscolor" value="#000000">'+
+  '         <input type="color" id="summernote_countimer_styleTimer_numbersColor" value="#000000">'+
   '       </div>'+
   '     </div>'+
 
   '     <div id="div_styleTimer_secondscolor" class="row form-group">'+
   '       <div class="col-sm-5">'+
-  '         <label for="summernote_countimer_styleTimer_secondscolor">Seconds Color</label>'+
+  '         <label for="summernote_countimer_styleTimer_secondsColor">Seconds Color</label>'+
   '       </div>'+
   '       <div class="col">'+
-  '         <input type="color" id="summernote_countimer_styleTimer_secondscolor" value="#ff0000">'+
+  '         <input type="color" id="summernote_countimer_styleTimer_secondsColor" value="#ff0000">'+
   '       </div>'+
   '     </div>'+
 
@@ -772,16 +810,16 @@ $(document).ready(function() {
 
   '     <div id="div_styleTimer_bordercolor" class="row form-group">'+
   '       <div class="col-sm-5">'+
-  '         <label for="summernote_countimer_styleTimer_bordercolor">Border Color</label>'+
+  '         <label for="summernote_countimer_styleTimer_borderColor">Border Color</label>'+
   '       </div>'+
   '       <div class="col">'+
-  '         <input type="color" id="summernote_countimer_styleTimer_bordercolor" value="#000000">'+
+  '         <input type="color" id="summernote_countimer_styleTimer_borderColor" value="#000000">'+
   '       </div>'+
   '     </div>'+
 
   '   </div>'+
-  '			  <div class="modal-footer">'+
-  '					<button type="submit" id="summernote_countimer_btn_setTimer" onclick="setTimer()" class="btn btn-info btn-block my-3" data-dismiss="modal">SET</button>'+
+  '			  <div id="summernote_countimer_modalFooter" class="modal-footer" data-toggle="tooltip" title="Please choose a date">'+
+  '					<button type="submit" id="summernote_countimer_btn_setTimer" onclick="summernote_countimer_setTimer()" class="btn btn-info btn-block my-3" data-dismiss="modal" disabled>SET</button>'+
   '			  </div>'+
   '   </form>'+
   '		</div>'+
@@ -789,8 +827,8 @@ $(document).ready(function() {
   '</div>'+
   '</div>';
 
-  $("body").append(c_modalbs4);
-  $("body").append(c_modalbs3);
+  $("body").append(summernote_countimer_modalbs4);
+  $("body").append(summernote_countimer_modalbs3);
 
   var confirm = document.getElementById("summernote_countimer_dateIn");
    confirm.addEventListener("keyup", function(event) {
@@ -801,7 +839,7 @@ $(document).ready(function() {
    });
 
   $('input[name="summernote_countimer_includeTitle_check"]').click(function(){
-    var title_div = document.getElementById("c_title_in_div");
+    var title_div = document.getElementById("summernote_countimer_titleIn_div");
 
       if($(this).prop("checked") == true){
           title_div.style.display = "";
@@ -819,47 +857,47 @@ $(document).ready(function() {
       }
       else if($(this).prop("checked") == false){
           summernote_countimer_styleTimer_container.style.display = "none";
-          resetTimerModal();
+          summernote_countimer_resetTimerModal();
       }
   });
 
-  $( "#summernote_countimer_styleTimer_bgcolor" ).change(function() {
-    summernote_countimer_previewTimer_div.style.backgroundColor = summernote_countimer_styleTimer_bgcolor.value;
+  $( "#summernote_countimer_styleTimer_bgColor").change(function() {
+    summernote_countimer_previewTimer_div.style.backgroundColor = summernote_countimer_styleTimer_bgColor.value;
   });
 
-  $( "#summernote_countimer_styleTimer_titlecolor" ).change(function() {
-    summernote_countimer_previewTimer_title.style.color = summernote_countimer_styleTimer_titlecolor.value;
+  $( "#summernote_countimer_styleTimer_titleColor").change(function() {
+    summernote_countimer_previewTimer_title.style.color = summernote_countimer_styleTimer_titleColor.value;
   });
 
-  $( "#summernote_countimer_styleTimer_numberscolor" ).change(function() {
-    summernote_countimer_previewTimer_days.style.color = summernote_countimer_styleTimer_numberscolor.value;
-    summernote_countimer_previewTimer_hours.style.color = summernote_countimer_styleTimer_numberscolor.value;
-    summernote_countimer_previewTimer_minutes.style.color = summernote_countimer_styleTimer_numberscolor.value;
+  $( "#summernote_countimer_styleTimer_numbersColor").change(function() {
+    summernote_countimer_previewTimer_days.style.color = summernote_countimer_styleTimer_numbersColor.value;
+    summernote_countimer_previewTimer_hours.style.color = summernote_countimer_styleTimer_numbersColor.value;
+    summernote_countimer_previewTimer_minutes.style.color = summernote_countimer_styleTimer_numbersColor.value;
 
-    summernote_countimer_previewLabel_days.style.color = summernote_countimer_styleTimer_numberscolor.value;
-    summernote_countimer_previewLabel_hours.style.color = summernote_countimer_styleTimer_numberscolor.value;
-    summernote_countimer_previewLabel_minutes.style.color = summernote_countimer_styleTimer_numberscolor.value;
+    summernote_countimer_previewLabel_days.style.color = summernote_countimer_styleTimer_numbersColor.value;
+    summernote_countimer_previewLabel_hours.style.color = summernote_countimer_styleTimer_numbersColor.value;
+    summernote_countimer_previewLabel_minutes.style.color = summernote_countimer_styleTimer_numbersColor.value;
   });
 
-  $( "#summernote_countimer_styleTimer_secondscolor" ).change(function() {
-    summernote_countimer_previewTimer_seconds.style.color = summernote_countimer_styleTimer_secondscolor.value;
-    summernote_countimer_previewLabel_seconds.style.color = summernote_countimer_styleTimer_secondscolor.value;
+  $( "#summernote_countimer_styleTimer_secondsColor").change(function() {
+    summernote_countimer_previewTimer_seconds.style.color = summernote_countimer_styleTimer_secondsColor.value;
+    summernote_countimer_previewLabel_seconds.style.color = summernote_countimer_styleTimer_secondsColor.value;
   });
 
-  $( "#summernote_countimer_styleTimer_borderStyle" ).click(function() {
+  $( "#summernote_countimer_styleTimer_borderStyle").click(function() {
     summernote_countimer_previewTimer_div.style.borderStyle = summernote_countimer_styleTimer_borderStyle.value;
   });
 
-  $( "#summernote_countimer_styleTimer_border" ).click(function() {
+  $( "#summernote_countimer_styleTimer_border").click(function() {
     summernote_countimer_previewTimer_div.style.borderWidth = summernote_countimer_styleTimer_border.value + "px";
   });
 
-  $( "#summernote_countimer_styleTimer_borderRadius" ).click(function() {
+  $( "#summernote_countimer_styleTimer_borderRadius").click(function() {
     summernote_countimer_previewTimer_div.style.borderRadius = summernote_countimer_styleTimer_borderRadius.value + "px";
   });
 
-  $( "#summernote_countimer_styleTimer_bordercolor" ).change(function() {
-    summernote_countimer_previewTimer_div.style.borderColor = summernote_countimer_styleTimer_bordercolor.value;
+  $( "#summernote_countimer_styleTimer_borderColor").change(function() {
+    summernote_countimer_previewTimer_div.style.borderColor = summernote_countimer_styleTimer_borderColor.value;
   });
 
 });
