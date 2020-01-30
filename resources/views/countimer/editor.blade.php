@@ -44,17 +44,20 @@
 	<!--Image attributes plugin-->
 	<script type="text/javascript" src="{{URL::asset('js/summernote-image-attributes.js')}}"></script>
 
+	<!-- Email template plugin -->
+	<script type="text/javascript" src="{{URL::asset('js/email_templates.js')}}"></script>
+
 	<style>
 		body{
 			width:80%;
 			margin: 20px auto 0;
 		}
 
-		.timer_value_days, .timer_value_hours, .timer_value_minutes, .timer_value_seconds{
+		.summernote_countimer_value_days, .summernote_countimer_value_hours, .summernote_countimer_value_minutes, .summernote_countimer_value_seconds{
 			font-size:70px;
 		}
 
-		.timer_label_title{
+		.summernote_countimer_label_title{
 			font-size:50px;
 		}
 	</style>
@@ -112,7 +115,7 @@
 			height: 600,
 			focus: true,
 			toolbar:[
-				['insert', ['countimer', 'picture']],
+				['insert', ['countimer', 'emailTemplates', 'picture']],
 				['font', ['fontname', 'customFontSize']],
 				['tool', ['undo', 'redo', 'codeview']],
 				['style', ['style']],

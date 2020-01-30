@@ -72,12 +72,12 @@ var clicks = 0;
    			//Context for button in plugin toolbar
    			context.memo('button.countimer', function () {
    				var button = ui.button({
-   					contents: '<i id="summernote_countimer_clock" class="fa fa-clock-o" aria-hidden="true"></i>',
+   					contents: '<i id="summernote_countimer_clock" class="fas fa-hourglass-half"></i>',
    					tooltip: 'Insert Countimer',
 
    					//HTML that will be inserted into editor
    					click: function () {
-   						$counter = '<div class="col summernote_countimer_timer" id="summernote_countimer_timerDiv">'+
+   						var summernote_countimer_counter = '<div class="col summernote_countimer_timer" id="summernote_countimer_timerDiv">'+
               '<p id="summernote_countimer_timerNum" class="summernote_countimer_timerNum" style="display:none"></p>'+
    						'		<div class="row summernote_countimer_timer"><a id="summernote_countimer_btn_deleteTimer" class="summernote_countimer_close_timer" style="float:left"><i class="far fa-times-circle"></i></a>'+
    						'			<div class="col-sm-8 mx-2"><h1 class="text-center summernote_countimer_label_title" id="summernote_countimer_label_title">Title</h1></div>'+
@@ -100,7 +100,7 @@ var clicks = 0;
      					'</div>';
 
               //Paste countimer into editor
-   						context.invoke('editor.pasteHTML', $counter);
+   						context.invoke('editor.pasteHTML', summernote_countimer_counter);
 
               clicks++;
               // console.log("Current number of clicks are = " + clicks);
@@ -628,10 +628,10 @@ $(document).ready(function() {
 
   '     <div id="div_styleTimer_borderRadius" class="row form-group">'+
   '       <div class="col-sm-5">'+
-  '         <label for="summernote_countimer_styleTimer_borderRadius">Border Radius</label>'+
+  '         <label for="summernote_countimer_styleTimer_borderRadius">Border Radius (px)</label>'+
   '       </div>'+
-  '       <div class="col">'+
-  '         <input type="number" min="0" step="1" max="59" id="summernote_countimer_styleTimer_borderRadius"> px'+
+  '       <div class="col slidecontainer">'+
+  '         <input type="range" min="0" step="1" max="59" id="summernote_countimer_styleTimer_borderRadius" class="slider">'+
   '       </div>'+
   '     </div>'+
 

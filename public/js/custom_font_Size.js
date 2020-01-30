@@ -67,31 +67,31 @@
 			// Context for button in plugin toolbar
 			context.memo('button.customFontSize', function () {
 				var button = ui.button({
-					contents: '<i class="fas fa-font"></i> <i id="logo_fontSize_dot" class="fas fa-circle"></i><i id="logo_fontSize_ast" class="fas fa-asterisk"></i>',
+					contents: '<i class="fas fa-font"></i> <i id="summernote_customFS_logo_fontSize_dot" class="fas fa-circle"></i><i id="summernote_customFS_logo_fontSize_ast" class="fas fa-asterisk"></i>',
 					tooltip: 'Decimal Font Size',
 
 					// Changes the font size according to the input in #fontSize
 					click: function(){
-            $('#setFontSizeModal').modal('show');
+            $('#summernote_customFS_setFontSize_modal').modal('show');
 
             // Acquiring the selected text that is needed to have different font size
               // Variable for acquiring the selected text, specifically the p element of the text
               clicks++;
               console.log("Clicks = " + clicks);
 
-              const sel = getSelection().getRangeAt(0); //Contains the raw text of the selected text
+              const summernote_customFS_sel = getSelection().getRangeAt(0); //Contains the raw text of the selected text
               const nNd = document.createElement("span");
-              $(nNd).attr({"id" : "span" + clicks, "style": "font-size:", "class" : "font_span"});
-              sel.surroundContents(nNd);
+              $(nNd).attr({"id" : "summernote_customFS_span" + clicks, "style": "font-size:", "class" : "summernote_customFS_font_span"});
+              summernote_customFS_sel.surroundContents(nNd);
               nNd.insertAdjacentHTML('afterend', "&nbsp;");
-              var closest = $(sel).closest('span');
+              var closest = $(summernote_customFS_sel).closest('span');
               console.log(closest);
               // if(closest){
               //
               // }
 
-               console.log("sel = " + sel);
-               getFontSize();
+               console.log("summernote_customFS_sel = " + summernote_customFS_sel);
+               summernote_customFS_getFontSize();
           }
 				});
 				//Render button
@@ -103,42 +103,42 @@
 }));
 
 // Fetch current font size of selected text and throw the value into input space of "#fontSize"
-function getFontSize() {
+function summernote_customFS_getFontSize() {
 
-  var font_size = document.getElementById("font_size_in");
+  var summernote_customFS_font_size = document.getElementById("summernote_customFS_font_size_in");
 
   // Acquiring the font size of selected text
-  var selected_span = $(sel).closest(".font_span");
-  var current_fSize = selected_span.style.fontSize;
+  var summernote_customFS_selected_span = $(summernote_customFS_sel).closest(".summernote_customFS_font_span");
+  var current_fSize = summernote_customFS_selected_span.style.fontSize;
 
   console.log("Current font size is " + current_fSize);
   var fSize_val = Number(current_fSize.replace(/[^0-9\.]+/g,""));
   if(fSize_val > 0){
-    font_size.value = fSize_val;
+    summernote_customFS_font_size_in.value = fSize_val;
   }
   else if(fSize_val == 0){
-    font_size.value = "";
+    summernote_customFS_font_size_in.value = "";
   }
 };
 
 // For clearing highlighted text
-function clearSelection(){
+function summernote_customFS_clearSelection(){
   if(document.selection && document.selection.empty) {
         document.selection.empty();
     } else if(window.getSelection) {
-        sel = window.getSelection();
-        sel.removeAllRanges();
+        summernote_customFS_sel = window.getSelection();
+        summernote_customFS_sel.removeAllRanges();
     }
 };
 
 // Set font size according to value of input space #fontSize
-function setFontSize() {
-  var in_font_size = document.getElementById("font_size_in").value;
+function summernote_customFS_setFontSize() {
+  var in_font_size = document.getElementById("summernote_customFS_font_size_in").value;
   // console.log("Current font size is " + in_font_size);
 
-  console.log("Selected span = " + document.getElementById("span" + clicks));
+  console.log("Selected span = " + document.getElementById("summernote_customFS_span" + clicks));
   // $(sel).css("font-size", in_font_size + "px");
-  $("#span" + clicks).css("font-size", in_font_size + "px");
+  $("#summernote_customFS_span" + clicks).css("font-size", in_font_size + "px");
 };
 
 function selectHTML() {
@@ -152,7 +152,7 @@ function selectHTML() {
         console.log("In selectHTML() Clicks = " + clicks);
 
         var nNd = document.createElement("span");
-        $(nNd).attr({"id" : "span" + clicks, "style": "font-size: 14px"});
+        $(nNd).attr({"id" : "summernote_customFS_span" + clicks, "style": "font-size: 14px"});
         var w = getSelection().getRangeAt(0);
         w.surroundContents(nNd);
         // console.log("Ran selectHTML");
@@ -168,45 +168,45 @@ function selectHTML() {
 
 // Contains the functions that runs immediately after the page is fully loaded
 $(document).ready(function() {
-  var font_modal = '<div id="setFontSizeModal" class="modal fade" role="dialog">'+
+  var summernote_customFS_font_modal = '<div id="summernote_customFS_setFontSize_modal" class="modal fade" role="dialog">'+
   '<div class="modal-dialog modal-sm">'+
   '	<div class="modal-content">'+
   '		<div class="modal-header">'+
-  '			<h4 class="modal-title" id="font_modal_title">Set Font Size</h4>'+
+  '			<h4 class="modal-title" id="summernote_customFS_font_modal_title">Set Font Size</h4>'+
   '			<button type="button" class="close" data-dismiss="modal"><i class="far fa-times-circle"></i></button>'+
   '		</div>'+
-  '		<div class="modal-body" id="font_size">'+
-  '			<label for="font_size_in">Font size</label>'+
-  '			<input id="font_size_in" name="font_size_in" type="number" max="120" min="8" step="0.1" value="14" style="width:25%"> px<br>'+
+  '		<div class="modal-body" id="summernote_customFS_font_size">'+
+  '			<label for="summernote_customFS_font_size_in">Font size</label>'+
+  '			<input id="summernote_customFS_font_size_in" name="summernote_customFS_font_size_in" type="number" max="120" min="8" step="0.1" value="14" style="width:25%"> px<br>'+
   '			</div>'+
   '			<div class="modal-footer">'+
-  '				<button type="button" id="submit_fontSize" class="btn btn-info btn-block my-3" data-dismiss="modal">SET</button>'+
+  '				<button type="button" id="summernote_customFS_submit_fontSize" class="btn btn-info btn-block my-3" data-dismiss="modal">SET</button>'+
   '			</div>'+
   '	</div>'+
   '</div>'+
   '</div>';
 
-  $("body").append(font_modal);
+  $("body").append(summernote_customFS_font_modal);
 
    var container = document.getElementById("summernote_container")
 
-   clicks = container.getElementsByClassName("font_span").length;
+   clicks = container.getElementsByClassName("summernote_customFS_font_span").length;
 
-   var confirm = document.getElementById("font_size_in");
+   var confirm = document.getElementById("summernote_customFS_font_size_in");
     confirm.addEventListener("keyup", function(event) {
       if (event.keyCode === 13) {
        event.preventDefault();
-       document.getElementById("submit_fontSize").click();
+       document.getElementById("summernote_customFS_submit_fontSize").click();
       }
     });
 
-   $("#submit_fontSize").click(function(){
-     setFontSize();
-     clearSelection();
+   $("#summernote_customFS_submit_fontSize").click(function(){
+     summernote_customFS_setFontSize();
+     summernote_customFS_clearSelection();
    });
 
-   $("#cancel_fontSize").click(function(){
-     clearSelection();
+   $("#summernote_customFS_cancel_fontSize").click(function(){
+     summernote_customFS_clearSelection();
    });
 
 });

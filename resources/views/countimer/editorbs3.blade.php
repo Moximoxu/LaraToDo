@@ -42,18 +42,22 @@
 	<!--Image attributes plugin-->
 	<script type="text/javascript" src="{{URL::asset('js/summernote-image-attributes.js')}}"></script>
 
+	<!-- Email template plugin -->
+	<script type="text/javascript" src="{{URL::asset('js/email_templates.js')}}"></script>
+
 	<style>
 		body{
 			width: 80%;
 			margin: 20px auto 20px;
 		}
-    .col.summernote_countimer_timer{
+    .summernote_countimer_timer{
       width: 80%;
       margin: auto;
     }
     .summernote_countimer_close_timer{
       float: left;
     }
+
 	</style>
 
 </head>
@@ -81,10 +85,10 @@
 	        <textarea name="summernoteInput" class="summernote" id="summernote"></textarea>
 	        <br>
 
-					<button class="btn btn-success" type="submit">Store <i class="fa fa-save" aria-hidden="true"></i></button>
+					<button class="btn btn-success my-3" type="submit">Store <i class="fa fa-save" aria-hidden="true"></i></button>
 
 					<div class="dropup">
-				    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Dropup Example
+				    <button class="btn btn-default dropdown-toggle my-3" type="button" data-toggle="dropdown">Dropup Example
 				    <span class="caret"></span></button>
 				    <ul class="dropdown-menu">
 							@foreach ($summernotes as $summernote)
@@ -103,15 +107,16 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
+
 		$('#summernote').summernote({
 			width: 1000,
 			height: 400,
 			focus: true,
 			toolbar:[
-				['insert', ['countimer', 'picture']],
+				['insert', ['countimer', 'emailTemplates', 'picture']],
 				['font', ['fontname', 'customFontSize']],
 				['tool', ['undo', 'redo', 'codeview']],
-				['style',['style']],
+				['style', ['style']],
 			],
       countimer:{
 				modalVer : 'bs3' // Or bs4. Default is bs4
